@@ -1,0 +1,27 @@
+{
+  "name": "fingrafimi2",
+  "version": "0.0.1",
+  "description": "Leikur ",
+  "main": "game.js",
+  "dependencies": {
+    "browser-sync": "^2.24.4",
+    "npm": "^6.0.1",
+    "phaser": "^3.6.0"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gorri4/fingrafimi2.git"
+  },
+  "author": "gudmundurorri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gorri4/fingrafimi2/issues"
+  },
+  "homepage": "https://github.com/Gorri4/fingrafimi2#readme"
+}

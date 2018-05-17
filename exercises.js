@@ -4,12 +4,22 @@ keyboardKeysMap = new Map();
 
 exercisesArray = 
 [
-    ['jjj fff ffff jjj fffff',
-    'jffjffjf jf fjf jjj jjf',
-    'jf fff jff ffjfjjjj',
-    'ff jj ff jj ff jj ff jj ff jj ff jj',
-    'fj fj fj fj fj fj fj fj fj fj fj fj',
-    'jf jf jf jf jf jf jf jf jf jf jf jf'],
+    ['ff jj ff jj ff jj ff jj ff jj ff jj',
+    'dk kk jd dkkjk kfj kdf',
+    'd saflllll s slf dsf s',
+    'sf sf sf sf sf lj lj lj lj lj',
+    'aa ææ ææ aaa aa ææ',
+    'af fæ fa æf la sa al æj ak dæ ka sæ',
+    'æs da æd ja as df jk læ ala dal læk',
+    'fas sæl lak kal æfa las æja kaf æsa',
+    'sala sala kafa kafa læsa',
+    'asa asa asa fas fas fas æla æla',
+    'das das das aka aka aka aka kæl kæl',
+    'kafa jaka læsa sæla saka kæla kala',
+    'afla lafa kæfa skal asdf jklæ asdf jklæ',
+    'sala fala skal kæsa kæsa dala æska',
+    'laka kæla afla flak dæla klak sækja fal',
+],
     ['ddddd kkk kkkk dd dd',
     'dk kk jd dkkjk kfj kdf',
     'ddd kd kkkdddk kdd d',
@@ -149,7 +159,7 @@ exercisesArray =
 
 exerciseBtnPosArray = 
 [
-	[[16, 555], [144, 583], [283, 572], [583, 500], [722, 524], [861, 500]],
+	[[15, 430], [51, 485], [111, 510], [171, 530], [231, 500], [291, 530], [351, 480], [411, 515], [461, 485], [521, 530], [581, 510], [641, 490], [701, 530], [761, 510], [821, 490]],
 	[[16, 555], [144, 583], [283, 572], [583, 500], [722, 524], [861, 500]],
 	[[16, 555], [144, 583], [283, 572], [522, 511], [638, 505], [755, 516], [872, 516]],
 	[[5, 516], [77, 583], [194, 572], [327, 522], [450, 511], [572, 524], [688, 533], [783, 583], [872, 527]],
@@ -165,7 +175,7 @@ exerciseBtnPosArray =
 
 exerciseTextPosArray = 
 [
-	[[16, 552], [144, 580], [283, 569], [587, 505], [726, 529], [865, 505]],
+	[[15, 430], [51, 485], [111, 510], [171, 530], [231, 500], [291, 530], [351, 480], [411, 515], [461, 485], [521, 530], [581, 510], [641, 490], [701, 530], [761, 510], [821, 490]],
 	[[16, 552], [144, 580], [283, 569], [587, 505], [726, 529], [865, 505]],
 	[[16, 552], [144, 580], [283, 569], [527, 516], [643, 510], [760, 521], [877, 521]],
 	[[5, 513], [77, 580], [194, 569], [332, 527], [455, 516], [577, 529], [688, 530], [783, 580], [872, 524]],
@@ -181,7 +191,7 @@ exerciseTextPosArray =
 
 exerciseBtnArray =
 [
-    [,,,,,],
+    [,,,,,,,,,,,,,,],
     [,,,,,],
     [,,,,,,],
     [,,,,,,,,],

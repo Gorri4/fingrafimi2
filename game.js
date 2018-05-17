@@ -8,8 +8,8 @@
 // We reffer to the assignments by numbers from 0 (F og J) to 11 (Hástafir)
 
 // Create instance of the game
-var width = 1000;
-var height = 700;
+var width = 900;
+var height = 600;
 var game = new Phaser.Game(width, height, Phaser.AUTO, '', { preload: preload, create: create, update: update}, true);
 
 // Create a variable for bitMapData to display text, used in functions Assignment and KeyPress
@@ -65,12 +65,18 @@ function preload()
     preloadBar.lineStyle(3, 0xffffff, 1);  
     preloadBar.moveTo(0, 0);  
     preloadBar.lineTo(game.width, 0);      
-    preloadBar.scale.x = 0; 
-
+    preloadBar.scale.x = 0;
+    
     // =================================== Images ===================================
     //Background images
-    game.load.image('homePage',                 'Assets/Images/Backgrounds/homePage.png');
+    game.load.image('homePage',                 'Assets/myndir/Backgrounds/bakgrunnur_forsida.png');
     game.load.image('homeKeysBackground',       'Assets/Images/Backgrounds/homeKeysBackground.png');
+    //Fingrafimi2 bakgrunnir
+    game.load.image('marglyttaBakgrunnur',                'Assets/myndir/Backgrounds/marglytta.png');
+    game.load.image('sundlaugBakgrunnur',                 'Assets/myndir/Backgrounds/sundlaug.png');
+    game.load.image('byflugaBakgrunnur',                  'Assets/myndir/Backgrounds/byfluga.png');
+    game.load.image('ledurblakaBakgrunnur',               'Assets/myndir/Backgrounds/ledurblaka.png');
+    
     game.load.image('instructionBg',            'Assets/Images/Backgrounds/instructionBackground.png');
     game.load.image('farm',                     'Assets/Images/Backgrounds/farm.png');
     game.load.image('clouds',                   'Assets/Images/Backgrounds/clouds.png');
@@ -80,23 +86,31 @@ function preload()
     game.load.spritesheet('fishes',             'Assets/Images/Backgrounds/fishes.png', 149, 94);
 
     //Keyboard related images and sprites
-    game.load.image('keyboard',                 'Assets/Images/Keyboard/lyklabord700.png');
+    game.load.image('keyboard',                 'Assets/myndir/Keyboard/lyklabord.png');
     game.load.spritesheet('keys',               'Assets/Images/Keyboard/keySprite.png', 49, 45);
+    game.load.spritesheet('a',                  'Assets/myndir/Keyboard/a.png', 37, 37);
+    game.load.spritesheet('s',                  'Assets/myndir/Keyboard/s.png', 38, 38);
+    game.load.spritesheet('d',                  'Assets/myndir/Keyboard/d.png', 37, 37);
+    game.load.spritesheet('f',                  'Assets/myndir/Keyboard/f.png', 38, 38);
+    game.load.spritesheet('j',                  'Assets/myndir/Keyboard/j.png', 37, 37);
+    game.load.spritesheet('k',                  'Assets/myndir/Keyboard/k.png', 34, 35);
+    game.load.spritesheet('l',                  'Assets/myndir/Keyboard/l.png', 40, 37);
+    game.load.spritesheet('æ',                  'Assets/myndir/Keyboard/æ.png', 38, 38);
+
     game.load.spritesheet('spacebar',           'Assets/Images/Keyboard/spacebarSprite.png', 259, 44);
     game.load.spritesheet('lShift',             'Assets/Images/Keyboard/leftShiftSprite.png', 56, 43);
     game.load.spritesheet('rShift',             'Assets/Images/Keyboard/rightShiftSprite.png', 125, 45);
     game.load.spritesheet('warmupKeys',         'Assets/Images/Keyboard/asdfgh.png', 699, 77);
-
     //Images of hands used in game
-    game.load.image('lHand',                    'Assets/Images/Hands/vinstri.png');
-    game.load.image('rHand',                    'Assets/Images/Hands/haegri.png');
+    game.load.image('lHand',                    'Assets/myndir/Hands/vinstri0001.png');
+    game.load.image('rHand',                    'Assets/myndir/Hands/haegri0001.png');
     game.load.spritesheet('handsSprite',        'Assets/Images/Hands/handSprite.png', 276, 450);
     game.load.spritesheet('hands',              'Assets/Images/Hands/handSpriteBigger1.png', 240, 450);
 
     // Various images
     game.load.image('logo',                     'Assets/Images/logo.png');
-    game.load.image('logoS',                    'Assets/Images/titill.png');
-    game.load.image('logoL',                    'Assets/Images/titillStaerri2.png');
+    game.load.image('logoS',                    'Assets/myndir/titillS.png');
+    game.load.image('logoL',                    'Assets/myndir/titill.png');
     game.load.image('teacher',                  'Assets/Images/Buttons/Global/teacher.png');
     game.load.image('mat',                      'Assets/Images/Buttons/Global/mat.png');
     game.load.image('about',                    'Assets/Images/Buttons/Global/about.png');
@@ -106,18 +120,18 @@ function preload()
     game.load.spritesheet('arrow',              'Assets/Images/Buttons/Global/arrowSprite.png', 93, 48);
 
     // Images for assignment buttons
-    game.load.image('fj',                       'Assets/Images/Buttons/Assignments/fogj.png');
-    game.load.image('dk',                       'Assets/Images/Buttons/Assignments/dogk.png');
-    game.load.image('sl',                       'Assets/Images/Buttons/Assignments/sogl.png');
-    game.load.image('aae',                      'Assets/Images/Buttons/Assignments/aogae.png');
-    game.load.image('heimalyklar1',             'Assets/Images/Buttons/Assignments/allir1.png');
-    game.load.image('heimalyklar2',             'Assets/Images/Buttons/Assignments/allir2.png');
+    game.load.spritesheet('upprifjun',          'Assets/myndir/Buttons/Assignments/upprifjun_forsida.png',137 ,55);
+    game.load.spritesheet('togm',               'Assets/myndir/Buttons/Assignments/togm_forsida.png',132,55 );
+    game.load.spritesheet('dogv',               'Assets/myndir/Buttons/Assignments/dogv_forsida.png',124,60);
+    game.load.spritesheet('pogu',               'Assets/myndir/Buttons/Assignments/pogu_forsida.png',125,100);
+    game.load.spritesheet('þogy',               'Assets/myndir/Buttons/Assignments/þogy_forsida.png',145,55);
+    game.load.spritesheet('oogc',               'Assets/myndir/Buttons/Assignments/ogoc_forsida.png',127,80);
     game.load.image('eh',                       'Assets/Images/Buttons/Assignments/eogh.png');
     game.load.image('ig',                       'Assets/Images/Buttons/Assignments/iogg.png');
-    game.load.image('bn',                       'Assets/Images/Buttons/Assignments/bogn.png');
+    game.load.spritesheet('texta',              'Assets/myndir/Buttons/Assignments/texta_forsida.png',130,80);
     game.load.image('ro',                       'Assets/Images/Buttons/Assignments/rogo.png');
-    game.load.image('broddstafir',              'Assets/Images/Buttons/Assignments/btn11.png');
-    game.load.image('hastafir',                 'Assets/Images/Buttons/Assignments/btn12.png');
+    game.load.spritesheet('broddstafir',        'Assets/myndir/Buttons/Assignments/broddstafir_forsida.png',163,60);
+    game.load.spritesheet('bandogspurn',        'Assets/myndir/Buttons/Assignments/bandogspurn_forsida.png',120,65);
     game.load.spritesheet('btnSprite',          'Assets/Images/Buttons/Assignments/buttons.png', 124, 81);
 
     // Images for exercise buttons
@@ -136,11 +150,11 @@ function preload()
     game.load.spritesheet('nota',               'Assets/Images/Buttons/Exercises/nota.png', 50, 40);
     game.load.spritesheet('piano',              'Assets/Images/Buttons/Exercises/piano.png', 81, 38);
     game.load.spritesheet('saxafonn',           'Assets/Images/Buttons/Exercises/saxafonn.png', 57, 96);
-    game.load.spritesheet('jellyfish',          'Assets/Images/Buttons/Exercises/jellyfish.png', 39, 44);
-    game.load.spritesheet('starfish',           'Assets/Images/Buttons/Exercises/starfish.png', 50, 49);
+    game.load.spritesheet('jellyfish',          'Assets/myndir/Buttons/Exercises/jellyfish.png', 65, 68);
+    game.load.spritesheet('starfish',           'Assets/myndir/Buttons/Exercises/krossfiskur.png', 61, 76);
     game.load.spritesheet('shrimp',             'Assets/Images/Buttons/Exercises/shrimp.png', 50, 50);
     game.load.spritesheet('seahorse',           'Assets/Images/Buttons/Exercises/seahorse.png', 35, 72);
-    game.load.spritesheet('shell',              'Assets/Images/Buttons/Exercises/shell.png', 44, 43);
+    game.load.spritesheet('shell',              'Assets/myndir/Buttons/Exercises/shell.png', 42, 43);
 
     //Images for glow around exercise buttons for the exercise you are currently in
     game.load.image('musGlow',                  'Assets/Images/Buttons/Exercises/mus-glow.png');
@@ -172,6 +186,12 @@ function preload()
     game.load.spritesheet('fish',               'Assets/Images/Instructors/fish.png', 414, 503);
     game.load.spritesheet('horse',              'Assets/Images/Instructors/horse.png', 371, 672);
     game.load.spritesheet('whale',              'Assets/Images/Instructors/whale.png', 372, 711);
+
+    game.load.spritesheet('instructorMarglytta',    'Assets/myndir/Instructors/instructorMarglytta.png', 386, 400);
+    game.load.spritesheet('instructorFroskur',      'Assets/myndir/Instructors/instructorFroskur.png', 373, 360);
+    game.load.spritesheet('instructorByfluga',      'Assets/myndir/Instructors/instructorByfluga.png', 380, 420);
+    game.load.spritesheet('instructurLedurblaka',   'Assets/myndir/Instructors/instructorLedurblaka.png', 543, 360);
+    game.load.spritesheet('instructorMarglytta',    'Assets/myndir/Instructors/instructorMarglytta.png', 372, 711);
     
 
     // =================================== Audio ===================================
@@ -179,7 +199,7 @@ function preload()
     game.load.audio('intro',            'Assets/Sounds/Inngangur.mp3');
 
     //Audio for when a wrong key is pressed in an exercise
-    game.load.audio('wrongSound',       'Assets/Sounds/wrongSound.mp3');
+    game.load.audio('wrongSound',      'Assets/Sounds/wrongSound.mp3');
 
     //Audio files related to WarmUp animation for "F og J"
     game.load.audio('leftFJ',           'Assets/Sounds/F_og_J_1.mp3');
@@ -319,6 +339,7 @@ function preload()
     game.load.audio('finishRO',         'Assets/Sounds/Finished/RO_buin.mp3');
     game.load.audio('finishBRODD',      'Assets/Sounds/Finished/Broddstafir_buin.mp3');
     game.load.audio('finishHA',         'Assets/Sounds/Finished/Hastafir_buin.mp3');
+    
     
     //Displays how much of the game has been loaded on the canvas
     var loadingText = game.add.text(game.world.centerX, game.world.centerY, 'Hleð inn 0%', { fill: '#00000' });
@@ -476,11 +497,11 @@ function update()
         }
 
         //This will make the left and right hand move from below the visible part of the canvas to their correct positions above the keys
-        if(leftHand.y > 400 && balloon.visible === true)
+        if(leftHand.y > 300 && balloon.visible === true)
         {
             leftHand.y -= 4;
         }
-        if(rightHand.y > 410 && balloon.visible === true)
+        if(rightHand.y > 160 && balloon.visible === true)
         {
             rightHand.y -= 4;
         }
@@ -490,11 +511,11 @@ function update()
     if(warmUps[6] === true || warmUps[7] === true  ||  warmUps[8] === true || warmUps[9] === true || warmUps[10] === true || warmUps[11])
     {
         //This will make the left and right hand move from below the visible part of the canvas to their correct positions above the keys
-        if(leftHand.y > 340 && balloon.visible === true)
+        if(leftHand.y > 300 && balloon.visible === true)
         {
             leftHand.y -= 4;
         }
-        if(rightHand.y > 300 && balloon.visible === true)
+        if(rightHand.y > 160 && balloon.visible === true)
         {
             rightHand.y -= 4;
         }
@@ -574,50 +595,106 @@ function loadHomePage()
     homePage.height = height;
 
     //Fingrafimi logo loaded
-    var logoL = game.add.image(200, 40, 'logoL');
+    var logoL = game.add.image(0, 0, 'logoL');
 
-    //Instructor Maggi Minnkur loaded and the animation of moving his mouth to make him talk.
-    var instructorMaggi = game.add.sprite(500, 150, 'instructorMaggi', 0);
-    instructorMaggi.scale.setTo(0.8);
-    instructorMaggi.animations.add('talk', [0, 1, 0, 1, 1, 0], 6, true);
+    // //Instructor Maggi Minnkur loaded and the animation of moving his mouth to make him talk.
+    // var instructorMaggi = game.add.sprite(500, 150, 'instructorMaggi', 0);
+    // instructorMaggi.scale.setTo(0.8);
+    // instructorMaggi.animations.add('talk', [0, 1, 0, 1, 1, 0], 6, true);
 
     //Buttons for all assignments added, clicking on them calls on the Instructions function first sending into it
     //the number of the assignment and exercise chosen
-    var btnFj = game.add.button(28, 20, 'fj');
-    btnFj.events.onInputDown.add(function(){ Instructions(0, -1); });
-
-    var btnDk = game.add.button(28, 70, 'dk');
-    btnDk.events.onInputDown.add(function(){ Instructions(1, -1); });
-
-    var btnSl = game.add.button(28, 120, 'sl');
-    btnSl.events.onInputDown.add(function(){ Instructions(2, -1); });
     
-    var btnAae = game.add.button(28, 170, 'aae');
-    btnAae.events.onInputDown.add(function(){ Instructions(3, -1); });
+    var btnUpprifjun = game.add.button(125, 300, 'upprifjun');
+    btnUpprifjun.events.onInputDown.add(function(){ Instructions(0, -1); });
+    //Frame 0 is a blue arrow
+    btnUpprifjun.frame = 0;
+    //If mouse hovers over the arrow it will turn red
+    btnUpprifjun.events.onInputOver.add(function(){ btnUpprifjun.frame = 1; }, this);
+    //If mouse hovers out of the arrow it will turn blue again
+    btnUpprifjun.events.onInputOut.add(function(){ btnUpprifjun.frame = 0; }, this);
 
-    var btnHome1 = game.add.button(28, 215, 'heimalyklar1');
-    btnHome1.events.onInputDown.add(function(){ Instructions(4, -1); });
+    var btnTogM = game.add.button(165, 420, 'togm');
+    btnTogM.events.onInputDown.add(function(){ Instructions(1, -1); });
+    //Frame 0 is a blue arrow
+    btnTogM.frame = 0;
+    //If mouse hovers over the arrow it will turn red
+    btnTogM.events.onInputOver.add(function(){ btnTogM.frame = 1; }, this);
+    //If mouse hovers out of the arrow it will turn blue again
+    btnTogM.events.onInputOut.add(function(){ btnTogM.frame = 0; }, this);
 
-    var btnHome2 = game.add.button(23, 275, 'heimalyklar2');
-    btnHome2.events.onInputDown.add(function(){ Instructions(5, -1); });
+    var btnDogV = game.add.button(220, 480, 'dogv');
+    btnDogV.events.onInputDown.add(function(){ Instructions(2, -1); });
+     //Frame 0 is a blue arrow
+     btnDogV.frame = 0;
+     //If mouse hovers over the arrow it will turn red
+     btnDogV.events.onInputOver.add(function(){ btnDogV.frame = 1; }, this);
+     //If mouse hovers out of the arrow it will turn blue again
+     btnDogV.events.onInputOut.add(function(){ btnDogV.frame = 0; }, this);
+     
+    var btnPogU = game.add.button(330, 470, 'pogu');
+    btnPogU.events.onInputDown.add(function(){ Instructions(3, -1); });
+    //Frame 0 is a blue arrow
+    btnPogU.frame = 0;
+    //If mouse hovers over the arrow it will turn red
+    btnPogU.events.onInputOver.add(function(){ btnPogU.frame = 1; }, this);
+    //If mouse hovers out of the arrow it will turn blue again
+    btnPogU.events.onInputOut.add(function(){ btnPogU.frame = 0; }, this);
 
-    var btnEh = game.add.button(30, 340, 'eh');
-    btnEh.events.onInputDown.add(function(){ Instructions(6, -1); });
+    var btnÞogY = game.add.button(450, 515, 'þogy');
+    btnÞogY.events.onInputDown.add(function(){ Instructions(4, -1); });
+    //Frame 0 is a blue arrow
+    btnÞogY.frame = 0;
+    //If mouse hovers over the arrow it will turn red
+    btnÞogY.events.onInputOver.add(function(){ btnÞogY.frame = 1; }, this);
+    //If mouse hovers out of the arrow it will turn blue again
+    btnÞogY.events.onInputOut.add(function(){ btnÞogY.frame = 0; }, this);
 
-    var btnIg = game.add.button(30, 388, 'ig');
-    btnIg.events.onInputDown.add(function(){ Instructions(7, -1); });
+    var btnOogC = game.add.button(540, 460, 'oogc');
+    btnOogC.events.onInputDown.add(function(){ Instructions(5, -1); });
+    //Frame 0 is a blue arrow
+    btnOogC.frame = 0;
+    //If mouse hovers over the arrow it will turn red
+    btnOogC.events.onInputOver.add(function(){ btnOogC.frame = 1; }, this);
+    //If mouse hovers out of the arrow it will turn blue again
+    btnOogC.events.onInputOut.add(function(){ btnOogC.frame = 0; }, this);
 
-    var btnBn = game.add.button(30, 437, 'bn');
-    btnBn.events.onInputDown.add(function(){ Instructions(8, -1); });
+    var btnBroddstafir = game.add.button(560, 410, 'broddstafir');
+    btnBroddstafir.events.onInputDown.add(function(){ Instructions(6, -1); });
+    //Frame 0 is a blue arrow
+    btnBroddstafir.frame = 0;
+    //If mouse hovers over the arrow it will turn red
+    btnBroddstafir.events.onInputOver.add(function(){ btnBroddstafir.frame = 1; }, this);
+    //If mouse hovers out of the arrow it will turn blue again
+    btnBroddstafir.events.onInputOut.add(function(){ btnBroddstafir.frame = 0; }, this);
+
+    var btnBandogSpurn = game.add.button(145, 365, 'bandogspurn');
+    btnBandogSpurn.events.onInputDown.add(function(){ Instructions(7, -1); });
+     //Frame 0 is a blue arrow
+     btnBandogSpurn.frame = 0;
+     //If mouse hovers over the arrow it will turn red
+     btnBandogSpurn.events.onInputOver.add(function(){ btnBandogSpurn.frame = 1; }, this);
+     //If mouse hovers out of the arrow it will turn blue again
+     btnBandogSpurn.events.onInputOut.add(function(){ btnBandogSpurn.frame = 0; }, this);
+ 
+
+    var btnTexta = game.add.button(615, 355, 'texta');
+    btnTexta.events.onInputDown.add(function(){ Instructions(8, -1); });
+    //Frame 0 is a blue arrow
+    btnTexta.frame = 0;
+    //If mouse hovers over the arrow it will turn red
+    btnTexta.events.onInputOver.add(function(){ btnTexta.frame = 1; }, this);
+    //If mouse hovers out of the arrow it will turn blue again
+    btnTexta.events.onInputOut.add(function(){ btnTexta.frame = 0; }, this);
+
+    // var btnRo = game.add.button(30, 485, 'ro'); 
+    // btnRo.events.onInputDown.add(function(){ Instructions(9, -1); });
+
+    // var btnBrodd = game.add.button(30, 535, 'broddstafir');
+    // btnBrodd.events.onInputDown.add(function(){ Instructions(10, -1); });
     
-    var btnRo = game.add.button(30, 485, 'ro'); 
-    btnRo.events.onInputDown.add(function(){ Instructions(9, -1); });
-
-    var btnBrodd = game.add.button(30, 535, 'broddstafir');
-    btnBrodd.events.onInputDown.add(function(){ Instructions(10, -1); });
-    
-    var btnHastafir = game.add.button(30, 605, 'hastafir');
-    btnHastafir.events.onInputDown.add(function(){ Instructions(11, -1); });
+    // var btnHastafir = game.add.button(30, 605, 'hastafir');
+    // btnHastafir.events.onInputDown.add(function(){ Instructions(11, -1); });
     
     // Turn off keyboard listening events
     game.input.keyboard.stop();
@@ -1061,7 +1138,7 @@ function findNextExercise(assignmentNr, exerciseNr)
 // Add the mute button to the canvas, this is called upon on all functions, Home Page, Instructions, WarmUps and Assignment
 function addMuteButton()
 {
-    muteBtn = game.add.button(890, 20, 'sound');
+    muteBtn = game.add.button(800, 20, 'sound');
     // Add hover affect
     muteBtn.events.onInputOver.add(function()
     { 
@@ -1111,7 +1188,7 @@ function muteSound()
 function addExitButton()
 {
     //Add the button
-    exitBtn = game.add.button(930, 20, 'exit');
+    exitBtn = game.add.button(850, 20, 'exit');
     //Add hover affect which changes the button if the mouse is hovering over the button or not
     exitBtn.events.onInputOver.add(function(){ exitBtn.frame = 1;});
     exitBtn.events.onInputOut.add(function(){ exitBtn.frame = 0;});
@@ -1119,6 +1196,44 @@ function addExitButton()
     //When the button is clicked, quitExercise() and loadHomePage() are called 
     exitBtn.events.onInputDown.add(quitExercise);
     exitBtn.events.onInputDown.add(loadHomePage);
+}
+
+//Saekir rettan takka fyrir aefinguna
+function getSpriteName(assignmentNumb){
+    var nafnSprite;
+    switch(assignmentNumb) {
+        case 0:
+            nafnSprite = 'upprifjun';
+            break;
+        case 1:
+            nafnSprite = 'togm';
+            break;
+        case 2:
+            nafnSprite = 'dogv';
+            break;  
+        case 3:
+            nafnSprite = 'pogu';
+            break;
+        case 4:
+            nafnSprite = 'þogy';
+            break;
+        case 5:
+            nafnSprite = 'oogc';
+            break;
+        case 6:
+            nafnSprite = 'broddstafir';
+            break;
+        case 7:
+            nafnSprite = 'bandogspurn';
+            break;
+        case 8:
+            nafnSprite = 'texta';
+            break;
+            
+        default:
+            nafnSprite = '';
+    }
+    return nafnSprite;
 }
 
 //Add the Fingrafimi logo and the assignment for the current assignment, clicking on the assignment button calls the Assignment function and skips through both through
@@ -1131,10 +1246,12 @@ function addLogoAndAssignmentID(assignmentNr, exerciseNr)
     logoS.events.onInputDown.add(function(){quitExercise(); loadHomePage();});
 
     //Add the assignment button
-    assignmentBtn = game.add.button(25, 100, 'btnSprite');
-    //Set the frame of the button to the current 
-    assignmentBtn.frame = assignmentNr;
-
+    assignmentBtn = game.add.button(60, 90, getSpriteName(assignmentNr));
+    assignmentBtn.frame = 0;
+    //If mouse hovers over the arrow it will turn red
+    assignmentBtn.events.onInputOver.add(function(){ assignmentBtn.frame = 1; }, this);
+    //If mouse hovers out of the arrow it will turn blue again
+    assignmentBtn.events.onInputOut.add(function(){ assignmentBtn.frame = 0; }, this);
     //Add the click event that loads the home page
     assignmentBtn.events.onInputDown.add(function()
     {
@@ -1153,7 +1270,7 @@ function addLogoAndAssignmentID(assignmentNr, exerciseNr)
 function addSkipButton(assignmentNr, exerciseNr, nextFunction)
 {
     //Add the button
-    var arrowBtn = game.add.button(870, 630, 'arrow');
+    var arrowBtn = game.add.button(800, 550, 'arrow');
     //Frame 0 is a blue arrow
     arrowBtn.frame = 0;
     //If mouse hovers over the arrow it will turn red
@@ -1266,8 +1383,8 @@ function addExercises(assignmentNr)
 {
     if(assignmentNr === 0 || assignmentNr === 1)
     {
-        addExerciseImages('mus', 'musGlow', exerciseBtnPosArray[assignmentNr], 3, assignmentNr, 0);
-        addExerciseImages('robot', 'robotGlow', exerciseBtnPosArray[assignmentNr], 3, assignmentNr, 3);
+        addExerciseImages('starfish', 'starfish', exerciseBtnPosArray[assignmentNr], 3, assignmentNr, 3);
+        addExerciseImages('jellyfish', 'jellyfish', exerciseBtnPosArray[assignmentNr], 3, assignmentNr, 0);
     }
     else if(assignmentNr === 2)
     {
@@ -1321,31 +1438,34 @@ function addExercises(assignmentNr)
 //Load and display the correct background depending on what assignmentNr is
 function loadBackground(assignmentNr)
 { 
-    if(assignmentNr === 0 || assignmentNr === 1 || assignmentNr === 2 || assignmentNr === 3)
+    
+    if(assignmentNr === 0 || assignmentNr === 7 || assignmentNr === 8)
     {
-        //Add blue background
-        background = game.add.image(game.world.centerX, game.world.centerY, 'homeKeysBackground');
+        console.log(game.world.centerY);
+        
+        //Add sea background
+        background = game.add.image(game.world.centerX, game.world.centerY, 'marglyttaBakgrunnur');
     }
-    else if(assignmentNr === 4 || assignmentNr === 5)
+    else if(assignmentNr === 5 || assignmentNr === 6)
     {
         //Add farm background
-        background = game.add.image(game.world.centerX, game.world.centerY, 'farm');
+        background = game.add.image(game.world.centerX, game.world.centerY, 'ledurblakaBakgrunnur');
         //Add clouds which will be constantly moving to the right
         clouds = game.add.image(-1000, 10,'clouds');
     }
-    else if(assignmentNr === 6 || assignmentNr === 7)
+    else if(assignmentNr === 1 || assignmentNr === 2)
     {
         //Load ocean floor background
-        background = game.add.image(game.world.centerX, game.world.centerY, 'ocean');
+        background = game.add.image(game.world.centerX, game.world.centerY, 'sundlaugBakgrunnur');
         //Add orange fish which will move from end to end then turn around repeatedly
         fish1 = game.add.sprite(800, 35, 'fishes', 2);
         //Add green fish which will move from end to end then turn around repeatedly
         fish2 = game.add.sprite(25, 175, 'fishes', 1);
     }
-    else if(assignmentNr === 8 || assignmentNr === 9)
+    else if(assignmentNr === 3 || assignmentNr === 4)
     {
         //Add stage background
-        background = game.add.image(game.world.centerX, game.world.centerY, 'stage');
+        background = game.add.image(game.world.centerX, game.world.centerY, 'byflugaBakgrunnur');
     }
     else if(assignmentNr === 10 || assignmentNr === 11)
     {
@@ -1353,6 +1473,8 @@ function loadBackground(assignmentNr)
         background = game.add.image(game.world.centerX, game.world.centerY, 'box');
     }
     //Set the width and height of the background to match the witdh and height of the canvas
+    console.log('width: ' + width + ' height:' + height);
+    
     background.width = width;
     background.height = height;
     background.anchor.setTo(0.5, 0.5);
@@ -1362,15 +1484,18 @@ function loadBackground(assignmentNr)
 function addExerciseImages(image, imageGlow, posArr, count, assignmentNr, exerciseNr)
 {
     textPosArr = exerciseTextPosArray[assignmentNr];
+    
     for(var i = 0; i < count; i++)
     {
         // Add the background image that makes the exercise buttons glow
-        exerciseBtnGlowArray[assignmentNr][exerciseNr+i] = game.add.image(posArr[i+exerciseNr][0]-10, posArr[i+exerciseNr][1]-10, imageGlow);
+        //exerciseBtnGlowArray[assignmentNr][exerciseNr+i] = game.add.image(posArr[i+exerciseNr][0]-10, posArr[i+exerciseNr][1]-10, imageGlow);
         // Make the background image hidden
-        exerciseBtnGlowArray[assignmentNr][exerciseNr+i].alpha = 0;
+        //exerciseBtnGlowArray[assignmentNr][exerciseNr+i].alpha = 0;
 
         //Add the exercise button for exercise in index exercisesArray[assignmentNr][exerciseNr]
         exerciseBtnArray[assignmentNr][exerciseNr+i] = game.add.button(posArr[i+exerciseNr][0], posArr[i+exerciseNr][1], image);
+        exerciseBtnArray[assignmentNr][exerciseNr+i].frame = 0;
+        exerciseBtnArray[assignmentNr][exerciseNr+i].scale.setTo(0.8);
         //Check if the exercise is finished, if it is we make the button green
         if(exercisesFinished[assignmentNr][exerciseNr+i] === true)
         {
@@ -1395,119 +1520,129 @@ function addExerciseImages(image, imageGlow, posArr, count, assignmentNr, exerci
 //along with a blinking animation, then a keyboard outline with some grey filled keys is drawn over the other single keys
 function loadKeyboard(assignmentNr, exerciseNr)
 {
-    keyboardKeysMap.set('a', game.add.sprite(241, 341, 'keys', 9));
-    keyboardKeysMap.get('a').animations.add('blink', [9, 10, 9, 10, 9], 2, false);
-
-    keyboardKeysMap.set('s', game.add.sprite(285, 341, 'keys', 27));   
-    keyboardKeysMap.get('s').animations.add('blink', [27, 34, 27, 34, 27], 2, false); 
-    
-    keyboardKeysMap.set('d', game.add.sprite(328, 341, 'keys', 15));
-    keyboardKeysMap.get('d').animations.add('blink', [15, 16, 15, 16, 15], 2, false);
-    
-    keyboardKeysMap.set('f', game.add.sprite(371, 341, 'keys', 21));
-    keyboardKeysMap.get('f').animations.add('blink', [21, 22, 21, 22, 21], 2, false);
-    
-    keyboardKeysMap.set('g', game.add.sprite(416, 341, 'keys', 23));
-    keyboardKeysMap.get('g').animations.add('blink', [23, 24, 23, 24, 23], 2, false);
-    
-    keyboardKeysMap.set('h', game.add.sprite(459, 340, 'keys', 25));
-    keyboardKeysMap.get('h').animations.add('blink', [25, 26, 25, 26, 25], 2, false);
-    
-    keyboardKeysMap.set('j', game.add.sprite(502, 340, 'keys', 31));
-    keyboardKeysMap.get('j').animations.add('blink', [31, 32, 31, 32, 31], 2, false);
-    
-    keyboardKeysMap.set('k', game.add.sprite(547, 340, 'keys', 33));
-    keyboardKeysMap.get('k').animations.add('blink', [33, 35, 33, 35, 33], 2, false);
-    
-    keyboardKeysMap.set('l', game.add.sprite(589, 340, 'keys', 39));
-    keyboardKeysMap.get('l').animations.add('blink', [39, 40, 39, 40, 39], 2, false);
-    
-    keyboardKeysMap.set('æ', game.add.sprite(636, 340, 'keys', 7));
-    keyboardKeysMap.get('æ').animations.add('blink', [7, 8, 7, 8, 7], 2, false);
-
-    keyboardKeysMap.set(' ', game.add.sprite(340, 429, 'spacebar', 0));
-    keyboardKeysMap.get(' ').width = 264;
-    keyboardKeysMap.get(' ').animations.add('blink', [0, 1, 0, 1, 0], 2, false);
-
-    //If We are in assignment 5 or higher, the e key will be colored and have a blinking animation, else it will just be grey
-    if(assignmentNr > 5)
-    {
-        keyboardKeysMap.set('e', game.add.sprite(317, 298, 'keys', 17));
-        keyboardKeysMap.get('e').animations.add('blink', [17, 18, 17, 18, 17], 2, false);
-    }
-    else
-    {
-        keyboardKeysMap.set('e', game.add.sprite(317, 298, 'keys', 19));
-    }
-
-    //If We are in assignment 6 or higher, the i key will be colored and have a blinking animation, else it will just be grey
-    if(assignmentNr > 6)
-    {
-        keyboardKeysMap.set('i', game.add.sprite(536, 296, 'keys', 28));
-        keyboardKeysMap.get('i').animations.add('blink', [28, 29, 28, 29, 28], 2, false);
-    }
-    else
-    {
-        keyboardKeysMap.set('i', game.add.sprite(536, 296, 'keys', 30));
-    }
-
-    //If We are in assignment 7 or higher, the b key will be colored and have a blinking animation, else it will just be grey
-    if(assignmentNr > 7)
-    {
-        keyboardKeysMap.set('b', game.add.sprite(437, 384, 'keys', 11));
-        keyboardKeysMap.get('b').animations.add('blink', [11, 12, 11, 12, 11], 2, false);
-        
-        keyboardKeysMap.set('n', game.add.sprite(481, 384, 'keys', 6));
-        keyboardKeysMap.get('n').animations.add('blink', [6, 13, 6, 13, 6], 2, false);
-    }
-    else
-    {
-        keyboardKeysMap.set('b', game.add.sprite(437, 384, 'keys', 14));
-        keyboardKeysMap.set('n', game.add.sprite(481, 384, 'keys', 20));
-    }
-
-    //If We are in assignment 8 or higher, the r key will be colored and have a blinking animation, else it will just be grey
-    if(assignmentNr > 8)
-    {
-        keyboardKeysMap.set('r', game.add.sprite(361, 298, 'keys', 3));
-        keyboardKeysMap.get('r').animations.add('blink', [3, 4, 3, 4, 3], 2, false);
-        
-        keyboardKeysMap.set('o', game.add.sprite(579, 297, 'keys', 0));
-        keyboardKeysMap.get('o').animations.add('blink', [0, 1, 0, 1, 0], 2, false);
-    }
-    else
-    {
-        keyboardKeysMap.set('r', game.add.sprite(361, 298, 'keys', 5));
-        keyboardKeysMap.set('o', game.add.sprite(579, 297, 'keys', 2));
-    }
-
-    //If We are in assignment 5 or higher, the ´ key will be colored and have a blinking animation, else it will just be grey
-    if(assignmentNr > 9)
-    {
-        keyboardKeysMap.set('´', game.add.sprite(678, 340, 'keys', 36));
-        keyboardKeysMap.get('´').animations.add('blink', [36, 37, 36, 37, 36], 2, false);
-    }
-    else
-    {
-        keyboardKeysMap.set('´', game.add.sprite(678, 340, 'keys', 38));
-    }
-
-    ////If We are in assignment 10 or higher, the shift keys will be colored and both will have a blinking animation, else they will just be grey
-    if(assignmentNr > 10)
-    {
-        keyboardKeysMap.set('lShift', game.add.sprite(165, 386, 'lShift', 1));
-        keyboardKeysMap.get('lShift').animations.add('blink', [1, 2, 1, 2, 1], 2, false);
-        keyboardKeysMap.set('rShift', game.add.sprite(700, 384, 'rShift', 1));
-        keyboardKeysMap.get('rShift').animations.add('blink', [1, 2, 1, 2, 1], 2, false);
-    }
-    else
-    {
-        keyboardKeysMap.set('lShift', game.add.sprite(165, 386, 'lShift', 0));
-        keyboardKeysMap.set('rShift', game.add.sprite(700, 384, 'rShift', 0));
-    }
-    
     //The keyboard outline that is over the single images is added in the end
-    keyboard = game.add.image(150, 175, 'keyboard');
+    keyboard = game.add.image(100, 175, 'keyboard');
+    keyboard.scale.setTo(0.56);
+
+    keyboardKeysMap.set('a', game.add.sprite(188, 335, 'a', 0));
+    keyboardKeysMap.get('a').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
+    keyboardKeysMap.get('a').scale.setTo(1.2);
+
+    keyboardKeysMap.set('s', game.add.sprite(228, 335, 's', 1000));   
+    keyboardKeysMap.get('s').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
+    keyboardKeysMap.get('s').scale.setTo(1.2);
+
+    keyboardKeysMap.set('d', game.add.sprite(272, 335, 'd', 1000));
+    keyboardKeysMap.get('d').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
+    keyboardKeysMap.get('d').scale.setTo(1.2);
+
+     keyboardKeysMap.set('f', game.add.sprite(313, 335, 'f', 1000));
+     keyboardKeysMap.get('f').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
+     keyboardKeysMap.get('f').scale.setTo(1.2);
+
+//     keyboardKeysMap.set('g', game.add.sprite(416, 341, 'keys', 23));
+//     keyboardKeysMap.get('g').animations.add('blink', [23, 24, 23, 24, 23], 2, false);
+    
+//     keyboardKeysMap.set('h', game.add.sprite(459, 340, 'keys', 25));
+//     keyboardKeysMap.get('h').animations.add('blink', [25, 26, 25, 26, 25], 2, false);
+    
+     keyboardKeysMap.set('j', game.add.sprite(440, 334, 'j', 0));
+     keyboardKeysMap.get('j').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
+     keyboardKeysMap.get('j').scale.setTo(1.2);
+
+     keyboardKeysMap.set('k', game.add.sprite(481, 334, 'k', 0));
+     keyboardKeysMap.get('k').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
+     keyboardKeysMap.get('k').scale.setTo(1.2);
+
+     keyboardKeysMap.set('l', game.add.sprite(520, 334, 'l', 0));
+     keyboardKeysMap.get('l').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
+     keyboardKeysMap.get('l').scale.setTo(1.2);
+
+     keyboardKeysMap.set('æ', game.add.sprite(566, 33333, 'æ', 0));
+     keyboardKeysMap.get('æ').animations.add('blink', [0, 1, 0,1, 0,1, 0, 1, 0,1, 0], 4, false);
+     keyboardKeysMap.get('æ').scale.setTo(1.2);
+//     keyboardKeysMap.set(' ', game.add.sprite(340, 429, 'spacebar', 0));
+//     keyboardKeysMap.get(' ').width = 264;
+//     keyboardKeysMap.get(' ').animations.add('blink', [0, 1, 0, 1, 0], 2, false);
+
+// //     // //If We are in assignment 5 or higher, the e key will be colored and have a blinking animation, else it will just be grey
+//     if(assignmentNr > 5)
+//     {
+//         keyboardKeysMap.set('e', game.add.sprite(317, 298, 'keys', 17));
+//         keyboardKeysMap.get('e').animations.add('blink', [17, 18, 17, 18, 17], 2, false);
+//     }
+//     else
+//     {
+//         keyboardKeysMap.set('e', game.add.sprite(317, 298, 'keys', 19));
+//     }
+
+// //     // //If We are in assignment 6 or higher, the i key will be colored and have a blinking animation, else it will just be grey
+//     if(assignmentNr > 6)
+//     {
+//         keyboardKeysMap.set('i', game.add.sprite(536, 296, 'keys', 28));
+//         keyboardKeysMap.get('i').animations.add('blink', [28, 29, 28, 29, 28], 2, false);
+//     }
+//     else
+//     {
+//         keyboardKeysMap.set('i', game.add.sprite(536, 296, 'keys', 30));
+//     }
+
+// //     // //If We are in assignment 7 or higher, the b key will be colored and have a blinking animation, else it will just be grey
+//     if(assignmentNr > 7)
+//     {
+//         keyboardKeysMap.set('b', game.add.sprite(437, 384, 'keys', 11));
+//         keyboardKeysMap.get('b').animations.add('blink', [11, 12, 11, 12, 11], 2, false);
+        
+//         keyboardKeysMap.set('n', game.add.sprite(481, 384, 'keys', 6));
+//         keyboardKeysMap.get('n').animations.add('blink', [6, 13, 6, 13, 6], 2, false);
+//     }
+//     else
+//     {
+//         keyboardKeysMap.set('b', game.add.sprite(437, 384, 'keys', 14));
+//         keyboardKeysMap.set('n', game.add.sprite(481, 384, 'keys', 20));
+//     }
+
+// //     // //If We are in assignment 8 or higher, the r key will be colored and have a blinking animation, else it will just be grey
+//     if(assignmentNr > 8)
+//     {
+//         keyboardKeysMap.set('r', game.add.sprite(361, 298, 'keys', 3));
+//         keyboardKeysMap.get('r').animations.add('blink', [3, 4, 3, 4, 3], 2, false);
+        
+//         keyboardKeysMap.set('o', game.add.sprite(579, 297, 'keys', 0));
+//         keyboardKeysMap.get('o').animations.add('blink', [0, 1, 0, 1, 0], 2, false);
+//     }
+//     else
+//     {
+//         keyboardKeysMap.set('r', game.add.sprite(361, 298, 'keys', 5));
+//         keyboardKeysMap.set('o', game.add.sprite(579, 297, 'keys', 2));
+//     }
+
+// //     // //If We are in assignment 5 or higher, the ´ key will be colored and have a blinking animation, else it will just be grey
+//     if(assignmentNr > 9)
+//     {
+//         keyboardKeysMap.set('´', game.add.sprite(678, 340, 'keys', 36));
+//         keyboardKeysMap.get('´').animations.add('blink', [36, 37, 36, 37, 36], 2, false);
+//     }
+//     else
+//     {
+//         keyboardKeysMap.set('´', game.add.sprite(678, 340, 'keys', 38));
+//     }
+
+// //     // ////If We are in assignment 10 or higher, the shift keys will be colored and both will have a blinking animation, else they will just be grey
+//     if(assignmentNr > 10)
+//     {
+//         keyboardKeysMap.set('lShift', game.add.sprite(165, 386, 'lShift', 1));
+//         keyboardKeysMap.get('lShift').animations.add('blink', [1, 2, 1, 2, 1], 2, false);
+//         keyboardKeysMap.set('rShift', game.add.sprite(700, 384, 'rShift', 1));
+//         keyboardKeysMap.get('rShift').animations.add('blink', [1, 2, 1, 2, 1], 2, false);
+//     }
+//     else
+//     {
+//         keyboardKeysMap.set('lShift', game.add.sprite(165, 386, 'lShift', 0));
+//         keyboardKeysMap.set('rShift', game.add.sprite(700, 384, 'rShift', 0));
+//     }
+    
+    
 }
 
 //Add the logo from Menntamálastofnun on the bottom left of the screen, x is the x coordinate on where to put the logo and sc is the scale we want
@@ -1528,7 +1663,7 @@ function Instructions(assignmentNr, exerciseNr)
     //If the assignmentNr is between 0 and 4, a part is added to the background
     if(assignmentNr === 0 || assignmentNr === 1 || assignmentNr === 2 || assignmentNr === 3)
     {
-        background = game.add.image(0, 0, 'instructionBg');
+        //background = game.add.image(0, 0, 'instructionBg');
     }
 
     //Add the Fingrafimi logo and Assignment buttons on the top left corner
@@ -1538,6 +1673,7 @@ function Instructions(assignmentNr, exerciseNr)
     addExitButton();
     //Add the Mute button
     addMuteButton();
+    
     
     //Add the skip button to skip the Instructions and go to the correct warmUp
     addSkipButton(assignmentNr, exerciseNr,  warmUpFunctions[assignmentNr]);
@@ -1557,31 +1693,31 @@ function Instructions(assignmentNr, exerciseNr)
 //Load and display the correct instructor depending on which Instruction you are in
 function addInstructionAnimation(assignmentNr)
 {
-    if(assignmentNr === 0 || assignmentNr === 1 || assignmentNr === 2 || assignmentNr === 3)
+    if(assignmentNr === 1 || assignmentNr === 2)
     {
-         instructor = game.add.sprite(500, 150, 'instructorMaggi', 0);
-         instructor.scale.setTo(0.8);
+         instructor = game.add.sprite(250, 300, 'instructorFroskur', 0);
+         instructor.scale.setTo(1);
          instructor.animations.add('talk', [0, 1, 0, 1, 1, 0], 6, true);
          return instructor;
     }
-    else if(assignmentNr === 4 || assignmentNr === 5)
+    else if(assignmentNr === 5 || assignmentNr === 6)
     {
-         instructor = game.add.sprite(500, 100, 'pig', 0);
-         instructor.scale.setTo(0.75);
+         instructor = game.add.sprite(250, 200, 'instructurLedurblaka', 0);
+         instructor.scale.setTo(1);
          instructor.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
          return instructor;
     }
-    else if(assignmentNr === 6 || assignmentNr === 7)
+    else if(assignmentNr === 0 || assignmentNr === 7 || assignmentNr === 8)
     {
-         instructor = game.add.sprite(500, 150, 'whale', 0);
-         instructor.scale.setTo(0.75);
+         instructor = game.add.sprite(250, 150, 'instructorMarglytta', 0);
+         instructor.scale.setTo(1);
          instructor.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
          return instructor;
     }
-    else if(assignmentNr === 8 || assignmentNr === 9)
+    else if(assignmentNr === 3 || assignmentNr === 4)
     {
-         instructor = game.add.sprite(500, 150, 'fish', 0);
-         instructor.scale.setTo(0.8);
+         instructor = game.add.sprite(300, 150, 'instructorByfluga', 0);
+         instructor.scale.setTo(1);
          instructor.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
          return instructor;
     }
@@ -1812,13 +1948,13 @@ function addWarmUpTextArea(letter, offset, color)
 //WarmUp animation for F og J, this function is mainly just animation sequences where one doesnt start until the previous one has finished playing
 //The soundclips are played in the following order: leftFJ, rightFJ, findFJ, findF, FindJ and spaceFJ
 function WarmUpFJ(assignmentNr, exerciseNr)
-{
+{   
     //Set warmUps[0] to true so that all the callBacks here work while in the warmup
     warmUps[0] = true;
     initGame();
-
+    
     loadBackground(assignmentNr);
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
+    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
     //Add the "heimalyklar" keys to the canvas, they have some blinking animations but only the ones needed which are:
@@ -1827,18 +1963,21 @@ function WarmUpFJ(assignmentNr, exerciseNr)
     //3: Just F blinks
     //4: Just J blinks
     //5: Both F and J blink simultaneously
-    warmupKeys = game.add.sprite(150, 380, 'warmupKeys', 0);
-    warmupKeys.animations.add('asdfBlink', [0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0], 2, false, true);
-    warmupKeys.animations.add('jklæBlink', [0, 16, 0, 16, 0, 16, 0, 16, 0, 16, 0], 2, false, true);
-    warmupKeys.animations.add('fBlink', [0, 4, 0, 4, 0, 4, 0], 2, false, true);
-    warmupKeys.animations.add('jBlink', [0, 7, 0, 7, 0, 7, 0], 2, false, true);
-    warmupKeys.animations.add('bothBlink', [0, 11, 0, 11, 0, 11, 0, 11, 0, 11, 0], 2, false, true);
+    // warmupKeys = game.add.sprite(150, 380, 'warmupKeys', 0);
+    // warmupKeys.animations.add('asdfBlink', [0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0], 2, false, true);
+    // warmupKeys.animations.add('jklæBlink', [0, 16, 0, 16, 0, 16, 0, 16, 0, 16, 0], 2, false, true);
+    // warmupKeys.animations.add('fBlink', [0, 4, 0, 4, 0, 4, 0], 2, false, true);
+    // warmupKeys.animations.add('jBlink', [0, 7, 0, 7, 0, 7, 0], 2, false, true);
+    // warmupKeys.animations.add('bothBlink', [0, 11, 0, 11, 0, 11, 0, 11, 0, 11, 0], 2, false, true);
+
+    
+    loadKeyboard(0,0);
 
     //Add the image and talking animation of the instructor
     warmupHead = game.add.sprite(1096, 210, 'warmupHead', 0);
     warmupHead.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
     warmupHead.anchor.setTo(0.75, 1);
-
+    
     //Add the left hand to the game so that it starts moving from below the visible canvas to the A, S, D and F keys.
     leftHand = game.add.sprite(160, 700, 'lHand', 2);
     leftHand.scale.setTo(1.1);  
@@ -1848,7 +1987,7 @@ function WarmUpFJ(assignmentNr, exerciseNr)
 
     addMuteButton();
     addExitButton();
-
+    addSkipButton(assignmentNr, exerciseNr,  Assignment);
     //Each animation of WarmUpFJ is divided into sections where one doesn't start until the previous one is complete
     //fogj1 is the first soundclip where he says "Finndu stafina A, S, D og F", the second clip where he says "Finndu stafina
     //J, K, L og Æ" does not start untill after the first soundclip has finished playing
@@ -1866,9 +2005,13 @@ function WarmUpFJ(assignmentNr, exerciseNr)
                 {
                     warmupHead.play('talk');
                     sounds['rightFJ'].play();
-                    warmupKeys.play('jklæBlink');
+                    //warmupKeys.play('jklæBlink');
+                    keyboardKeysMap.get('j').play('blink');
+                    keyboardKeysMap.get('k').play('blink');
+                    keyboardKeysMap.get('l').play('blink');
+                    keyboardKeysMap.get('æ').play('blink');
                     balloon.frame = 1;
-                    rightHand = game.add.sprite(535, 700, 'rHand', 0);
+                    rightHand = game.add.sprite(350, 700, 'rHand', 0);
                     rightHand.scale.setTo(1.1);
                 }
                 
@@ -1876,131 +2019,131 @@ function WarmUpFJ(assignmentNr, exerciseNr)
             }, this).autoDestroy = true;  
     }, this);
 
-    //fogj2 is the soundclip where he says "Finndu stafina J, K, L og Æ"
-     sounds['rightFJ'].onStop.addOnce(function()
-     {
-            //Make Maggi stop moving his mouth in the 2 second pause between animations 
-            stopWarmupHeadTalk();
-            //Pause for 2 seconds, then play the soundclip "Finndu stafina F og J" and make both F and J blink
-            game.time.events.add(Phaser.Timer.SECOND * 2, function()
-            {          
-                //Make Maggi talk, blink both F and J, set correct text in speech bubble and play soundclip
-                if(warmUps[0])
-                {
-                    warmupHead.play('talk');
-                    warmupKeys.play('bothBlink');
-                    balloon.frame = 2;
-                    sounds['findFJ'].play();
-                }           
-            }, this).autoDestroy = true;  
-    }, this);
+    // //fogj2 is the soundclip where he says "Finndu stafina J, K, L og Æ"
+    //  sounds['rightFJ'].onStop.addOnce(function()
+    //  {
+    //         //Make Maggi stop moving his mouth in the 2 second pause between animations 
+    //         stopWarmupHeadTalk();
+    //         //Pause for 2 seconds, then play the soundclip "Finndu stafina F og J" and make both F and J blink
+    //         game.time.events.add(Phaser.Timer.SECOND * 2, function()
+    //         {          
+    //             //Make Maggi talk, blink both F and J, set correct text in speech bubble and play soundclip
+    //             if(warmUps[0])
+    //             {
+    //                 warmupHead.play('talk');
+    //                 warmupKeys.play('bothBlink');
+    //                 balloon.frame = 2;
+    //                 sounds['findFJ'].play();
+    //             }           
+    //         }, this).autoDestroy = true;  
+    // }, this);
 
     //This is after the end of "Finndu stafina J, K, L og Æ", here we want to focus on F and J and make them blink
-    sounds['findFJ'].onStop.addOnce(function()
-    {
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
-        stopWarmupHeadTalk();
+    // sounds['findFJ'].onStop.addOnce(function()
+    // {
+    //     //Make Maggi stop moving his mouth in the 2 second pause between animations 
+    //     stopWarmupHeadTalk();
 
-        //2 second pause between findFJ soundclip and next one
-        game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {                          
-            //Make Maggi talk, blink both F and J, set correct text in speech bubble and play soundclip
-            if(warmUps[0])
-            {
-                //Make the Instructor talk
-                warmupHead.play('talk');
-                //Make F blink
-                warmupKeys.play('fBlink');
-                //Set speech bubble
-                balloon.frame = 4;
-                //Play correct soundclip
-                sounds['findF'].play();
-                // Display the letter in the textArea
-                addWarmUpTextArea('f', 50, '#000000');
-            }                    
-        }, this).autoDestroy = true;
-    });
+    //     //2 second pause between findFJ soundclip and next one
+    //     game.time.events.add(Phaser.Timer.SECOND * 2, function()
+    //     {                          
+    //         //Make Maggi talk, blink both F and J, set correct text in speech bubble and play soundclip
+    //         if(warmUps[0])
+    //         {
+    //             //Make the Instructor talk
+    //             warmupHead.play('talk');
+    //             //Make F blink
+    //             warmupKeys.play('fBlink');
+    //             //Set speech bubble
+    //             balloon.frame = 4;
+    //             //Play correct soundclip
+    //             sounds['findF'].play();
+    //             // Display the letter in the textArea
+    //             addWarmUpTextArea('f', 50, '#000000');
+    //         }                    
+    //     }, this).autoDestroy = true;
+    // });
 
-    sounds['findF'].onStop.addOnce(function()
-    { 
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
-        stopWarmupHeadTalk();        
+    // sounds['findF'].onStop.addOnce(function()
+    // { 
+    //     //Make Maggi stop moving his mouth in the 2 second pause between animations 
+    //     stopWarmupHeadTalk();        
 
-        //Turn on keyboard event listener
-        game.input.keyboard.start();
+    //     //Turn on keyboard event listener
+    //     game.input.keyboard.start();
 
-        //Event for keyboard inputs
-        game.input.keyboard.addCallbacks(this, null, null, function(char)
-        {
-            //We only want to proceed when the F key is pressed    
-            if(char === 'f')
-            {
-                //Turn off keyboard event listener
-                game.input.keyboard.stop();
-                //Remove the textArea to display the text green
-                textArea.destroy();
+    //     //Event for keyboard inputs
+    //     game.input.keyboard.addCallbacks(this, null, null, function(char)
+    //     {
+    //         //We only want to proceed when the F key is pressed    
+    //         if(char === 'f')
+    //         {
+    //             //Turn off keyboard event listener
+    //             game.input.keyboard.stop();
+    //             //Remove the textArea to display the text green
+    //             textArea.destroy();
 
-                // Display the letter in the textArea in green
-                addWarmUpTextArea('f', 50, '#00ff00');
+    //             // Display the letter in the textArea in green
+    //             addWarmUpTextArea('f', 50, '#00ff00');
 
-                // 1 second pause
-                game.time.events.add(Phaser.Timer.SECOND * 2, function()
-                {
-                    warmupHead.play('talk');
-                    warmupKeys.play('jBlink');
-                    balloon.frame = 5;
-                    sounds['findJ'].play();
-                    textArea.destroy();
-                    // Display the letter in the textArea
-                    addWarmUpTextArea('j', 50, '#000000');
-                });
-            }
-        });
-     });
+    //             // 1 second pause
+    //             game.time.events.add(Phaser.Timer.SECOND * 2, function()
+    //             {
+    //                 warmupHead.play('talk');
+    //                 warmupKeys.play('jBlink');
+    //                 balloon.frame = 5;
+    //                 sounds['findJ'].play();
+    //                 textArea.destroy();
+    //                 // Display the letter in the textArea
+    //                 addWarmUpTextArea('j', 50, '#000000');
+    //             });
+    //         }
+    //     });
+    //  });
 
-     sounds['findJ'].onStop.add(function()
-     { 
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
-        stopWarmupHeadTalk(); 
+    //  sounds['findJ'].onStop.add(function()
+    //  { 
+    //     //Make Maggi stop moving his mouth in the 2 second pause between animations 
+    //     stopWarmupHeadTalk(); 
 
-        game.input.keyboard.start();
-        game.input.keyboard.addCallbacks(this, null, null, function(char)
-        {
-            if(char === 'j')
-            {
-                game.input.keyboard.stop();
-                textArea.destroy();
-                // Display the letter in the textArea
-                addWarmUpTextArea('j', 50, '#00ff00');
-                game.time.events.add(Phaser.Timer.SECOND * 2, function()
-                {
-                    game.input.keyboard.stop();
-                    leftHand.destroy();
-                    rightHand.destroy();
-                    warmupKeys.destroy();
-                    textArea.destroy();
+    //     game.input.keyboard.start();
+    //     game.input.keyboard.addCallbacks(this, null, null, function(char)
+    //     {
+    //         if(char === 'j')
+    //         {
+    //             game.input.keyboard.stop();
+    //             textArea.destroy();
+    //             // Display the letter in the textArea
+    //             addWarmUpTextArea('j', 50, '#00ff00');
+    //             game.time.events.add(Phaser.Timer.SECOND * 2, function()
+    //             {
+    //                 game.input.keyboard.stop();
+    //                 leftHand.destroy();
+    //                 rightHand.destroy();
+    //                 warmupKeys.destroy();
+    //                 textArea.destroy();
                     
-                    loadKeyboard(assignmentNr, exerciseNr);
+    //                 loadKeyboard(assignmentNr, exerciseNr);
 
-                    leftHand = game.add.sprite(210, 355, 'handsSprite', 2);
-                    leftHand.scale.setTo(0.85);
-                    leftHand.animations.add('lSpacePress', [2, 3, 2, 3, 2], 2, false);
-                    rightHand = game.add.sprite(470, 355, 'handsSprite', 0);
-                    rightHand.scale.setTo(0.85);
-                    rightHand.animations.add('rSpacePress', [0, 1, 0, 1, 0], 2, false);
-                    sounds['spaceFJ'].play();
-                    leftHand.play('lSpacePress');
-                    rightHand.play('rSpacePress');
-                    balloon.frame = 7;
-                    keyboardKeysMap.get(' ').play('blink');
+    //                 leftHand = game.add.sprite(210, 355, 'handsSprite', 2);
+    //                 leftHand.scale.setTo(0.85);
+    //                 leftHand.animations.add('lSpacePress', [2, 3, 2, 3, 2], 2, false);
+    //                 rightHand = game.add.sprite(470, 355, 'handsSprite', 0);
+    //                 rightHand.scale.setTo(0.85);
+    //                 rightHand.animations.add('rSpacePress', [0, 1, 0, 1, 0], 2, false);
+    //                 sounds['spaceFJ'].play();
+    //                 leftHand.play('lSpacePress');
+    //                 rightHand.play('rSpacePress');
+    //                 balloon.frame = 7;
+    //                 keyboardKeysMap.get(' ').play('blink');
                     
-                });
-            }
-        });
+    //             });
+    //         }
+    //     });
 
-        game.time.events.add(Phaser.Timer.SECOND * 2, function(){   
-        });
-     });
+    //     game.time.events.add(Phaser.Timer.SECOND * 2, function(){   
+    //     });
+    //  });
 
      sounds['spaceFJ'].onStop.addOnce(function()
      {
@@ -2023,18 +2166,24 @@ function WarmUpFJ(assignmentNr, exerciseNr)
     //Make Maggi talk
     warmupHead.play('talk');
     //make A, S, D and F blink.
-    warmupKeys.play('asdfBlink');
+    //warmupKeys.play('asdfBlink');
+    keyboardKeysMap.get('a').play('blink');
+    keyboardKeysMap.get('s').play('blink');
+    keyboardKeysMap.get('d').play('blink');
+    keyboardKeysMap.get('f').play('blink');
 }
 
 //The soundclips are played in the following order: leftFJ, rightFJ, findDK, findD, findK and finalDK
 function WarmUpDK(assignmentNr, exerciseNr)
 {
+
+    console.log('WarmupDK');
     warmUps[1] = true;
 
     initGame();
 
     loadBackground(assignmentNr);
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
+    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
     warmupKeys = game.add.sprite(150, 380, 'warmupKeys', 0);
@@ -2053,6 +2202,7 @@ function WarmUpDK(assignmentNr, exerciseNr)
 
     balloon = game.add.sprite(500, 25, 'balloonSprite', 0);
 
+    addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addMuteButton();
     addExitButton();
 
@@ -2170,12 +2320,13 @@ function WarmUpDK(assignmentNr, exerciseNr)
 //The soundclips are played in the following order: leftFJ, rightFJ, findSL, findS, FindL and finalSL
 function WarmUpSL(assignmentNr, exerciseNr)
 {
+    console.log('WarmupSL');
     warmUps[2] = true;
 
     initGame();
 
     loadBackground(assignmentNr);
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
+    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
     warmupKeys = game.add.sprite(150, 380, 'warmupKeys', 0);
@@ -2193,7 +2344,8 @@ function WarmUpSL(assignmentNr, exerciseNr)
     leftHand.scale.setTo(1.1);  
 
     balloon = game.add.sprite(500, 25, 'balloonSprite', 0);
-
+    
+    addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addMuteButton();
     addExitButton();
 
@@ -2311,12 +2463,13 @@ function WarmUpSL(assignmentNr, exerciseNr)
 
 //The soundclips are played in the following order: leftFJ, rightFJ, findAAE, findA, findAE and finalAAE
 function WarmUpAAE(assignmentNr, exerciseNr){
+    console.log('WarmupAAE');
     warmUps[3] = true;
     
     initGame();
 
     loadBackground(assignmentNr);
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
+    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
     warmupKeys = game.add.sprite(150, 380, 'warmupKeys', 0);
@@ -2335,6 +2488,7 @@ function WarmUpAAE(assignmentNr, exerciseNr){
 
     balloon = game.add.sprite(500, 25, 'balloonSprite', 0);
 
+    addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addMuteButton();
     addExitButton();
 
@@ -2456,12 +2610,13 @@ function WarmUpAAE(assignmentNr, exerciseNr){
 //The soundclips are played in the following order: leftAll1, rightAll1
 function WarmUpALL1(assignmentNr, exerciseNr)
 {
+    console.log('WarmupALL1');
     warmUps[4] = true;
     
     initGame();
 
     loadBackground(assignmentNr);
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
+    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
     var instructor = game.add.sprite(750, 100, 'pig', 0);
@@ -2477,7 +2632,8 @@ function WarmUpALL1(assignmentNr, exerciseNr)
     leftHand.scale.setTo(1.1);  
 
     balloon = game.add.sprite(500, 25, 'balloonSprite', 22);
-
+    
+    addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addMuteButton();
     addExitButton();
 
@@ -2520,12 +2676,13 @@ function WarmUpALL1(assignmentNr, exerciseNr)
 //The soundclips are played in the following order: leftAll2, rightAll2
 function WarmUpALL2(assignmentNr, exerciseNr)
 {
+    console.log('WarmupALL2');
     warmUps[5] = true;
     
     initGame();
 
     loadBackground(assignmentNr);
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
+    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
     var instructor = game.add.sprite(750, 100, 'pig', 0);
@@ -2541,6 +2698,7 @@ function WarmUpALL2(assignmentNr, exerciseNr)
 
     balloon = game.add.sprite(500, 25, 'balloonSprite', 25);
 
+    addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addMuteButton();
     addExitButton();
 
@@ -2583,12 +2741,13 @@ function WarmUpALL2(assignmentNr, exerciseNr)
 //The soundclips are played in the following order: handsEH, findE, typingE, typeE, findH, typingH, typeH
 function WarmUpEH(assignmentNr, exerciseNr)
 {
+    console.log('WarmupEH');
     warmUps[6] = true;
 
     initGame();
 
     loadBackground(assignmentNr);
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
+    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
     instructor = game.add.sprite(810, 125, 'whale', 0);
@@ -2606,6 +2765,7 @@ function WarmUpEH(assignmentNr, exerciseNr)
     balloon = game.add.sprite(475, 5, 'balloonSprite', 29);
     balloon.scale.setTo(0.9);
 
+    addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addMuteButton();
     addExitButton();
 
@@ -2758,7 +2918,7 @@ function WarmUpIG(assignmentNr, exerciseNr)
     initGame();
 
     loadBackground(assignmentNr);
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
+    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
     instructor = game.add.sprite(810, 125, 'whale', 0);
@@ -2776,6 +2936,7 @@ function WarmUpIG(assignmentNr, exerciseNr)
     balloon = game.add.sprite(475, 5, 'balloonSprite', 38);
     balloon.scale.setTo(0.9);
 
+    addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addMuteButton();
     addExitButton();
 
