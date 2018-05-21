@@ -19,7 +19,8 @@ var textAreaY = 65;
 
 // Variables for the assignments texts and its stylings
 var style = { font: '44px Arial', fill: 'white', align: 'left', wordWrap: true, wordWrapWidth: 900, backgroundColor: "rgba(0,0,0,0.4)", boundsAlignH: "center", boundsAlignV: "middle"};
-var instructionStyle = { font: '64px Arial', fill: 'white', align: 'left', wordWrap: true, wordWrapWidth: 600 };
+var instrstyle = { font: '14px Arial', fill: 'black', wordWrap: true, align: 'center', wordWrapWidth: 200,backgroundColor: "rgba(0,0,0,0)"}
+var instructionStyle = { font: '64px Arial', fill: 'white', align: 'left', wordWrap: true, wordWrapWidth: 600,backgroundColor: "rgba(0,0,0,0.4)" };
 var text = "";
 var textX = 500;
 var textY = 50;
@@ -48,6 +49,7 @@ var instructorMaggi;
 var leftHand;
 var rightHand;
 var warmupHead;
+var moveDown = false;
 
 //Audio variables
 var sounds = {};
@@ -57,325 +59,6 @@ var wrongSound;
 var comingFromExercise = false;
 var warmUps = [ false, false, false, false, false, false, false, false, false, false, false, false ];
 var preloadBar;
-
-// Function which preload all the necessary resources
-function preload()
-{    
-    preloadBar = game.add.graphics(0, 50); 
-    preloadBar.lineStyle(3, 0xffffff, 1);  
-    preloadBar.moveTo(0, 0);  
-    preloadBar.lineTo(game.width, 0);      
-    preloadBar.scale.x = 0;
-    
-    // =================================== Images ===================================
-    //Background images
-    game.load.image('homePage',                 'Assets/myndir/Backgrounds/bakgrunnur_forsida.png');
-    game.load.image('homeKeysBackground',       'Assets/Images/Backgrounds/homeKeysBackground.png');
-    //Fingrafimi2 bakgrunnir
-    game.load.image('marglyttaBakgrunnur',                'Assets/myndir/Backgrounds/marglytta.png');
-    game.load.image('sundlaugBakgrunnur',                 'Assets/myndir/Backgrounds/sundlaug.png');
-    game.load.image('byflugaBakgrunnur',                  'Assets/myndir/Backgrounds/byfluga.png');
-    game.load.image('ledurblakaBakgrunnur',               'Assets/myndir/Backgrounds/ledurblaka.png');
-    
-    game.load.image('instructionBg',            'Assets/Images/Backgrounds/instructionBackground.png');
-    game.load.image('farm',                     'Assets/Images/Backgrounds/farm.png');
-    game.load.image('clouds',                   'Assets/Images/Backgrounds/clouds.png');
-    game.load.image('box',                      'Assets/Images/Backgrounds/box.png');
-    game.load.image('stage',                    'Assets/Images/Backgrounds/svid.png');
-    game.load.image('ocean',                    'Assets/Images/Backgrounds/sandur.png');
-    game.load.spritesheet('fishes',             'Assets/Images/Backgrounds/fishes.png', 149, 94);
-
-    //Keyboard related images and sprites
-    game.load.image('keyboard',                 'Assets/myndir/Keyboard/lyklabord.png');
-    game.load.spritesheet('keys',               'Assets/Images/Keyboard/keySprite.png', 49, 45);
-    game.load.spritesheet('a',                  'Assets/myndir/Keyboard/a.png', 37, 37);
-    game.load.spritesheet('s',                  'Assets/myndir/Keyboard/s.png', 38, 38);
-    game.load.spritesheet('d',                  'Assets/myndir/Keyboard/d.png', 37, 37);
-    game.load.spritesheet('f',                  'Assets/myndir/Keyboard/f.png', 38, 38);
-    game.load.spritesheet('j',                  'Assets/myndir/Keyboard/j.png', 37, 37);
-    game.load.spritesheet('k',                  'Assets/myndir/Keyboard/k.png', 34, 35);
-    game.load.spritesheet('l',                  'Assets/myndir/Keyboard/l.png', 40, 37);
-    game.load.spritesheet('æ',                  'Assets/myndir/Keyboard/æ.png', 38, 38);
-
-    game.load.spritesheet('spacebar',           'Assets/Images/Keyboard/spacebarSprite.png', 259, 44);
-    game.load.spritesheet('lShift',             'Assets/Images/Keyboard/leftShiftSprite.png', 56, 43);
-    game.load.spritesheet('rShift',             'Assets/Images/Keyboard/rightShiftSprite.png', 125, 45);
-    game.load.spritesheet('warmupKeys',         'Assets/Images/Keyboard/asdfgh.png', 699, 77);
-    //Images of hands used in game
-    game.load.image('lHand',                    'Assets/myndir/Hands/vinstri0001.png');
-    game.load.image('rHand',                    'Assets/myndir/Hands/haegri0001.png');
-    game.load.spritesheet('handsSprite',        'Assets/Images/Hands/handSprite.png', 276, 450);
-    game.load.spritesheet('hands',              'Assets/Images/Hands/handSpriteBigger1.png', 240, 450);
-
-    // Various images
-    game.load.image('logo',                     'Assets/Images/logo.png');
-    game.load.image('logoS',                    'Assets/myndir/titillS.png');
-    game.load.image('logoL',                    'Assets/myndir/titill.png');
-    game.load.image('teacher',                  'Assets/Images/Buttons/Global/teacher.png');
-    game.load.image('mat',                      'Assets/Images/Buttons/Global/mat.png');
-    game.load.image('about',                    'Assets/Images/Buttons/Global/about.png');
-    game.load.image('aboutInfo',                'Assets/Images/Buttons/Global/aboutInfo.png');
-    game.load.spritesheet('exit',               'Assets/Images/Buttons/Global/xSprite.png', 32, 32);
-    game.load.spritesheet('sound',              'Assets/Images/Buttons/Global/soundSprite.png', 100, 96);
-    game.load.spritesheet('arrow',              'Assets/Images/Buttons/Global/arrowSprite.png', 93, 48);
-
-    // Images for assignment buttons
-    game.load.spritesheet('upprifjun',          'Assets/myndir/Buttons/Assignments/upprifjun_forsida.png',137 ,55);
-    game.load.spritesheet('togm',               'Assets/myndir/Buttons/Assignments/togm_forsida.png',132,55 );
-    game.load.spritesheet('dogv',               'Assets/myndir/Buttons/Assignments/dogv_forsida.png',124,60);
-    game.load.spritesheet('pogu',               'Assets/myndir/Buttons/Assignments/pogu_forsida.png',125,100);
-    game.load.spritesheet('þogy',               'Assets/myndir/Buttons/Assignments/þogy_forsida.png',145,55);
-    game.load.spritesheet('oogc',               'Assets/myndir/Buttons/Assignments/ogoc_forsida.png',127,80);
-    game.load.image('eh',                       'Assets/Images/Buttons/Assignments/eogh.png');
-    game.load.image('ig',                       'Assets/Images/Buttons/Assignments/iogg.png');
-    game.load.spritesheet('texta',              'Assets/myndir/Buttons/Assignments/texta_forsida.png',130,80);
-    game.load.image('ro',                       'Assets/Images/Buttons/Assignments/rogo.png');
-    game.load.spritesheet('broddstafir',        'Assets/myndir/Buttons/Assignments/broddstafir_forsida.png',163,60);
-    game.load.spritesheet('bandogspurn',        'Assets/myndir/Buttons/Assignments/bandogspurn_forsida.png',120,65);
-    game.load.spritesheet('btnSprite',          'Assets/Images/Buttons/Assignments/buttons.png', 124, 81);
-
-    // Images for exercise buttons
-    game.load.spritesheet('mus',                'Assets/Images/Buttons/Exercises/mus.png', 110, 70);
-    game.load.spritesheet('robot',              'Assets/Images/Buttons/Exercises/robot.png', 105, 127);
-    game.load.spritesheet('heyBaggi',           'Assets/Images/Buttons/Exercises/hey.png', 80, 62);
-    game.load.spritesheet('blom',               'Assets/Images/Buttons/Exercises/blom.png', 73, 95);
-    game.load.spritesheet('mus2',               'Assets/Images/Buttons/Exercises/mus2.png', 91, 84);
-    game.load.spritesheet('blakbolti',          'Assets/Images/Buttons/Exercises/blakbolti.png', 48, 52);
-    game.load.spritesheet('fotbolti',           'Assets/Images/Buttons/Exercises/fotbolti.png', 45, 45);
-    game.load.spritesheet('korfubolti',         'Assets/Images/Buttons/Exercises/korfubolti.png', 50, 52);
-    game.load.spritesheet('rubbybolti',         'Assets/Images/Buttons/Exercises/rubbybolti.png', 62, 42);
-    game.load.spritesheet('tennisbolti',        'Assets/Images/Buttons/Exercises/tennisbolti.png', 26, 26);
-    game.load.spritesheet('gitar',              'Assets/Images/Buttons/Exercises/gitar.png', 51, 73);
-    game.load.spritesheet('tromma',             'Assets/Images/Buttons/Exercises/trommur.png', 37, 35);
-    game.load.spritesheet('nota',               'Assets/Images/Buttons/Exercises/nota.png', 50, 40);
-    game.load.spritesheet('piano',              'Assets/Images/Buttons/Exercises/piano.png', 81, 38);
-    game.load.spritesheet('saxafonn',           'Assets/Images/Buttons/Exercises/saxafonn.png', 57, 96);
-    game.load.spritesheet('jellyfish',          'Assets/myndir/Buttons/Exercises/jellyfish.png', 83, 68);
-    game.load.spritesheet('starfish',           'Assets/myndir/Buttons/Exercises/krossfiskur.png', 61, 76);
-    game.load.spritesheet('shrimp',             'Assets/myndir/Buttons/Exercises/shrimp.png', 77, 50);
-    game.load.spritesheet('seahorse',           'Assets/myndir/Buttons/Exercises/seahorse.png', 35, 72);
-    game.load.spritesheet('shell',              'Assets/myndir/Buttons/Exercises/shell.png', 42, 43);
-    game.load.spritesheet('brabra',             'Assets/myndir/Buttons/Exercises/brabra.png', 59, 50);
-    game.load.spritesheet('sundbolti',          'Assets/myndir/Buttons/Exercises/sundbolti.png', 61, 50);
-    game.load.spritesheet('sundhringur',        'Assets/myndir/Buttons/Exercises/sundhringur.png', 85, 50);
-    game.load.spritesheet('solhlif',            'Assets/myndir/Buttons/Exercises/solhlif.png', 81, 80);
-    game.load.spritesheet('glas',               'Assets/myndir/Buttons/Exercises/glass.png', 61, 80);
-    game.load.spritesheet('byflugaEx',          'Assets/myndir/Buttons/Exercises/byfluga.png', 52, 80);
-    game.load.spritesheet('sol',                'Assets/myndir/Buttons/Exercises/sol.png', 81, 80);
-    game.load.spritesheet('gras',               'Assets/myndir/Buttons/Exercises/gras.png', 75, 80);
-    game.load.spritesheet('blomBlatt',          'Assets/myndir/Buttons/Exercises/blomBlatt.png', 70, 80);
-    game.load.spritesheet('blomFjolu',          'Assets/myndir/Buttons/Exercises/blomFjolu.png', 61, 80);
-    game.load.spritesheet('kongulo',            'Assets/myndir/Buttons/Exercises/kongulo.png', 91, 80);
-    game.load.spritesheet('stjarna',            'Assets/myndir/Buttons/Exercises/stjarna.png', 64, 80);
-    game.load.spritesheet('tungl',              'Assets/myndir/Buttons/Exercises/tungl.png', 48, 80);
-    game.load.spritesheet('ledurblakaEx',       'Assets/myndir/Buttons/Exercises/ledurblaka.png', 112, 80);
-    
-    //Images for glow around exercise buttons for the exercise you are currently in
-    game.load.image('musGlow',                  'Assets/Images/Buttons/Exercises/mus-glow.png');
-    game.load.image('robotGlow',                'Assets/Images/Buttons/Exercises/robot-glow.png');
-    game.load.image('heyBaggiGlow',             'Assets/Images/Buttons/Exercises/hey-glow.png');
-    game.load.image('blomGlow',                 'Assets/Images/Buttons/Exercises/blom-glow.png');
-    game.load.image('mus2Glow',                 'Assets/Images/Buttons/Exercises/mus2-glow.png');
-    game.load.image('blakboltiGlow',            'Assets/Images/Buttons/Exercises/blakbolti-glow.png');
-    game.load.image('tennisboltiGlow',          'Assets/Images/Buttons/Exercises/tennisbolti-glow.png');
-    game.load.image('fotboltiGlow',             'Assets/Images/Buttons/Exercises/fotbolti-glow.png');
-    game.load.image('korfuboltiGlow',           'Assets/Images/Buttons/Exercises/korfubolti-glow.png');
-    game.load.image('rubbyboltiGlow',           'Assets/Images/Buttons/Exercises/rubbybolti-glow.png');
-    game.load.image('gitarGlow',                'Assets/Images/Buttons/Exercises/gitar-glow.png');
-    game.load.image('trommurGlow',              'Assets/Images/Buttons/Exercises/trommur-glow.png');
-    game.load.image('notaGlow',                 'Assets/Images/Buttons/Exercises/nota-glow.png');
-    game.load.image('pianoGlow',                'Assets/Images/Buttons/Exercises/piano-glow.png');
-    game.load.image('saxafonnGlow',             'Assets/Images/Buttons/Exercises/saxafonn-glow.png');
-    game.load.image('jellyfishGlow',            'Assets/Images/Buttons/Exercises/jellyfish-glow.png');
-    game.load.image('starfishGlow',             'Assets/Images/Buttons/Exercises/starfish-glow.png');
-    game.load.image('shrimpGlow',               'Assets/Images/Buttons/Exercises/shrimp-glow.png');
-    game.load.image('seahorseGlow',             'Assets/Images/Buttons/Exercises/seahorse-glow.png');
-    game.load.image('shellGlow',                'Assets/Images/Buttons/Exercises/shell-glow.png');
-
-    // Images related to WarmUp animations
-    game.load.spritesheet('balloonSprite',      'Assets/Images/Instructors/bubbleSprite.png', 345.2, 191);
-    game.load.spritesheet('warmupHead',         'Assets/Images/Instructors/warmupHead2.png', 159, 155);
-    game.load.spritesheet('instructorMaggi',    'Assets/Images/Instructors/instructionMaggi.png', 524, 572);
-    game.load.spritesheet('pig',                'Assets/Images/Instructors/svin.png', 522, 756);
-    game.load.spritesheet('fish',               'Assets/Images/Instructors/fish.png', 414, 503);
-    game.load.spritesheet('horse',              'Assets/Images/Instructors/horse.png', 371, 672);
-    game.load.spritesheet('whale',              'Assets/Images/Instructors/whale.png', 372, 711);
-
-    game.load.spritesheet('instructorMarglytta',    'Assets/myndir/Instructors/instructorMarglytta.png', 386, 400);
-    game.load.spritesheet('instructorFroskur',      'Assets/myndir/Instructors/instructorFroskur.png', 373, 360);
-    game.load.spritesheet('instructorByfluga',      'Assets/myndir/Instructors/instructorByfluga.png', 380, 420);
-    game.load.spritesheet('instructurLedurblaka',   'Assets/myndir/Instructors/instructorLedurblaka.png', 543, 360);
-    game.load.spritesheet('instructorMarglytta',    'Assets/myndir/Instructors/instructorMarglytta.png', 372, 711);
-    
-
-    // =================================== Audio ===================================
-    //Audio for when entering game
-    game.load.audio('intro',            'Assets/Sounds/Inngangur.mp3');
-
-    //Audio for when a wrong key is pressed in an exercise
-    game.load.audio('wrongSound',      'Assets/Sounds/wrongSound.mp3');
-
-    //Audio files related to WarmUp animation for "F og J"
-    game.load.audio('leftFJ',           'Assets/Sounds/F_og_J_1.mp3');
-    game.load.audio('rightFJ',          'Assets/Sounds/F_og_J_2.mp3');
-    game.load.audio('findFJ',           'Assets/Sounds/F_og_J_3.mp3');
-    game.load.audio('findF',            'Assets/Sounds/F_og_J_4.mp3');
-    game.load.audio('findJ',            'Assets/Sounds/F_og_J_5.mp3');
-    game.load.audio('spaceFJ',          'Assets/Sounds/F_og_J_6.mp3');
-    game.load.audio('finalFJ',          'Assets/Sounds/F_og_J_7.mp3');
-    
-    //Audio files related to WarmUp animation for "D og K"
-    game.load.audio('findDK',           'Assets/Sounds/D_og_K_3.mp3');
-    game.load.audio('findD',            'Assets/Sounds/D_og_K_4.mp3');
-    game.load.audio('findK',            'Assets/Sounds/D_og_K_5.mp3');
-    game.load.audio('finalDK',          'Assets/Sounds/D_og_K_6.mp3');
-    
-    //Audio files related to WarmUp animation for "S og L"
-    game.load.audio('findSL',           'Assets/Sounds/S_og_L_3.mp3');
-    game.load.audio('findS',            'Assets/Sounds/S_og_L_4.mp3');
-    game.load.audio('findL',            'Assets/Sounds/S_og_L_5.mp3');
-    game.load.audio('finalSL',          'Assets/Sounds/S_og_L_6.mp3');
-    
-    //Audio files related to WarmUp animation for "A og Æ"
-    game.load.audio('findAAE',          'Assets/Sounds/A_og_AE_3.mp3');
-    game.load.audio('findA',            'Assets/Sounds/A_og_AE_4.mp3');
-    game.load.audio('findAE',           'Assets/Sounds/A_og_AE_5.mp3');
-    game.load.audio('finalAAE',         'Assets/Sounds/A_og_AE_6.mp3');
-    
-    //Audio files related to WarmUp animation for "Allir heimalyklar 1"
-    game.load.audio('leftAll1',         'Assets/Sounds/Heimalyklar_1_2.mp3');
-    game.load.audio('rightAll1',        'Assets/Sounds/Heimalyklar_1_3.mp3');
-    game.load.audio('finalAll1',        'Assets/Sounds/Heimalyklar_1_4.mp3');
-    
-    //Audio files related to WarmUp animation for "Allir heimalyklar 2"
-    game.load.audio('leftAll2',         'Assets/Sounds/Heimalyklar_2_2.mp3');
-    game.load.audio('rightAll2',        'Assets/Sounds/Heimalyklar_2_3.mp3');
-    game.load.audio('finalAll2',        'Assets/Sounds/Heimalyklar_2_4.mp3');
-    
-    //Audio files related to WarmUp animation for "E og H"
-    game.load.audio('handsEH',          'Assets/Sounds/E_og_H_2.mp3');
-    game.load.audio('findE',            'Assets/Sounds/E_og_H_3.mp3');
-    game.load.audio('typingE',          'Assets/Sounds/E_og_H_4.mp3');
-    game.load.audio('typeE',            'Assets/Sounds/E_og_H_5.mp3');
-    game.load.audio('findH',            'Assets/Sounds/E_og_H_6.mp3');
-    game.load.audio('typingH',          'Assets/Sounds/E_og_H_7.mp3');
-    game.load.audio('typeH',            'Assets/Sounds/E_og_H_8.mp3');
-    game.load.audio('finalEH',          'Assets/Sounds/E_og_H_9.mp3');
-    
-    //Audio files related to WarmUp animation for "I og G"
-    game.load.audio('handsIG',          'Assets/Sounds/I_og_G_2.mp3');    
-    game.load.audio('findI',            'Assets/Sounds/I_og_G_3.mp3');
-    game.load.audio('typingI',          'Assets/Sounds/I_og_G_4.mp3');
-    game.load.audio('typeI',            'Assets/Sounds/I_og_G_5_1.mp3');
-    game.load.audio('gjIG',             'Assets/Sounds/I_og_G_5_2.mp3');
-    game.load.audio('findG',            'Assets/Sounds/I_og_G_6.mp3');
-    game.load.audio('typingG',          'Assets/Sounds/I_og_G_7.mp3');
-    game.load.audio('typeG',            'Assets/Sounds/I_og_G_8.mp3');
-    game.load.audio('finalIG',          'Assets/Sounds/I_og_G_9.mp3');
-    
-    //Audio files related to WarmUp animation for "B og N"
-    game.load.audio('handsBN',          'Assets/Sounds/B_og_N_1.mp3');
-    game.load.audio('findB',            'Assets/Sounds/B_og_N_2.mp3');
-    game.load.audio('typingB',          'Assets/Sounds/B_og_N_3.mp3');
-    game.load.audio('typeB',            'Assets/Sounds/B_og_N_4.mp3');
-    game.load.audio('gjBN',             'Assets/Sounds/B_og_N_7_2.mp3');
-    game.load.audio('findN',            'Assets/Sounds/B_og_N_5.mp3');
-    game.load.audio('typingN',          'Assets/Sounds/B_og_N_6.mp3');
-    game.load.audio('typeN',            'Assets/Sounds/B_og_N_7_1.mp3');
-    game.load.audio('finalBN',          'Assets/Sounds/B_og_N_8.mp3');    
-    
-    //Audio files related to WarmUp animation for "R og O"
-    game.load.audio('handsRO',          'Assets/Sounds/R_og_O_1.mp3');
-    game.load.audio('findR',            'Assets/Sounds/R_og_O_2.mp3');
-    game.load.audio('typingR',          'Assets/Sounds/R_og_O_3.mp3');
-    game.load.audio('typeR',            'Assets/Sounds/R_og_O_4.mp3');
-    game.load.audio('findO',            'Assets/Sounds/R_og_O_5.mp3');
-    game.load.audio('typingO',          'Assets/Sounds/R_og_O_6.mp3');
-    game.load.audio('typeO',            'Assets/Sounds/R_og_O_7.mp3');
-    game.load.audio('finalRO',          'Assets/Sounds/R_og_O_8.mp3');
-
-    //Audio files related to WarmUp animation for Broddstafir
-    game.load.audio('handsBRODD',       'Assets/Sounds/Broddstafir_1.mp3');
-    game.load.audio('findComma',        'Assets/Sounds/Broddstafir_2.mp3');
-    game.load.audio('typingComma',      'Assets/Sounds/Broddstafir_3.mp3');
-    game.load.audio('typingComma2',     'Assets/Sounds/Broddstafir_4.mp3');
-    game.load.audio('typingComma3',     'Assets/Sounds/Broddstafir_5.mp3');
-    game.load.audio('typeCommaE',       'Assets/Sounds/Broddstafir_6.mp3');
-    game.load.audio('finalBRODD',       'Assets/Sounds/Broddstafir_7.mp3');
-
-    //Audio files related to WarmUp animation for Hástafir
-    game.load.audio('handsHA',          'Assets/Sounds/Hastafir_2.mp3');
-    game.load.audio('findLShift',       'Assets/Sounds/Hastafir_3.mp3');
-    game.load.audio('typingLShift',     'Assets/Sounds/Hastafir_4.mp3');
-    game.load.audio('findRShift',       'Assets/Sounds/Hastafir_5.mp3');
-    game.load.audio('typingRShift',     'Assets/Sounds/Hastafir_6.mp3');
-    game.load.audio('typingOHA',        'Assets/Sounds/Hastafir_7.mp3');
-    game.load.audio('typingOHA2',       'Assets/Sounds/Hastafir_8.mp3');
-    game.load.audio('typeOHA',          'Assets/Sounds/Hastafir_9.mp3');
-    game.load.audio('finalHA',          'Assets/Sounds/Hastafir_10.mp3');
-
-    //Audio files for the Instructions
-    game.load.audio('instructionFJ',   'Assets/Sounds/Instructions/instructionFJ.mp3');
-    game.load.audio('instructionDK',    'Assets/Sounds/Instructions/DK_instruction.mp3');
-    game.load.audio('instructionSL',    'Assets/Sounds/Instructions/SL_instruction.mp3');
-    game.load.audio('instructionAAE',   'Assets/Sounds/Instructions/AÆ_instruction.mp3');
-    game.load.audio('instructionALL1',  'Assets/Sounds/Instructions/Allir1_instruction.mp3');
-    game.load.audio('instructionALL2',  'Assets/Sounds/Instructions/Allir2_instruction.mp3');
-    game.load.audio('instructionEH',    'Assets/Sounds/Instructions/EH_instruction.mp3');
-    game.load.audio('instructionIG',    'Assets/Sounds/Instructions/IG_instruction.mp3');
-    game.load.audio('instructionBN',    'Assets/Sounds/Instructions/BN_instruction.mp3');
-    game.load.audio('instructionRO',    'Assets/Sounds/Instructions/RO_instruction.mp3');
-    game.load.audio('instructionBRODD', 'Assets/Sounds/Instructions/Broddstafir_instruction.mp3');
-    game.load.audio('instructionHA',    'Assets/Sounds/Instructions/Hastafir_instruction.mp3');
-
-    //Audio files that are played when the user finishes an exercise
-    game.load.audio('complimentFJ',     'Assets/Sounds/Compliments/FJ_hros.mp3');
-    game.load.audio('complimentDK',     'Assets/Sounds/Compliments/DK_hros.mp3');
-    game.load.audio('complimentSL',     'Assets/Sounds/Compliments/SL_hros.mp3');
-    game.load.audio('complimentAAE',    'Assets/Sounds/Compliments/AAE_hros.mp3');
-    game.load.audio('complimentALL1',   'Assets/Sounds/Compliments/Allir1_hros.mp3');
-    game.load.audio('complimentALL2',   'Assets/Sounds/Compliments/Allir2_hros.mp3');
-    game.load.audio('complimentEH',     'Assets/Sounds/Compliments/EH_hros.mp3');
-    game.load.audio('complimentIG',     'Assets/Sounds/Compliments/IG_hros.mp3');
-    game.load.audio('complimentBN',     'Assets/Sounds/Compliments/BN_hros.mp3');
-    game.load.audio('complimentBRODD',  'Assets/Sounds/Compliments/Broddstafir_hros.mp3');
-
-    //Audio files that are played when the user has finished all the exercises in an assignment
-    game.load.audio('finishFJ',         'Assets/Sounds/Finished/FJ_buin.mp3');
-    game.load.audio('finishDK',         'Assets/Sounds/Finished/DK_buin.mp3');
-    game.load.audio('finishSL',         'Assets/Sounds/Finished/SL_buin.mp3');
-    game.load.audio('finishAAE',        'Assets/Sounds/Finished/AAE_buin.mp3');
-    game.load.audio('finishALL1',       'Assets/Sounds/Finished/Allir1_buin.mp3');
-    game.load.audio('finishALL2',       'Assets/Sounds/Finished/Allir2_buin.mp3');
-    game.load.audio('finishEH',         'Assets/Sounds/Finished/EH_buin.mp3');
-    game.load.audio('finishIG',         'Assets/Sounds/Finished/IG_buin.mp3');
-    game.load.audio('finishBN',         'Assets/Sounds/Finished/BN_buin.mp3');
-    game.load.audio('finishRO',         'Assets/Sounds/Finished/RO_buin.mp3');
-    game.load.audio('finishBRODD',      'Assets/Sounds/Finished/Broddstafir_buin.mp3');
-    game.load.audio('finishHA',         'Assets/Sounds/Finished/Hastafir_buin.mp3');
-    
-    
-    //Displays how much of the game has been loaded on the canvas
-    var loadingText = game.add.text(game.world.centerX, game.world.centerY, 'Hleð inn 0%', { fill: '#00000' });
-    loadingText.anchor.setTo(0.5);
-    var progressDisplay = 0;
-
-    var timerEvt = game.time.events.loop(10, function ()
-    {
-        if(game.load.progress < 100)
-        {
-            if(progressDisplay < game.load.progress)
-            {
-                loadingText.text = 'Hleð inn '+(++progressDisplay)+'%';
-            }
-        }
-        else
-        {
-            loadingText.text = 'Hlaðið 100%';
-            game.time.events.remove(timerEvt);
-        }
-    }, this);
-}
 
 function create() 
 {
@@ -390,107 +73,7 @@ function create()
     rightHand = game.add.sprite(200, 700, 'rHand', 0);
     warmupHead = game.add.sprite(1000, 210, 'warmupHead', 0);
 
-    //Sound files initialized in a map so it is always accessible
-    //Sounds initialized in map regarding the F og J assignment
-    sounds['leftFJ']      = game.add.audio('leftFJ');
-    sounds['rightFJ'] =     game.add.audio('rightFJ');
-    sounds['findFJ'] =      game.add.audio('findFJ');
-    sounds['findF'] =       game.add.audio('findF');
-    sounds['findJ'] =       game.add.audio('findJ');
-    sounds['spaceFJ'] =     game.add.audio('spaceFJ');
-    sounds['finalFJ'] =     game.add.audio('finalFJ');
-
-    //Sounds initialized in map regarding the D og K assignment
-    sounds['findDK'] =      game.add.audio('findDK');
-    sounds['findD'] =       game.add.audio('findD');
-    sounds['findK'] =       game.add.audio('findK');
-    sounds['finalDK'] =     game.add.audio('finalDK');
-
-    //Sounds initialized in map regarding the S og L assignment
-    sounds['findSL'] =      game.add.audio('findSL');
-    sounds['findS'] =       game.add.audio('findS');
-    sounds['findL'] =       game.add.audio('findL');
-    sounds['finalSL'] =     game.add.audio('finalSL');
-
-    //Sounds initialized in map regarding the A og Æ assignment
-    sounds['findAAE'] =     game.add.audio('findAAE');
-    sounds['findA'] =       game.add.audio('findA');
-    sounds['findAE'] =      game.add.audio('findAE');
-    sounds['finalAAE'] =    game.add.audio('finalAAE');
-
-    //Sounds initialized in map regarding the Allir heimalyklar 1 assignment
-    sounds['leftAll1'] =    game.add.audio('leftAll1');
-    sounds['rightAll1'] =   game.add.audio('rightAll1');
-    sounds['finalAll1'] =   game.add.audio('finalAll1');
-
-    //Sounds initialized in map regarding the Allir heimalyklar 2 assignment
-    sounds['leftAll2'] =    game.add.audio('leftAll2');
-    sounds['rightAll2'] =   game.add.audio('rightAll2');
-    sounds['finalAll2'] =   game.add.audio('finalAll2');
-
-    //Sounds initialized in map regarding the E og H assignment
-    sounds['handsEH'] =     game.add.audio('handsEH');
-    sounds['findE'] =       game.add.audio('findE');
-    sounds['typingE'] =     game.add.audio('typingE');
-    sounds['typeE'] =       game.add.audio('typeE');
-    sounds['findH'] =       game.add.audio('findH');
-    sounds['typingH'] =     game.add.audio('typingH');
-    sounds['typeH'] =       game.add.audio('typeH');
-    sounds['finalEH'] =     game.add.audio('finalEH');
-
-    //Sounds initialized in map regarding the I og G assignment
-    sounds['handsIG'] =     game.add.audio('handsIG');
-    sounds['findI'] =       game.add.audio('findI');
-    sounds['typingI'] =     game.add.audio('typingI');
-    sounds['typeI'] =       game.add.audio('typeI');
-    sounds['gjIG1'] =       game.add.audio('gjIG');
-    sounds['gjIG2'] =       game.add.audio('gjIG');
-    sounds['findG'] =       game.add.audio('findG');
-    sounds['typingG'] =     game.add.audio('typingG');
-    sounds['typeG'] =       game.add.audio('typeG');
-    sounds['finalIG'] =     game.add.audio('finalIG');
-
-    //Sounds initialized in map regarding the B og N assignment
-    sounds['handsBN'] =     game.add.audio('handsBN');
-    sounds['findB'] =       game.add.audio('findB');
-    sounds['typingB'] =     game.add.audio('typingB');
-    sounds['typeB'] =       game.add.audio('typeB');
-    sounds['gjBN1'] =       game.add.audio('gjBN');
-    sounds['gjBN2'] =       game.add.audio('gjBN');
-    sounds['findN'] =       game.add.audio('findN');
-    sounds['typingN'] =     game.add.audio('typingN');
-    sounds['typeN'] =       game.add.audio('typeN');
-    sounds['finalBN'] =     game.add.audio('finalBN'); 
-
-    //Sounds initialized in map regarding the R og O assignment
-    sounds['handsRO'] =     game.add.audio('handsRO');
-    sounds['findR'] =       game.add.audio('findR');
-    sounds['typingR'] =     game.add.audio('typingR');
-    sounds['typeR'] =       game.add.audio('typeR');
-    sounds['findO'] =       game.add.audio('findO');
-    sounds['typingO'] =     game.add.audio('typingO');
-    sounds['typeO'] =       game.add.audio('typeO');
-    sounds['finalRO'] =     game.add.audio('finalRO');
-
-    //Sounds initialized in map regarding the Broddstafir assignment
-    sounds['handsBRODD'] =      game.add.audio('handsBRODD');
-    sounds['findComma'] =       game.add.audio('findComma');
-    sounds['typingComma'] =     game.add.audio('typingComma');
-    sounds['typingComma2'] =    game.add.audio('typingComma2');
-    sounds['typingComma3'] =    game.add.audio('typingComma3');
-    sounds['typeCommaE'] =      game.add.audio('typeCommaE');
-    sounds['finalBRODD'] =      game.add.audio('finalBRODD');
-
-    //Sounds initialized in map regarding the Hástafir assignment
-    sounds['handsHA'] =         game.add.audio('handsHA');
-    sounds['findLShift'] =      game.add.audio('findLShift');
-    sounds['typingLShift'] =    game.add.audio('typingLShift');
-    sounds['findRShift'] =      game.add.audio('findRShift');
-    sounds['typingRShift'] =    game.add.audio('typingRShift');
-    sounds['typingOHA'] =       game.add.audio('typingOHA');
-    sounds['typingOHA2'] =      game.add.audio('typingOHA2');
-    sounds['typeOHA'] =         game.add.audio('typeOHA');
-    sounds['finalHA'] =         game.add.audio('finalHA');
+    createSounds();
 
     //loadHomePage will display the main screen of the game
     loadHomePage();    
@@ -511,13 +94,17 @@ function update()
         }
 
         //This will make the left and right hand move from below the visible part of the canvas to their correct positions above the keys
-        if(leftHand.y > 300 && balloon.visible === true)
+        if(leftHand.y > 300 && balloon.visible === true && moveDown===false)
         {
             leftHand.y -= 4;
         }
-        if(rightHand.y > 160 && balloon.visible === true)
+        if(rightHand.y > 160 && balloon.visible === true && moveDown===false)
         {
             rightHand.y -= 4;
+        }
+
+        if(moveDown && rightHand.y < 350){
+            rightHand.y += 4;
         }
     }
 
@@ -778,18 +365,9 @@ function initGame()
     game.sound.stopAll();
 }
 
-function stopAllSounds()
-{
-    for(var key in sounds)
-    {
-        sounds[key].onStop.removeAll();   
-    }
-}
-
-
 //The assignment function is where the exercises can be executed, all of its objects are initialized here and they are different
 //depending on which assignment we are on
-function Assignment(assignmentNr, exerciseNr) 
+function Assignment(assignmentNr, exerciseNr,text) 
 {
     //Sets all of the warmUps array to false
     initWarmUps();
@@ -841,10 +419,13 @@ function Assignment(assignmentNr, exerciseNr)
     //we must add the speech bubble for the instructor, play the correct audio and make the instructor talk
     else
     {
-        var balloon = game.add.sprite(475, 5, 'balloonSprite', addBalloon(assignmentNr));
-        balloon.scale.setTo(0.9);
+        balloon = game.add.sprite(440, 25, 'balloonSprite', 0);
+        balloon.scale.setTo(0.6);
+        addBalloontext(addBalloon(assignmentNr));
+        
+        // instructionText.anchor.set(0.5);
         addFinalSound(assignmentNr);
-        instructor.play('talk');
+        //instructor.play('talk');
     }
     
     //Add the exit button to the canvas so we can return to the home page
@@ -1301,86 +882,23 @@ function addBalloon(assignmentNr)
     switch(assignmentNr)
     {
         case 0:
-            return 3;
+            return 'Uúúúú...flott! Nú skaltu velja verkefni. Það er svaka sniðugt að byrja þar sem þú hættir síðast';
         case 1:
-            return 11;
+            return 'Rabbití bomm! Veldu nú verkefni. Það er góð regla að byrja þar sem þú hættir síðast!';
         case 2:
-            return 16;
+            return 'Rabbití snilld! Veldu nú verkefni og mundu að það er góð regla að byrja þar sem þú hættir síðast! Viðbúinn, tilbúinn, byrja!!!';
         case 3:
-            return 16;
+            return 'Veldu nú verkefni. Jiii við verðum að muna að byrja þar sem við hættum síðast!';
         case 4:
-            return 24;
+            return 'Ji flott! Við skulum velja verkefni. Ji já og muna að byrja þar sem við hættum síðast!';
         case 5:
-            return 28;
+            return 'Töff! Prófaðu að velja verkefni. Ekki klikka á að byrja þar sem þú hættir síðast!';
         case 6:
-            return 37;
+             return 'Töff- Prófaðu að velja verkefni. Og muna, ekki klikka á því að byrja þar sem þú hættir síðast!';
         case 7:
-            return 46;
+            return 'Hahaha...Veldu nú verkefni. Byrjaðu þar sem þú hættir síðast. Ertu tilbúinn?';
         case 8:
-            return 56;
-        case 9:
-            return 56;
-        case 10:
-            return 73;
-        case 11:
-            return 48;
-    }
-}
-
-//Depending on what assignment you are on, it will play the correct sound when you are entering the Assignment page coming from the
-//warmUp animations
-function addFinalSound(assignmentNr)
-{
-    switch(assignmentNr)
-    {
-        case 0:
-            sounds['finalFJ'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
-            sounds['finalFJ'].play();
-            break;
-        case 1:
-            sounds['finalDK'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
-            sounds['finalDK'].play();
-            break;
-        case 2:
-            sounds['finalSL'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
-            sounds['finalSL'].play();
-            break;
-        case 3:
-            sounds['finalAAE'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
-            sounds['finalAAE'].play();
-            break;
-        case 4:
-            sounds['finalAll1'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
-            sounds['finalAll1'].play();
-            break;
-        case 5:
-            sounds['finalAll2'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
-            sounds['finalAll2'].play();
-            break;
-        case 6:
-            sounds['finalEH'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
-            sounds['finalEH'].play();
-            break;
-        case 7:
-            sounds['finalIG'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
-            sounds['finalIG'].play();
-            break;
-        case 8:
-            sounds['finalBN'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
-            sounds['finalBN'].play();
-            break;
-        case 9:
-            sounds['finalRO'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
-            sounds['finalRO'].play();
-            break;
-        case 10:
-            sounds['finalBRODD'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
-            sounds['finalBRODD'].play();
-            break;
-        case 11:
-            sounds['finalHA'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
-            sounds['finalHA'].play();
-            break;
+            return 'Ji en flott! Nú skaltu velja þér verkefni og sýna mér hvað þú ert orðinn mikill snillingur í Fingrafimi 2. Muna að byrja alltaf þar sem við hættum síðast! Góða skemmtun!';
     }
 }
 
@@ -1428,7 +946,6 @@ function addExercises(assignmentNr)
         addExerciseImages('ledurblakaEx', 'ledurblakaEx', exerciseBtnPosArray[assignmentNr], 3, assignmentNr, 9);
         addExerciseImages('stjarna', 'stjarna', exerciseBtnPosArray[assignmentNr], 3, assignmentNr, 12);
     }
-    /*
     else if(assignmentNr === 10)
     {
         addExerciseImages('heyBaggi','heyBaggiGlow', exerciseBtnPosArray[assignmentNr], 4, assignmentNr, 0);
@@ -1460,7 +977,6 @@ function addExercises(assignmentNr)
         addExerciseImages('fotbolti', 'fotboltiGlow', exerciseBtnPosArray[assignmentNr], 3, assignmentNr, 9);
         addExerciseImages('tennisbolti', 'tennisboltiGlow', exerciseBtnPosArray[assignmentNr], 3, assignmentNr, 12);
     }
-    */
 }
 
 //Load and display the correct background depending on what assignmentNr is
@@ -1542,135 +1058,6 @@ function addExerciseImages(image, imageGlow, posArr, count, assignmentNr, exerci
             exerciseBtnArray[assignmentNr][exerciseNr+i].events.onInputDown.add(function(){ quitExercise(); Assignment(assignmentNr, exerciseNum); });
         }()); // immediate invocation
     }
-}
-
-//Displays the keyboard used in assignment, it is composed of many smaller pictures, all keys used in assignments are added to the canvas
-//along with a blinking animation, then a keyboard outline with some grey filled keys is drawn over the other single keys
-function loadKeyboard(assignmentNr, exerciseNr)
-{
-    //The keyboard outline that is over the single images is added in the end
-    keyboard = game.add.image(100, 175, 'keyboard');
-    keyboard.scale.setTo(0.56);
-
-    keyboardKeysMap.set('a', game.add.sprite(188, 335, 'a', 0));
-    keyboardKeysMap.get('a').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
-    keyboardKeysMap.get('a').scale.setTo(1.2);
-
-    keyboardKeysMap.set('s', game.add.sprite(228, 335, 's', 1000));   
-    keyboardKeysMap.get('s').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
-    keyboardKeysMap.get('s').scale.setTo(1.2);
-
-    keyboardKeysMap.set('d', game.add.sprite(272, 335, 'd', 1000));
-    keyboardKeysMap.get('d').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
-    keyboardKeysMap.get('d').scale.setTo(1.2);
-
-     keyboardKeysMap.set('f', game.add.sprite(313, 335, 'f', 1000));
-     keyboardKeysMap.get('f').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
-     keyboardKeysMap.get('f').scale.setTo(1.2);
-
-//     keyboardKeysMap.set('g', game.add.sprite(416, 341, 'keys', 23));
-//     keyboardKeysMap.get('g').animations.add('blink', [23, 24, 23, 24, 23], 2, false);
-    
-//     keyboardKeysMap.set('h', game.add.sprite(459, 340, 'keys', 25));
-//     keyboardKeysMap.get('h').animations.add('blink', [25, 26, 25, 26, 25], 2, false);
-    
-     keyboardKeysMap.set('j', game.add.sprite(440, 334, 'j', 0));
-     keyboardKeysMap.get('j').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
-     keyboardKeysMap.get('j').scale.setTo(1.2);
-
-     keyboardKeysMap.set('k', game.add.sprite(481, 334, 'k', 0));
-     keyboardKeysMap.get('k').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
-     keyboardKeysMap.get('k').scale.setTo(1.2);
-
-     keyboardKeysMap.set('l', game.add.sprite(520, 334, 'l', 0));
-     keyboardKeysMap.get('l').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
-     keyboardKeysMap.get('l').scale.setTo(1.2);
-
-     keyboardKeysMap.set('æ', game.add.sprite(566, 33333, 'æ', 0));
-     keyboardKeysMap.get('æ').animations.add('blink', [0, 1, 0,1, 0,1, 0, 1, 0,1, 0], 4, false);
-     keyboardKeysMap.get('æ').scale.setTo(1.2);
-//     keyboardKeysMap.set(' ', game.add.sprite(340, 429, 'spacebar', 0));
-//     keyboardKeysMap.get(' ').width = 264;
-//     keyboardKeysMap.get(' ').animations.add('blink', [0, 1, 0, 1, 0], 2, false);
-
-// //     // //If We are in assignment 5 or higher, the e key will be colored and have a blinking animation, else it will just be grey
-//     if(assignmentNr > 5)
-//     {
-//         keyboardKeysMap.set('e', game.add.sprite(317, 298, 'keys', 17));
-//         keyboardKeysMap.get('e').animations.add('blink', [17, 18, 17, 18, 17], 2, false);
-//     }
-//     else
-//     {
-//         keyboardKeysMap.set('e', game.add.sprite(317, 298, 'keys', 19));
-//     }
-
-// //     // //If We are in assignment 6 or higher, the i key will be colored and have a blinking animation, else it will just be grey
-//     if(assignmentNr > 6)
-//     {
-//         keyboardKeysMap.set('i', game.add.sprite(536, 296, 'keys', 28));
-//         keyboardKeysMap.get('i').animations.add('blink', [28, 29, 28, 29, 28], 2, false);
-//     }
-//     else
-//     {
-//         keyboardKeysMap.set('i', game.add.sprite(536, 296, 'keys', 30));
-//     }
-
-// //     // //If We are in assignment 7 or higher, the b key will be colored and have a blinking animation, else it will just be grey
-//     if(assignmentNr > 7)
-//     {
-//         keyboardKeysMap.set('b', game.add.sprite(437, 384, 'keys', 11));
-//         keyboardKeysMap.get('b').animations.add('blink', [11, 12, 11, 12, 11], 2, false);
-        
-//         keyboardKeysMap.set('n', game.add.sprite(481, 384, 'keys', 6));
-//         keyboardKeysMap.get('n').animations.add('blink', [6, 13, 6, 13, 6], 2, false);
-//     }
-//     else
-//     {
-//         keyboardKeysMap.set('b', game.add.sprite(437, 384, 'keys', 14));
-//         keyboardKeysMap.set('n', game.add.sprite(481, 384, 'keys', 20));
-//     }
-
-// //     // //If We are in assignment 8 or higher, the r key will be colored and have a blinking animation, else it will just be grey
-//     if(assignmentNr > 8)
-//     {
-//         keyboardKeysMap.set('r', game.add.sprite(361, 298, 'keys', 3));
-//         keyboardKeysMap.get('r').animations.add('blink', [3, 4, 3, 4, 3], 2, false);
-        
-//         keyboardKeysMap.set('o', game.add.sprite(579, 297, 'keys', 0));
-//         keyboardKeysMap.get('o').animations.add('blink', [0, 1, 0, 1, 0], 2, false);
-//     }
-//     else
-//     {
-//         keyboardKeysMap.set('r', game.add.sprite(361, 298, 'keys', 5));
-//         keyboardKeysMap.set('o', game.add.sprite(579, 297, 'keys', 2));
-//     }
-
-// //     // //If We are in assignment 5 or higher, the ´ key will be colored and have a blinking animation, else it will just be grey
-//     if(assignmentNr > 9)
-//     {
-//         keyboardKeysMap.set('´', game.add.sprite(678, 340, 'keys', 36));
-//         keyboardKeysMap.get('´').animations.add('blink', [36, 37, 36, 37, 36], 2, false);
-//     }
-//     else
-//     {
-//         keyboardKeysMap.set('´', game.add.sprite(678, 340, 'keys', 38));
-//     }
-
-// //     // ////If We are in assignment 10 or higher, the shift keys will be colored and both will have a blinking animation, else they will just be grey
-//     if(assignmentNr > 10)
-//     {
-//         keyboardKeysMap.set('lShift', game.add.sprite(165, 386, 'lShift', 1));
-//         keyboardKeysMap.get('lShift').animations.add('blink', [1, 2, 1, 2, 1], 2, false);
-//         keyboardKeysMap.set('rShift', game.add.sprite(700, 384, 'rShift', 1));
-//         keyboardKeysMap.get('rShift').animations.add('blink', [1, 2, 1, 2, 1], 2, false);
-//     }
-//     else
-//     {
-//         keyboardKeysMap.set('lShift', game.add.sprite(165, 386, 'lShift', 0));
-//         keyboardKeysMap.set('rShift', game.add.sprite(700, 384, 'rShift', 0));
-//     }
-    
-    
 }
 
 //Add the logo from Menntamálastofnun on the bottom left of the screen, x is the x coordinate on where to put the logo and sc is the scale we want
@@ -1762,23 +1149,23 @@ function addInstructionAnimation(assignmentNr)
 function addAssignmentInstructor(assignmentNr)
 {
     //Maggi minnkur is the assignment instructor in the first 4 assignments
-    if(assignmentNr === 0 || assignmentNr === 1 || assignmentNr === 2 || assignmentNr === 3)
+    if(assignmentNr === 0 || assignmentNr === 7)
     {
         //Load the image of the instructor
-        instructor = game.add.sprite(1015, 210, 'warmupHead', 0);
+        instructor = game.add.sprite(850, 210, 'instructorMarglytta', 0);
         //Add the animation that makes him talk
         instructor.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
         //Move the anchor point of the image
-        instructor.anchor.setTo(0.75, 1);
-        //Rotate the image
-        instructor.angle = -41;
+        instructor.anchor.setTo(0.5);
+
+        instructor.scale.setTo(0.8);
         //Return the object
         return instructor;
     }
     //The pig is the assignment instructor for Allir heimalyklar 1 and 2
-    else if(assignmentNr === 4 || assignmentNr === 5)
+    else if(assignmentNr === 1 || assignmentNr === 1)
     {
-         instructor = game.add.sprite(750, 100, 'pig', 0);
+         instructor = game.add.sprite(750, 100, 'instructorFroskur', 0);
          instructor.scale.setTo(0.5);
          instructor.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
          return instructor;
@@ -1809,149 +1196,6 @@ function addAssignmentInstructor(assignmentNr)
     }
 }
 
-//Returns the correct audio to play for when you select an assignment in the home page
-function addInstructionSound(assignmentNr)
-{
-    if(assignmentNr === 0)
-    {
-            return game.add.audio('instructionFJ');
-    }
-    else if(assignmentNr === 1)
-    {
-            return game.add.audio('instructionDK');
-    }
-    else if(assignmentNr === 2)
-    {
-            return game.add.audio('instructionSL');
-    }
-    else if(assignmentNr == 3)
-    {
-            return game.add.audio('instructionAAE');
-    }
-    else if(assignmentNr === 4)
-    {
-            return game.add.audio('instructionALL1');
-    }
-    else if(assignmentNr === 5)
-    {
-            return game.add.audio('instructionALL2');
-    }
-    else if(assignmentNr === 6)
-    {
-            return game.add.audio('instructionEH');
-    }
-    else if(assignmentNr === 7)
-    {
-            return game.add.audio('instructionIG');
-    }
-    else if(assignmentNr === 8)
-    {
-            return game.add.audio('instructionBN');
-    }
-    else if(assignmentNr === 9)
-    {
-            return game.add.audio('instructionRO');
-    }
-    else if(assignmentNr === 10)
-    {
-            return game.add.audio('instructionBRODD');
-    }
-    else if(assignmentNr === 11)
-    {
-            return game.add.audio('instructionHA');
-    }
-}
-
-//Returns the correct audio to play for when you have finished an exercises in an assignment
-function addComplimentSound(assignmentNr)
-{
-    if(assignmentNr === 0)
-    {
-        return this.game.add.sound('complimentFJ');
-    }
-    else if(assignmentNr === 1)
-    {
-        return game.add.audio('complimentDK');
-    }
-    else if(assignmentNr === 2)
-    {
-        return game.add.audio('complimentSL');
-    }
-    else if(assignmentNr === 3)
-    {
-        return game.add.audio('complimentAAE');
-    }
-    else if(assignmentNr === 4)
-    {
-        return game.add.audio('complimentALL1');
-    }
-    else if(assignmentNr === 5)
-    {
-        return game.add.audio('complimentALL2');
-    }
-    else if(assignmentNr === 6)
-    {
-        return game.add.audio('complimentEH');
-    }
-    else if(assignmentNr === 7)
-    {
-        return game.add.audio('complimentIG');
-    }
-    else if(assignmentNr === 8 || assignmentNr === 9)
-    {
-        return game.add.audio('complimentBN');
-    }
-    else if(assignmentNr === 10 || assignmentNr === 11)
-    {
-        return game.add.audio('complimentBRODD');
-    }
-}
-
-//Returns the correct audio to play for when you have finished all the exercises in an assignment
-function addFinishSound(assignmentNr)
-{
-    if(assignmentNr === 0)
-    {
-        return game.add.audio('finishFJ');
-    }
-    else if(assignmentNr === 1)
-    {
-        return game.add.audio('finishDK');
-    }
-    else if(assignmentNr === 2)
-    {
-        return game.add.audio('finishSL');
-    }
-    else if(assignmentNr === 3)
-    {
-        return game.add.audio('finishAAE');
-    }
-    else if(assignmentNr === 4)
-    {
-        return game.add.audio('finishALL1');
-    }
-    else if(assignmentNr === 5)
-    {
-        return game.add.audio('finishALL2');
-    }
-    else if(assignmentNr === 6)
-    {
-        return game.add.audio('finishEH');
-    }
-    else if(assignmentNr === 7)
-    {
-        return game.add.audio('finishIG');
-    }
-    else if(assignmentNr === 8 || assignmentNr === 9)
-    {
-        return game.add.audio('finishBN');
-    }
-    else if(assignmentNr === 10 || assignmentNr === 11)
-    {
-        return game.add.audio('finishBRODD');
-    }
-}
-
 function stopWarmupHeadTalk()
 {
     warmupHead.animations.stop(); 
@@ -1964,6 +1208,7 @@ function stopInstructorTalk()
     instructor.frame = 0;
 }
 
+
 // Display the text in the letter variable in the textArea with the specified color centerd in the canvas, 
 // but subtract the offset to the Y coordinates to move it slightly up on the canvas
 function addWarmUpTextArea(letter, offset, color)
@@ -1973,9 +1218,16 @@ function addWarmUpTextArea(letter, offset, color)
     textArea.addColor(color, 0);
 }
 
+function addBalloontext(text,fontSize){
+    instrstyle.font = String(fontSize) + 'px';
+    balloon = game.add.sprite(440, 25, 'balloonSprite', 0);
+    balloon.scale.setTo(0.6);
+    var instructionText = game.add.text(game.world.centerX+23, game.world.centerY/2 - 80, text, instrstyle);
+}
+
 //WarmUp animation for F og J, this function is mainly just animation sequences where one doesnt start until the previous one has finished playing
 //The soundclips are played in the following order: leftFJ, rightFJ, findFJ, findF, FindJ and spaceFJ
-function WarmUpFJ(assignmentNr, exerciseNr)
+function warmupUpprifjun(assignmentNr, exerciseNr)
 {   
     //Set warmUps[0] to true so that all the callBacks here work while in the warmup
     warmUps[0] = true;
@@ -1985,43 +1237,25 @@ function WarmUpFJ(assignmentNr, exerciseNr)
     // addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
-    //Add the "heimalyklar" keys to the canvas, they have some blinking animations but only the ones needed which are:
-    //1: A, S, D and F all blink simultaneously
-    //2: J, K, L and Æ all blink simultaneously
-    //3: Just F blinks
-    //4: Just J blinks
-    //5: Both F and J blink simultaneously
-    // warmupKeys = game.add.sprite(150, 380, 'warmupKeys', 0);
-    // warmupKeys.animations.add('asdfBlink', [0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0], 2, false, true);
-    // warmupKeys.animations.add('jklæBlink', [0, 16, 0, 16, 0, 16, 0, 16, 0, 16, 0], 2, false, true);
-    // warmupKeys.animations.add('fBlink', [0, 4, 0, 4, 0, 4, 0], 2, false, true);
-    // warmupKeys.animations.add('jBlink', [0, 7, 0, 7, 0, 7, 0], 2, false, true);
-    // warmupKeys.animations.add('bothBlink', [0, 11, 0, 11, 0, 11, 0, 11, 0, 11, 0], 2, false, true);
-
-    
+    //Add keyboard
     loadKeyboard(0,0);
 
     //Add the image and talking animation of the instructor
-    warmupHead = game.add.sprite(1096, 210, 'warmupHead', 0);
+    warmupHead = game.add.sprite(900, 350, 'instructorMarglytta', 0);
     warmupHead.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
+    warmupHead.scale.setTo(0.8);
     warmupHead.anchor.setTo(0.75, 1);
-    
-    //Add the left hand to the game so that it starts moving from below the visible canvas to the A, S, D and F keys.
-    leftHand = game.add.sprite(160, 700, 'lHand', 2);
-    leftHand.scale.setTo(1.1);  
 
-    //Add the speech bubble with the correct text
-    balloon = game.add.sprite(500, 25, 'balloonSprite', 0);
-
+    //Bætum við tökkum
     addMuteButton();
     addExitButton();
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
-    //Each animation of WarmUpFJ is divided into sections where one doesn't start until the previous one is complete
-    //fogj1 is the first soundclip where he says "Finndu stafina A, S, D og F", the second clip where he says "Finndu stafina
+    
+    //Each animation of warmupUpprifjun is divided into sections where one doesn't start until the previous one is complete
+    //byrjunUpprifjun is the first soundclip where he says "Finndu stafina A, S, D og F", the second clip where he says "Finndu stafina
     //J, K, L og Æ" does not start untill after the first soundclip has finished playing
-    sounds['leftFJ'].onStop.addOnce(function()
+    sounds['byrjunUpprifjun'].onStop.addOnce(function()
     {
-            //Make Maggi stop moving his mouth in the 2 second pause between animations 
+            //Make Instructor stop moving his mouth in the 2 second pause between animations 
             stopWarmupHeadTalk();
             
             //Pause for 2 seconds between soundclips
@@ -2032,173 +1266,73 @@ function WarmUpFJ(assignmentNr, exerciseNr)
                 if(warmUps[0])
                 {
                     warmupHead.play('talk');
-                    sounds['rightFJ'].play();
+                    sounds['leftFJ'].play();
+                    //Add the speech bubble with the correct text
+                    addBalloontext('Settu nú puttana á vinstri hendi á rétta lykla',14);
+                    //Add the left hand to the game so that it starts moving from below the visible canvas to the A, S, D and F keys.
+                    leftHand = game.add.sprite(160, 700, 'lHand', 0);
+                    leftHand.scale.setTo(1.1);  
                     //warmupKeys.play('jklæBlink');
-                    keyboardKeysMap.get('j').play('blink');
-                    keyboardKeysMap.get('k').play('blink');
-                    keyboardKeysMap.get('l').play('blink');
-                    keyboardKeysMap.get('æ').play('blink');
-                    balloon.frame = 1;
-                    rightHand = game.add.sprite(350, 700, 'rHand', 0);
-                    rightHand.scale.setTo(1.1);
+                    keyboardKeysMap.get('a').play('blink');
+                    keyboardKeysMap.get('s').play('blink');
+                    keyboardKeysMap.get('d').play('blink');
+                    keyboardKeysMap.get('f').play('blink');
+                    
                 }
                 
                   
             }, this).autoDestroy = true;  
     }, this);
 
-    // //fogj2 is the soundclip where he says "Finndu stafina J, K, L og Æ"
-    //  sounds['rightFJ'].onStop.addOnce(function()
-    //  {
-    //         //Make Maggi stop moving his mouth in the 2 second pause between animations 
-    //         stopWarmupHeadTalk();
-    //         //Pause for 2 seconds, then play the soundclip "Finndu stafina F og J" and make both F and J blink
-    //         game.time.events.add(Phaser.Timer.SECOND * 2, function()
-    //         {          
-    //             //Make Maggi talk, blink both F and J, set correct text in speech bubble and play soundclip
-    //             if(warmUps[0])
-    //             {
-    //                 warmupHead.play('talk');
-    //                 warmupKeys.play('bothBlink');
-    //                 balloon.frame = 2;
-    //                 sounds['findFJ'].play();
-    //             }           
-    //         }, this).autoDestroy = true;  
-    // }, this);
-
-    //This is after the end of "Finndu stafina J, K, L og Æ", here we want to focus on F and J and make them blink
-    // sounds['findFJ'].onStop.addOnce(function()
-    // {
-    //     //Make Maggi stop moving his mouth in the 2 second pause between animations 
-    //     stopWarmupHeadTalk();
-
-    //     //2 second pause between findFJ soundclip and next one
-    //     game.time.events.add(Phaser.Timer.SECOND * 2, function()
-    //     {                          
-    //         //Make Maggi talk, blink both F and J, set correct text in speech bubble and play soundclip
-    //         if(warmUps[0])
-    //         {
-    //             //Make the Instructor talk
-    //             warmupHead.play('talk');
-    //             //Make F blink
-    //             warmupKeys.play('fBlink');
-    //             //Set speech bubble
-    //             balloon.frame = 4;
-    //             //Play correct soundclip
-    //             sounds['findF'].play();
-    //             // Display the letter in the textArea
-    //             addWarmUpTextArea('f', 50, '#000000');
-    //         }                    
-    //     }, this).autoDestroy = true;
-    // });
-
-    // sounds['findF'].onStop.addOnce(function()
-    // { 
-    //     //Make Maggi stop moving his mouth in the 2 second pause between animations 
-    //     stopWarmupHeadTalk();        
-
-    //     //Turn on keyboard event listener
-    //     game.input.keyboard.start();
-
-    //     //Event for keyboard inputs
-    //     game.input.keyboard.addCallbacks(this, null, null, function(char)
-    //     {
-    //         //We only want to proceed when the F key is pressed    
-    //         if(char === 'f')
-    //         {
-    //             //Turn off keyboard event listener
-    //             game.input.keyboard.stop();
-    //             //Remove the textArea to display the text green
-    //             textArea.destroy();
-
-    //             // Display the letter in the textArea in green
-    //             addWarmUpTextArea('f', 50, '#00ff00');
-
-    //             // 1 second pause
-    //             game.time.events.add(Phaser.Timer.SECOND * 2, function()
-    //             {
-    //                 warmupHead.play('talk');
-    //                 warmupKeys.play('jBlink');
-    //                 balloon.frame = 5;
-    //                 sounds['findJ'].play();
-    //                 textArea.destroy();
-    //                 // Display the letter in the textArea
-    //                 addWarmUpTextArea('j', 50, '#000000');
-    //             });
-    //         }
-    //     });
-    //  });
-
-    //  sounds['findJ'].onStop.add(function()
-    //  { 
-    //     //Make Maggi stop moving his mouth in the 2 second pause between animations 
-    //     stopWarmupHeadTalk(); 
-
-    //     game.input.keyboard.start();
-    //     game.input.keyboard.addCallbacks(this, null, null, function(char)
-    //     {
-    //         if(char === 'j')
-    //         {
-    //             game.input.keyboard.stop();
-    //             textArea.destroy();
-    //             // Display the letter in the textArea
-    //             addWarmUpTextArea('j', 50, '#00ff00');
-    //             game.time.events.add(Phaser.Timer.SECOND * 2, function()
-    //             {
-    //                 game.input.keyboard.stop();
-    //                 leftHand.destroy();
-    //                 rightHand.destroy();
-    //                 warmupKeys.destroy();
-    //                 textArea.destroy();
-                    
-    //                 loadKeyboard(assignmentNr, exerciseNr);
-
-    //                 leftHand = game.add.sprite(210, 355, 'handsSprite', 2);
-    //                 leftHand.scale.setTo(0.85);
-    //                 leftHand.animations.add('lSpacePress', [2, 3, 2, 3, 2], 2, false);
-    //                 rightHand = game.add.sprite(470, 355, 'handsSprite', 0);
-    //                 rightHand.scale.setTo(0.85);
-    //                 rightHand.animations.add('rSpacePress', [0, 1, 0, 1, 0], 2, false);
-    //                 sounds['spaceFJ'].play();
-    //                 leftHand.play('lSpacePress');
-    //                 rightHand.play('rSpacePress');
-    //                 balloon.frame = 7;
-    //                 keyboardKeysMap.get(' ').play('blink');
-                    
-    //             });
-    //         }
-    //     });
-
-    //     game.time.events.add(Phaser.Timer.SECOND * 2, function(){   
-    //     });
-    //  });
-
-     sounds['spaceFJ'].onStop.addOnce(function()
+     //fogj2 is the soundclip where he says "Finndu stafina J, K, L og Æ"
+     sounds['leftFJ'].onStop.addOnce(function()
      {
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
-        stopWarmupHeadTalk(); 
+            //Make Maggi stop moving his mouth in the 2 second pause between animations 
+            stopWarmupHeadTalk();
+            //Pause for 2 seconds, then play the soundclip "Finndu stafina F og J" and make both F and J blink
+            game.time.events.add(Phaser.Timer.SECOND * 2, function()
+            {          
+                //Make Maggi talk, blink both F and J, set correct text in speech bubble and play soundclip
+                if(warmUps[0])
+                {
+                sounds['rightFJ'].play();
+                    warmupHead.play('talk');
+                    addBalloontext('Settu nú puttana á hægri hendi á rétta lykla',14);
+                    keyboardKeysMap.get('j').play('blink');
+                    keyboardKeysMap.get('k').play('blink');
+                    keyboardKeysMap.get('l').play('blink');
+                    keyboardKeysMap.get('æ').play('blink');
+                    rightHand = game.add.sprite(350, 700, 'rHand', 0);
+                    rightHand.scale.setTo(1.1);
+                }           
+            }, this).autoDestroy = true;  
+    }, this);   
 
-        game.input.keyboard.start();
-        game.input.keyboard.addCallbacks(this, null, null, function(char){
-            if(char === ' ')
-            {
-                game.input.keyboard.stop();
-                game.time.events.add(Phaser.Timer.SECOND * 1, function(){ Assignment(assignmentNr, exerciseNr); });
-            }
-        });
-    });
+    //fogj2 is the soundclip where he says "Finndu stafina J, K, L og Æ"
+     sounds['rightFJ'].onStop.addOnce(function()
+     {
+            //Make Maggi stop moving his mouth in the 2 second pause between animations 
+            stopWarmupHeadTalk();
+            //Pause for 2 seconds, then play the soundclip "Finndu stafina F og J" and make both F and J blink
+            game.time.events.add(Phaser.Timer.SECOND * 2, function()
+            {          
+                //Make Maggi talk, blink both F and J, set correct text in speech bubble and play soundclip
+                if(warmUps[0])
+                {
+
+                    warmupHead.play('talk');
+                    addBalloontext('Uúúú….flott! Nú skaltu velja verkefni. Thad er svaka snidugt ad byrja thar sem thu haettir sidast',14);
+                    Assignment(assignmentNr,exerciseNr);
+                    sounds['endirFJ'].play();
+                }           
+            }, this).autoDestroy = true;  
+    }, this);
 
 
-    //Play soundclip fogj1
-    sounds['leftFJ'].play();
-    //Make Maggi talk
+
+    //Play soundclip byrjunUpprifjun
+    sounds['byrjunUpprifjun'].play();
     warmupHead.play('talk');
-    //make A, S, D and F blink.
-    //warmupKeys.play('asdfBlink');
-    keyboardKeysMap.get('a').play('blink');
-    keyboardKeysMap.get('s').play('blink');
-    keyboardKeysMap.get('d').play('blink');
-    keyboardKeysMap.get('f').play('blink');
 }
 
 //The soundclips are played in the following order: leftFJ, rightFJ, findDK, findD, findK and finalDK
@@ -2214,27 +1348,35 @@ function WarmUpDK(assignmentNr, exerciseNr)
     // addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
-    warmupKeys = game.add.sprite(150, 380, 'warmupKeys', 0);
-    warmupKeys.animations.add('asdfBlink', [0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0], 2, false, true);
-    warmupKeys.animations.add('jklæBlink', [0, 16, 0, 16, 0, 16, 0, 16, 0, 16, 0], 2, false, true);
-    warmupKeys.animations.add('dBlink', [0, 3, 0, 3, 0, 3, 0], 2, false, true);
-    warmupKeys.animations.add('kBlink', [0, 8, 0, 8, 0, 8, 0], 2, false, true);
-    warmupKeys.animations.add('bothBlink', [0, 12, 0, 12, 0, 12, 0, 12, 0, 12, 0], 2, false, true);
+    loadKeyboard(0,0);
 
-    warmupHead = game.add.sprite(1096, 210, 'warmupHead', 0);
+    // warmupKeys = game.add.sprite(150, 380, 'warmupKeys', 0);
+    // warmupKeys.animations.add('asdfBlink', [0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0], 2, false, true);
+    // warmupKeys.animations.add('jklæBlink', [0, 16, 0, 16, 0, 16, 0, 16, 0, 16, 0], 2, false, true);
+    // warmupKeys.animations.add('dBlink', [0, 3, 0, 3, 0, 3, 0], 2, false, true);
+    // warmupKeys.animations.add('kBlink', [0, 8, 0, 8, 0, 8, 0], 2, false, true);
+    // warmupKeys.animations.add('bothBlink', [0, 12, 0, 12, 0, 12, 0, 12, 0, 12, 0], 2, false, true);
+
+    warmupHead = game.add.sprite(800, 300, 'instructorFroskur', 0);
     warmupHead.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
-    warmupHead.anchor.setTo(0.75, 1);
+    warmupHead.anchor.setTo(0.65, 1);
 
-    leftHand = game.add.sprite(155, 700, 'lHand', 2);
+    leftHand = game.add.sprite(155, 700, 'lHand', 0);
+    leftHand.animations.add('t', [0, 4, 4, 4, 0, 0, 0], 4, true);
     leftHand.scale.setTo(1.1);  
+    rightHand = game.add.sprite(350, 550, 'rHand', 0);
+    rightHand.animations.add('m', [0, 7, 7, 7, 0, 0, 0], 4, true);
+    rightHand.scale.setTo(1.1);
 
-    balloon = game.add.sprite(500, 25, 'balloonSprite', 0);
+   // balloon = game.add.sprite(500, 25, 'balloonSprite', 0);
+   // balloon.scale.setTo(0.5);
 
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
+    //addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addMuteButton();
     addExitButton();
+    addBalloontext('Fingurna á heimalyklunum já!',24);
 
-    sounds['leftFJ'].onStop.addOnce(function()
+    sounds['byrjunDK'].onStop.addOnce(function()
     {
             stopWarmupHeadTalk(); 
             
@@ -2243,16 +1385,16 @@ function WarmUpDK(assignmentNr, exerciseNr)
                 if(warmUps[1])
                 {
                     warmupHead.play('talk');
-                    sounds['rightFJ'].play();
-                    warmupKeys.play('jklæBlink');
-                    balloon.frame = 1;
-                    rightHand = game.add.sprite(535, 700, 'rHand', 0);
-                    rightHand.scale.setTo(1.1);
+                    sounds['findTDK'].play();
+                    addBalloontext('Hvar er stafurinn t á lyklaborðinu?',24);
+            
+                    keyboardKeysMap.get('t').play('blink');
+                    //warmupKeys.play('jklæBlink');
                 }
             }, this).autoDestroy = true;  
     }, this);
 
-     sounds['rightFJ'].onStop.addOnce(function()
+     sounds['findTDK'].onStop.addOnce(function()
      {
         stopWarmupHeadTalk(); 
 
@@ -2261,88 +1403,138 @@ function WarmUpDK(assignmentNr, exerciseNr)
             if(warmUps[1])
             {
                 warmupHead.play('talk');
-                warmupKeys.play('bothBlink');
-                balloon.frame = 8;
-                sounds['findDK'].play();
+                leftHand.play('t');
+                addBalloontext('Þú notar vísifingur vinstri handar til að skrifa t',24);
+                //warmupKeys.play('bothBlink');
+                //balloon.frame = 8;
+                sounds['visV'].play();
             }              
         }, this).autoDestroy = true;  
     }, this);
 
-    sounds['findDK'].onStop.addOnce(function()
+    sounds['visV'].onStop.addOnce(function()
     {
+        leftHand.frame = 0;
+        leftHand.animations.stop();
         stopWarmupHeadTalk(); 
-
         game.time.events.add(Phaser.Timer.SECOND * 2, function()
         {                  
             if(warmUps[1])
             {
                 warmupHead.play('talk');
-                warmupKeys.play('dBlink');
-                balloon.frame = 9;
-                sounds['findD'].play();
+                addBalloontext('Skrifaðu t',24);
+                sounds['skrifT'].play();
                 // Display the letter in the textArea
-                addWarmUpTextArea('d', 50, '#000000');
+                addWarmUpTextArea('t', 100, '#000000');
             }
             
                             
         }, this).autoDestroy = true;
     });
 
-    sounds['findD'].onStop.addOnce(function()
+    sounds['skrifT'].onStop.addOnce(function()
     { 
         stopWarmupHeadTalk(); 
 
         game.input.keyboard.start();
         game.input.keyboard.addCallbacks(this, null, null, function(char)
         {    
-            if(char === 'd')
+            if(char === 't')
             {
                 game.input.keyboard.stop();
                 textArea.destroy();
 
                 // Display the letter in the textArea
-                addWarmUpTextArea('d', 50, '#00ff00');
+                addWarmUpTextArea('t', 100, '#00ff00');
 
                 game.time.events.add(Phaser.Timer.SECOND * 2, function()
                 {
                     warmupHead.play('talk');
-                    warmupKeys.play('kBlink');
-                    balloon.frame = 10;
-                    sounds['findK'].play();
-                    textArea.destroy();
-                    // Display the letter in the textArea
-                    addWarmUpTextArea('k', 50, '#000000');
+                    sounds['findM'].play();
+                    addBalloontext('Rabbit! Finndu nú stafinn m á lyklaborðinu',24);
+                    game.time.events.add(Phaser.Timer.SECOND * 1, function(){
+                            //balloon.frame = 10;
+                            keyboardKeysMap.get('m').play('blink');
+                            moveDown = true;
+                            textArea.destroy();
+                        }, this).autoDestroy = true;
                 });
             }
         });
      });
 
-     sounds['findK'].onStop.addOnce(function()
+     sounds['findM'].onStop.addOnce(function()
      { 
         //Make Maggi stop moving his mouth in the 2 second pause between animations 
         stopWarmupHeadTalk(); 
 
+        moveDown = false;
+        stopWarmupHeadTalk(); 
+        game.time.events.add(Phaser.Timer.SECOND * 2, function()
+        {                  
+            if(warmUps[1])
+            {
+                warmupHead.play('talk');
+                rightHand.play('m');
+                addBalloontext('Þú notar vísifingur haegri handar til að skrifa m',24);
+                //warmupKeys.play('bothBlink');
+                //balloon.frame = 8;
+                sounds['visH'].play();
+            }
+            
+                            
+        }, this).autoDestroy = true;
+     });
+
+     sounds['visH'].onStop.addOnce(function()
+     {
+         rightHand.animations.stop();
+         rightHand.frame = 0;
+         stopWarmupHeadTalk(); 
+         game.time.events.add(Phaser.Timer.SECOND * 2, function()
+         {                  
+             if(warmUps[1])
+             {
+                 warmupHead.play('talk');
+                 addBalloontext('Skrifaðu m',24);
+                 sounds['skrifM'].play();
+                 // Display the letter in the textArea
+                 addWarmUpTextArea('m', 100, '#000000');
+             }
+             
+                             
+         }, this).autoDestroy = true;
+     });
+
+     sounds['skrifM'].onStop.addOnce(function()
+    { 
+        stopWarmupHeadTalk(); 
+
         game.input.keyboard.start();
-        game.input.keyboard.addCallbacks(this, null, null, function(char){
-            if(char === 'k')
+        game.input.keyboard.addCallbacks(this, null, null, function(char)
+        {    
+            if(char === 'm')
             {
                 game.input.keyboard.stop();
                 textArea.destroy();
+
                 // Display the letter in the textArea
-                addWarmUpTextArea('k', 50, '#00ff00');
-                game.time.events.add(Phaser.Timer.SECOND * 1, function()
+                addWarmUpTextArea('m', 100, '#00ff00');
+
+                game.time.events.add(Phaser.Timer.SECOND * 2, function()
                 {
-                    sounds['finalDK'].play();
-                    balloon.frame = 11;
+                    warmupHead.play('talk');
+                    sounds['finalTM'].play();
+                    warmUps[1] = false;
                     Assignment(assignmentNr, exerciseNr);
+                    textArea.destroy();
                 });
             }
         });
      });
 
-    sounds['leftFJ'].play();
+    sounds['byrjunDK'].play();
     warmupHead.play('talk');
-    warmupKeys.play('asdfBlink');
 }
 
 //The soundclips are played in the following order: leftFJ, rightFJ, findSL, findS, FindL and finalSL
@@ -3822,7 +3014,7 @@ function loadAbout()
 //Array which stores all the warmUp functions and are called from the Instructions function with the assignmentNr variable
 var warmUpFunctions =
 [
-    WarmUpFJ,
+    warmupUpprifjun,
     WarmUpDK,
     WarmUpSL,
     WarmUpAAE,
