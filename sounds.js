@@ -3,7 +3,7 @@ function createSounds(){
     //Sounds initialized in map regarding the F og J assignment
     sounds['leftFJ']      = game.add.audio('leftFJ');
     sounds['byrjunUpprifjun']      = game.add.audio('byrjunUpprifjun');
-    sounds['endirFJ']      = game.add.audio('endirFJ');
+    sounds['endirUpprifjun']      = game.add.audio('endirUpprifjun');
     sounds['rightFJ'] =     game.add.audio('rightFJ');
     sounds['findFJ'] =      game.add.audio('findFJ');
     sounds['findF'] =       game.add.audio('findF');
@@ -12,8 +12,8 @@ function createSounds(){
     sounds['finalFJ'] =     game.add.audio('finalFJ');
 
     //Sounds initialized in map regarding the D og K assignment
-    sounds['byrjunDK']      = game.add.audio('byrjunDK');
-    sounds['findTDK']      = game.add.audio('findTDK');
+    sounds['byrjunTM']      = game.add.audio('byrjunTM');
+    sounds['findTTM']      = game.add.audio('findTTM');
     sounds['visV']      = game.add.audio('visV');
     sounds['visH']      = game.add.audio('visH');
     sounds['skrifT']    = game.add.audio('skrifT');
@@ -25,10 +25,57 @@ function createSounds(){
     // sounds['findK'] =       game.add.audio('findK');
 
     //Sounds initialized in map regarding the S og L assignment
-    sounds['findSL'] =      game.add.audio('findSL');
-    sounds['findS'] =       game.add.audio('findS');
-    sounds['findL'] =       game.add.audio('findL');
-    sounds['finalSL'] =     game.add.audio('finalSL');
+    sounds['byrjunDV'] =      game.add.audio('byrjunDV');
+    sounds['findV'] =       game.add.audio('findV');
+    sounds['lilD'] =       game.add.audio('lilD');
+    sounds['visVV'] =     game.add.audio('visVV');
+    sounds['skrifD'] =      game.add.audio('skrifD');
+    sounds['findD'] =       game.add.audio('findD');
+    sounds['finalDV'] =       game.add.audio('finalDV');
+    sounds['skrifV'] =     game.add.audio('skrifV');
+
+//Sounds initialized in map regarding the S og L assignment
+    sounds['byrjunPU'] =      game.add.audio('byrjunPU');
+    sounds['findP'] =       game.add.audio('findP');
+    sounds['lilP'] =       game.add.audio('lilP');
+    sounds['visU'] =     game.add.audio('visU');
+    sounds['skrifP'] =      game.add.audio('skrifP');
+    sounds['findU'] =       game.add.audio('findU');
+    sounds['finalPU'] =       game.add.audio('finalPU');
+    sounds['skrifU'] =     game.add.audio('skrifU');
+
+    sounds['byrjunÞY'] =      game.add.audio('byrjunÞY');
+    sounds['findÞ'] =       game.add.audio('findÞ');
+    sounds['lilÞ'] =       game.add.audio('lilÞ');
+    sounds['visY'] =     game.add.audio('visY');
+    sounds['skrifÞ'] =      game.add.audio('skrifÞ');
+    sounds['findY'] =       game.add.audio('findY');
+    sounds['finalÞY'] =       game.add.audio('finalÞY');
+    sounds['skrifY'] =     game.add.audio('skrifY');
+
+    sounds['byrjunÖC'] =      game.add.audio('byrjunÖC');
+    sounds['findÖ'] =       game.add.audio('findÖ');
+    sounds['lilÖ'] =       game.add.audio('lilÖ');
+    sounds['visC'] =     game.add.audio('visC');
+    sounds['skrifÖ'] =      game.add.audio('skrifÖ');
+    sounds['findC'] =       game.add.audio('findC');
+    sounds['finalÖC'] =       game.add.audio('finalÖC');
+    sounds['skrifC'] =     game.add.audio('skrifC');
+
+    sounds['byrjunKomma'] =      game.add.audio('byrjunKomma');
+    sounds['findUppKomma'] =       game.add.audio('findUppKomma');
+    sounds['lilUppKomma'] =       game.add.audio('lilUppKomma');
+    sounds['langKomma'] =     game.add.audio('langKomma');
+    sounds['skrifÁ'] =      game.add.audio('skrifÁ');
+    sounds['findKomma'] =       game.add.audio('findKomma');
+    sounds['finalKomma'] =       game.add.audio('finalKomma');
+    sounds['skrifKomma'] =     game.add.audio('skrifKomma');
+    sounds['pressE'] =      game.add.audio('pressE');
+
+    sounds['byrjunTextar'] =      game.add.audio('byrjunTextar');
+    sounds['findLTextar'] =       game.add.audio('findLTextar');
+    sounds['findRTextar'] =       game.add.audio('findRTextar');
+    sounds['finalTextar'] =     game.add.audio('finalTextar');
 
     //Sounds initialized in map regarding the A og Æ assignment
     sounds['findAAE'] =     game.add.audio('findAAE');
@@ -127,40 +174,40 @@ function addFinalSound(assignmentNr)
     switch(assignmentNr)
     {
         case 0:
-            sounds['endirFJ'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
-            sounds['endirFJ'].play();
+            sounds['endirUpprifjun'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
+            sounds['endirUpprifjun'].play();
             break;
         case 1:
             sounds['finalTM'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
             sounds['finalTM'].play();
             break;
         case 2:
-            sounds['finalSL'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
+            sounds['finalDV'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
             sounds['finalSL'].play();
             break;
         case 3:
-            sounds['finalAAE'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
-            sounds['finalAAE'].play();
+            sounds['finalPU'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
+            sounds['finalPU'].play();
             break;
         case 4:
-            sounds['finalAll1'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
-            sounds['finalAll1'].play();
+            sounds['finalÞY'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
+            sounds['finalÞY'].play();
             break;
         case 5:
-            sounds['finalAll2'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
-            sounds['finalAll2'].play();
+            sounds['finalÖC'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
+            sounds['finalÖC'].play();
             break;
         case 6:
-            sounds['finalEH'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
-            sounds['finalEH'].play();
+            sounds['finalKomma'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
+            sounds['finalKomma'].play();
             break;
         case 7:
-            sounds['finalIG'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
-            sounds['finalIG'].play();
+            sounds['finalTextar'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
+            sounds['finalTextar'].play();
             break;
         case 8:
-            sounds['finalBN'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
-            sounds['finalBN'].play();
+            sounds['finalTextar'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
+            sounds['finalTextar'].play();
             break;
         case 9:
             sounds['finalRO'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);

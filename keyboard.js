@@ -1,8 +1,8 @@
 //Displays the keyboard used in assignment, it is composed of many smaller pictures, all keys used in assignments are added to the canvas
 //along with a blinking animation, then a keyboard outline with some grey filled keys is drawn over the other single keys
-function loadKeyboard(assignmentNr, exerciseNr)
+function loadKeyboard(assignmentNr)
 {
-    //The keyboard outline that is over the single images is added in the end
+    //Base keyboard
     keyboard = game.add.image(100, 175, 'keyboard');
     keyboard.scale.setTo(0.56);
 
@@ -30,15 +30,25 @@ function loadKeyboard(assignmentNr, exerciseNr)
      keyboardKeysMap.get('m').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
      keyboardKeysMap.get('m').scale.setTo(1.2);
 
-//     keyboardKeysMap.set('g', game.add.sprite(416, 341, 'keys', 23));
-//     keyboardKeysMap.get('g').animations.add('blink', [23, 24, 23, 24, 23], 2, false);
-    
-//     keyboardKeysMap.set('h', game.add.sprite(459, 340, 'keys', 25));
-//     keyboardKeysMap.get('h').animations.add('blink', [25, 26, 25, 26, 25], 2, false);
-    
+     keyboardKeysMap.set('dd', game.add.sprite(598, 292, 'dd', 0));
+     keyboardKeysMap.get('dd').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
+     keyboardKeysMap.get('dd').scale.setTo(1.2);
+
+     keyboardKeysMap.set('c', game.add.sprite(292, 377, 'c', 0));
+     keyboardKeysMap.get('c').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
+     keyboardKeysMap.get('c').scale.setTo(1.2);
+
+     keyboardKeysMap.set('ö', game.add.sprite(575, 250, 'ö', 0));
+     keyboardKeysMap.get('ö').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
+     keyboardKeysMap.get('ö').scale.setTo(1.2);
+
      keyboardKeysMap.set('j', game.add.sprite(440, 334, 'j', 0));
      keyboardKeysMap.get('j').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
      keyboardKeysMap.get('j').scale.setTo(1.2);
+
+     keyboardKeysMap.set('v', game.add.sprite(336, 378, 'v', 0));
+     keyboardKeysMap.get('v').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
+     keyboardKeysMap.get('v').scale.setTo(1.2);
 
      keyboardKeysMap.set('k', game.add.sprite(481, 334, 'k', 0));
      keyboardKeysMap.get('k').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
@@ -48,82 +58,27 @@ function loadKeyboard(assignmentNr, exerciseNr)
      keyboardKeysMap.get('l').animations.add('blink', [0, 2, 0, 2, 0, 2, 0, 2, 0, 2, 0], 4, false);
      keyboardKeysMap.get('l').scale.setTo(1.2);
 
-     keyboardKeysMap.set('æ', game.add.sprite(566, 33333, 'æ', 0));
+     keyboardKeysMap.set('æ', game.add.sprite(566, 333, 'æ', 0));
      keyboardKeysMap.get('æ').animations.add('blink', [0, 1, 0,1, 0,1, 0, 1, 0,1, 0], 4, false);
      keyboardKeysMap.get('æ').scale.setTo(1.2);
-     
-//     keyboardKeysMap.set(' ', game.add.sprite(340, 429, 'spacebar', 0));
-//     keyboardKeysMap.get(' ').width = 264;
-//     keyboardKeysMap.get(' ').animations12.add('blink', [0, 1, 0, 1, 0], 2, false);
 
-// //     // //If We are in assignment 5 or higher, the e key will be colored and have a blinking animation, else it will just be grey
-    
+     keyboardKeysMap.set('p', game.add.sprite(555, 292, 'p', 0));
+     keyboardKeysMap.get('p').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
+     keyboardKeysMap.get('p').scale.setTo(1.2);
 
-// //     // //If We are in assignment 6 or higher, the i key will be colored and have a blinking animation, else it will just be grey
-//     if(assignmentNr > 6)
-//     {
-//         keyboardKeysMap.set('i', game.add.sprite(536, 296, 'keys', 28));
-//         keyboardKeysMap.get('i').animations.add('blink', [28, 29, 28, 29, 28], 2, false);
-//     }
-//     else
-//     {
-//         keyboardKeysMap.set('i', game.add.sprite(536, 296, 'keys', 30));
-//     }
+     keyboardKeysMap.set('u', game.add.sprite(429, 294, 'u', 0));
+     keyboardKeysMap.get('u').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
+     keyboardKeysMap.get('u').scale.setTo(1.2);
 
-// //     // //If We are in assignment 7 or higher, the b key will be colored and have a blinking animation, else it will just be grey
-//     if(assignmentNr > 7)
-//     {
-//         keyboardKeysMap.set('b', game.add.sprite(437, 384, 'keys', 11));
-//         keyboardKeysMap.get('b').animations.add('blink', [11, 12, 11, 12, 11], 2, false);
-        
-//         keyboardKeysMap.set('n', game.add.sprite(481, 384, 'keys', 6));
-//         keyboardKeysMap.get('n').animations.add('blink', [6, 13, 6, 13, 6], 2, false);
-//     }
-//     else
-//     {
-//         keyboardKeysMap.set('b', game.add.sprite(437, 384, 'keys', 14));
-//         keyboardKeysMap.set('n', game.add.sprite(481, 384, 'keys', 20));
-//     }
+     keyboardKeysMap.set('þ', game.add.sprite(588, 376, 'þ', 0));
+     keyboardKeysMap.get('þ').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
+     keyboardKeysMap.get('þ').scale.setTo(1.2);
 
-// //     // //If We are in assignment 8 or higher, the r key will be colored and have a blinking animation, else it will just be grey
-//     if(assignmentNr > 8)
-//     {
-//         keyboardKeysMap.set('r', game.add.sprite(361, 298, 'keys', 3));
-//         keyboardKeysMap.get('r').animations.add('blink', [3, 4, 3, 4, 3], 2, false);
-        
-//         keyboardKeysMap.set('o', game.add.sprite(579, 297, 'keys', 0));
-//         keyboardKeysMap.get('o').animations.add('blink', [0, 1, 0, 1, 0], 2, false);
-//     }
-//     else
-//     {
-//         keyboardKeysMap.set('r', game.add.sprite(361, 298, 'keys', 5));
-//         keyboardKeysMap.set('o', game.add.sprite(579, 297, 'keys', 2));
-//     }
+     keyboardKeysMap.set('y', game.add.sprite(387, 293, 'y', 0));
+     keyboardKeysMap.get('y').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
+     keyboardKeysMap.get('y').scale.setTo(1.2);
 
-// //     // //If We are in assignment 5 or higher, the ´ key will be colored and have a blinking animation, else it will just be grey
-//     if(assignmentNr > 9)
-//     {
-//         keyboardKeysMap.set('´', game.add.sprite(678, 340, 'keys', 36));
-//         keyboardKeysMap.get('´').animations.add('blink', [36, 37, 36, 37, 36], 2, false);
-//     }
-//     else
-//     {
-//         keyboardKeysMap.set('´', game.add.sprite(678, 340, 'keys', 38));
-//     }
-
-// //     // ////If We are in assignment 10 or higher, the shift keys will be colored and both will have a blinking animation, else they will just be grey
-//     if(assignmentNr > 10)
-//     {
-//         keyboardKeysMap.set('lShift', game.add.sprite(165, 386, 'lShift', 1));
-//         keyboardKeysMap.get('lShift').animations.add('blink', [1, 2, 1, 2, 1], 2, false);
-//         keyboardKeysMap.set('rShift', game.add.sprite(700, 384, 'rShift', 1));
-//         keyboardKeysMap.get('rShift').animations.add('blink', [1, 2, 1, 2, 1], 2, false);
-//     }
-//     else
-//     {
-//         keyboardKeysMap.set('lShift', game.add.sprite(165, 386, 'lShift', 0));
-//         keyboardKeysMap.set('rShift', game.add.sprite(700, 384, 'rShift', 0));
-//     }
-    
-    
+     keyboardKeysMap.set('´', game.add.sprite(607, 334, '´', 36));
+     keyboardKeysMap.get('´').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 2, false);
+     keyboardKeysMap.get('´').scale.setTo(1.2);
 }

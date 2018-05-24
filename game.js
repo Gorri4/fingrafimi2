@@ -49,7 +49,8 @@ var instructorMaggi;
 var leftHand;
 var rightHand;
 var warmupHead;
-var moveDown = false;
+var moveDownRight = false;
+var moveDownLeft = false;
 
 //Audio variables
 var sounds = {};
@@ -60,6 +61,7 @@ var comingFromExercise = false;
 var warmUps = [ false, false, false, false, false, false, false, false, false, false, false, false ];
 var preloadBar;
 
+
 function create() 
 {
     //Objects that need to be created at first to be moved later by the Update() function
@@ -69,8 +71,8 @@ function create()
     fish2 = game.add.sprite(50, 150, 'fishes', 1);
     instructorMaggi = game.add.sprite(500, 150, 'instructorMaggi', 0);
     intro = game.add.audio('intro');
-    leftHand = game.add.sprite(200, 700, 'lHand', 2);
-    rightHand = game.add.sprite(200, 700, 'rHand', 0);
+    leftHand = game.add.sprite(75, 700, 'lHand', 0);
+    rightHand = game.add.sprite(205, 700, 'rHand', 0);
     warmupHead = game.add.sprite(1000, 210, 'warmupHead', 0);
 
     createSounds();
@@ -82,9 +84,6 @@ function create()
 //This function is called upon and repaints the canvas constantly, thus the actions in here are only called upon at certain times
 function update()
 {
-    //This IF statement will only run if we are inside the WarmUp animation of the first 6 assignments
-    if(warmUps[0] === true || warmUps[1] === true || warmUps[2] === true || warmUps[3] === true || warmUps[4] === true || warmUps[5] === true)
-    {
         //Maggi minnkur peeks from the right side of the screen, angle of image at start is 0 and will stop rotating at -46. It will also
         //slightly move the image to the left.
         if(warmupHead.angle > -46 && warmupHead.x > 1015)
@@ -94,33 +93,24 @@ function update()
         }
 
         //This will make the left and right hand move from below the visible part of the canvas to their correct positions above the keys
-        if(leftHand.y > 300 && balloon.visible === true && moveDown===false)
+        if(leftHand.y > 303 && balloon.visible === true && moveDownLeft===false)
         {
             leftHand.y -= 4;
         }
-        if(rightHand.y > 160 && balloon.visible === true && moveDown===false)
+        if(rightHand.y > 275 && balloon.visible === true && moveDownRight===false)
         {
+            console.log(rightHand.y);
+            
             rightHand.y -= 4;
         }
-
-        if(moveDown && rightHand.y < 350){
-            rightHand.y += 4;
+        
+         if(moveDownRight && rightHand.y < 350){
+             rightHand.y += 4;
+         }
+        
+        if(moveDownLeft && leftHand.y < 450){
+            leftHand.y += 4;
         }
-    }
-
-    //This IF statement will only run if we are inside the WarmUp animation of the last 6 assignments
-    if(warmUps[6] === true || warmUps[7] === true  ||  warmUps[8] === true || warmUps[9] === true || warmUps[10] === true || warmUps[11])
-    {
-        //This will make the left and right hand move from below the visible part of the canvas to their correct positions above the keys
-        if(leftHand.y > 300 && balloon.visible === true)
-        {
-            leftHand.y -= 4;
-        }
-        if(rightHand.y > 160 && balloon.visible === true)
-        {
-            rightHand.y -= 4;
-        }
-    }
 
     //The clouds will constantly move to the right, although the clouds are not visible when not inside the
     //Allir heimalyklar 1 and 2.
@@ -194,7 +184,7 @@ function loadHomePage()
     homePage.anchor.setTo(0.5, 0.5);
     homePage.width = width;
     homePage.height = height;
-
+    
     //Fingrafimi logo loaded
     var logoL = game.add.image(0, 0, 'logoL');
 
@@ -367,7 +357,7 @@ function initGame()
 
 //The assignment function is where the exercises can be executed, all of its objects are initialized here and they are different
 //depending on which assignment we are on
-function Assignment(assignmentNr, exerciseNr,text) 
+function Assignment(assignmentNr, exerciseNr) 
 {
     //Sets all of the warmUps array to false
     initWarmUps();
@@ -1149,7 +1139,7 @@ function addInstructionAnimation(assignmentNr)
 function addAssignmentInstructor(assignmentNr)
 {
     //Maggi minnkur is the assignment instructor in the first 4 assignments
-    if(assignmentNr === 0 || assignmentNr === 7)
+    if(assignmentNr === 0 || assignmentNr === 7 || assignmentNr === 8)
     {
         //Load the image of the instructor
         instructor = game.add.sprite(850, 210, 'instructorMarglytta', 0);
@@ -1163,7 +1153,7 @@ function addAssignmentInstructor(assignmentNr)
         return instructor;
     }
     //The pig is the assignment instructor for Allir heimalyklar 1 and 2
-    else if(assignmentNr === 1 || assignmentNr === 1)
+    else if(assignmentNr === 1 || assignmentNr === 2)
     {
          instructor = game.add.sprite(750, 100, 'instructorFroskur', 0);
          instructor.scale.setTo(0.5);
@@ -1171,20 +1161,12 @@ function addAssignmentInstructor(assignmentNr)
          return instructor;
     }
     //The horse is the assignment instructor for the E og H and I og G assignments
-    else if(assignmentNr === 6 || assignmentNr === 7)
+    else if(assignmentNr === 3 || assignmentNr === 4)
     {
-         instructor = game.add.sprite(810, 125, 'whale', 0);
+         instructor = game.add.sprite(810, 125, 'instructorByfluga', 0);
          instructor.scale.setTo(0.5);
          instructor.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
          return instructor;
-    }
-    //The fish with sunglasses is the assignment instructor for the B og N and R og O assignments
-    else if(assignmentNr === 8 || assignmentNr === 9)
-    {
-        instructor = game.add.sprite(785, 100, 'fish', 0);
-        instructor.scale.setTo(0.5);
-        instructor.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
-        return instructor;
     }
     //The horse is the assignment instructor for the Broddstafir and Hástafir assignments
     else
@@ -1225,8 +1207,7 @@ function addBalloontext(text,fontSize){
     var instructionText = game.add.text(game.world.centerX+23, game.world.centerY/2 - 80, text, instrstyle);
 }
 
-//WarmUp animation for F og J, this function is mainly just animation sequences where one doesnt start until the previous one has finished playing
-//The soundclips are played in the following order: leftFJ, rightFJ, findFJ, findF, FindJ and spaceFJ
+//Load warmup for Upprifjun Assignment
 function warmupUpprifjun(assignmentNr, exerciseNr)
 {   
     //Set warmUps[0] to true so that all the callBacks here work while in the warmup
@@ -1234,11 +1215,10 @@ function warmupUpprifjun(assignmentNr, exerciseNr)
     initGame();
     
     loadBackground(assignmentNr);
-    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
     //Add keyboard
-    loadKeyboard(0,0);
+    loadKeyboard(assignmentNr);
 
     //Add the image and talking animation of the instructor
     warmupHead = game.add.sprite(900, 350, 'instructorMarglytta', 0);
@@ -1270,7 +1250,7 @@ function warmupUpprifjun(assignmentNr, exerciseNr)
                     //Add the speech bubble with the correct text
                     addBalloontext('Settu nú puttana á vinstri hendi á rétta lykla',14);
                     //Add the left hand to the game so that it starts moving from below the visible canvas to the A, S, D and F keys.
-                    leftHand = game.add.sprite(160, 700, 'lHand', 0);
+                    leftHand = game.add.sprite(75, 700, 'lHand', 0);
                     leftHand.scale.setTo(1.1);  
                     //warmupKeys.play('jklæBlink');
                     keyboardKeysMap.get('a').play('blink');
@@ -1302,7 +1282,7 @@ function warmupUpprifjun(assignmentNr, exerciseNr)
                     keyboardKeysMap.get('k').play('blink');
                     keyboardKeysMap.get('l').play('blink');
                     keyboardKeysMap.get('æ').play('blink');
-                    rightHand = game.add.sprite(350, 700, 'rHand', 0);
+                    rightHand = game.add.sprite(415, 700, 'rHand', 0);
                     rightHand.scale.setTo(1.1);
                 }           
             }, this).autoDestroy = true;  
@@ -1336,47 +1316,36 @@ function warmupUpprifjun(assignmentNr, exerciseNr)
 }
 
 //The soundclips are played in the following order: leftFJ, rightFJ, findDK, findD, findK and finalDK
-function WarmUpDK(assignmentNr, exerciseNr)
+function warmupTM(assignmentNr, exerciseNr)
 {
 
-    console.log('WarmupDK');
+    console.log('warmupTM');
     warmUps[1] = true;
 
     initGame();
 
     loadBackground(assignmentNr);
-    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
+
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
     loadKeyboard(0,0);
-
-    // warmupKeys = game.add.sprite(150, 380, 'warmupKeys', 0);
-    // warmupKeys.animations.add('asdfBlink', [0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0], 2, false, true);
-    // warmupKeys.animations.add('jklæBlink', [0, 16, 0, 16, 0, 16, 0, 16, 0, 16, 0], 2, false, true);
-    // warmupKeys.animations.add('dBlink', [0, 3, 0, 3, 0, 3, 0], 2, false, true);
-    // warmupKeys.animations.add('kBlink', [0, 8, 0, 8, 0, 8, 0], 2, false, true);
-    // warmupKeys.animations.add('bothBlink', [0, 12, 0, 12, 0, 12, 0, 12, 0, 12, 0], 2, false, true);
 
     warmupHead = game.add.sprite(800, 300, 'instructorFroskur', 0);
     warmupHead.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
     warmupHead.anchor.setTo(0.65, 1);
 
-    leftHand = game.add.sprite(155, 700, 'lHand', 0);
+    leftHand = game.add.sprite(75, 700, 'lHand', 0);
     leftHand.animations.add('t', [0, 4, 4, 4, 0, 0, 0], 4, true);
     leftHand.scale.setTo(1.1);  
-    rightHand = game.add.sprite(350, 550, 'rHand', 0);
+    rightHand = game.add.sprite(410, 560, 'rHand', 0);
     rightHand.animations.add('m', [0, 7, 7, 7, 0, 0, 0], 4, true);
     rightHand.scale.setTo(1.1);
 
-   // balloon = game.add.sprite(500, 25, 'balloonSprite', 0);
-   // balloon.scale.setTo(0.5);
-
-    //addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addMuteButton();
     addExitButton();
     addBalloontext('Fingurna á heimalyklunum já!',24);
 
-    sounds['byrjunDK'].onStop.addOnce(function()
+    sounds['byrjunTM'].onStop.addOnce(function()
     {
             stopWarmupHeadTalk(); 
             
@@ -1385,7 +1354,7 @@ function WarmUpDK(assignmentNr, exerciseNr)
                 if(warmUps[1])
                 {
                     warmupHead.play('talk');
-                    sounds['findTDK'].play();
+                    sounds['findTTM'].play();
                     addBalloontext('Hvar er stafurinn t á lyklaborðinu?',24);
             
                     keyboardKeysMap.get('t').play('blink');
@@ -1394,7 +1363,7 @@ function WarmUpDK(assignmentNr, exerciseNr)
             }, this).autoDestroy = true;  
     }, this);
 
-     sounds['findTDK'].onStop.addOnce(function()
+     sounds['findTTM'].onStop.addOnce(function()
      {
         stopWarmupHeadTalk(); 
 
@@ -1455,7 +1424,7 @@ function WarmUpDK(assignmentNr, exerciseNr)
                     game.time.events.add(Phaser.Timer.SECOND * 1, function(){
                             //balloon.frame = 10;
                             keyboardKeysMap.get('m').play('blink');
-                            moveDown = true;
+                            moveDownRight = true;
                             textArea.destroy();
                         }, this).autoDestroy = true;
                 });
@@ -1468,7 +1437,7 @@ function WarmUpDK(assignmentNr, exerciseNr)
         //Make Maggi stop moving his mouth in the 2 second pause between animations 
         stopWarmupHeadTalk(); 
 
-        moveDown = false;
+        moveDownRight = false;
         stopWarmupHeadTalk(); 
         game.time.events.add(Phaser.Timer.SECOND * 2, function()
         {                  
@@ -1533,608 +1502,939 @@ function WarmUpDK(assignmentNr, exerciseNr)
         });
      });
 
-    sounds['byrjunDK'].play();
+    sounds['byrjunTM'].play();
     warmupHead.play('talk');
 }
 
 //The soundclips are played in the following order: leftFJ, rightFJ, findSL, findS, FindL and finalSL
 function WarmUpSL(assignmentNr, exerciseNr)
 {
+    
     console.log('WarmupSL');
     warmUps[2] = true;
 
     initGame();
 
     loadBackground(assignmentNr);
-    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
+
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
-    warmupKeys = game.add.sprite(150, 380, 'warmupKeys', 0);
-    warmupKeys.animations.add('asdfBlink', [0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0], 2, false, true);
-    warmupKeys.animations.add('jklæBlink', [0, 16, 0, 16, 0, 16, 0, 16, 0, 16, 0], 2, false, true);
-    warmupKeys.animations.add('sBlink', [0, 2, 0, 2, 0, 2, 0], 2, false, true);
-    warmupKeys.animations.add('lBlink', [0, 9, 0, 9, 0, 9, 0], 2, false, true);
-    warmupKeys.animations.add('bothBlink', [0, 13, 0, 13, 0, 13, 0, 13, 0, 13, 0], 2, false, true);
+    loadKeyboard(0,0);
 
-    warmupHead = game.add.sprite(1096, 210, 'warmupHead', 0);
+    warmupHead = game.add.sprite(800, 300, 'instructorFroskur', 0);
     warmupHead.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
-    warmupHead.anchor.setTo(0.75, 1);
+    warmupHead.anchor.setTo(0.65, 1);
 
-    leftHand = game.add.sprite(155, 700, 'lHand', 2);
+    leftHand = game.add.sprite(75, 715, 'lHand', 0);
+    leftHand.animations.add('v', [0, 5, 5, 5, 0, 0, 0], 4, true);
     leftHand.scale.setTo(1.1);  
-
-    balloon = game.add.sprite(500, 25, 'balloonSprite', 0);
+    rightHand = game.add.sprite(415, 550, 'rHand', 0);
+    rightHand.animations.add('d', [0, 6, 6, 6, 0, 0, 0], 4, true);
+    rightHand.scale.setTo(1.1);
     
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addMuteButton();
     addExitButton();
+    addBalloontext('Fingurna á heimalyklana.',24);
 
-    sounds['leftFJ'].onStop.addOnce(function()
+    sounds['byrjunDV'].onStop.addOnce(function()
     {
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
+            stopWarmupHeadTalk(); 
+            
+            game.time.events.add(Phaser.Timer.SECOND * 2, function()
+            {   
+                if(warmUps[2])
+                {
+                    warmupHead.play('talk');
+                    sounds['findD'].play();
+                    addBalloontext('Hvar er stafurinn ð á lyklaborðinu?',24);
+            
+                    keyboardKeysMap.get('dd').play('blink');
+                }
+            }, this).autoDestroy = true;  
+    }, this);
+
+     sounds['findD'].onStop.addOnce(function()
+     {
         stopWarmupHeadTalk(); 
 
         game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {
+        {         
             if(warmUps[2])
             {
                 warmupHead.play('talk');
-                sounds['rightFJ'].play();
-                warmupKeys.play('jklæBlink');
-                balloon.frame = 1;
-                rightHand = game.add.sprite(535, 700, 'rHand', 0);
-                rightHand.scale.setTo(1.1);
-            }
+                rightHand.x += 10;
+                rightHand.play('d');
+                addBalloontext('Þú notar litlaputta hægri handar til að skrifa ð',24);
+                sounds['lilD'].play();
+            }              
         }, this).autoDestroy = true;  
     }, this);
 
-    sounds['rightFJ'].onStop.addOnce(function()
+    sounds['lilD'].onStop.addOnce(function()
     {
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
-        stopWarmupHeadTalk();
-
-        game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {        
-            if(warmUps[2])
-            {
-                warmupHead.play('talk');
-                warmupKeys.play('bothBlink');
-                balloon.frame = 12;
-                sounds['findSL'].play();
-            }         
-        }, this).autoDestroy = true;  
-    }, this);
-
-    sounds['findSL'].onStop.addOnce(function()
-    {
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
+        rightHand.x -= 20;
+        rightHand.frame = 0;
+        rightHand.animations.stop();
         stopWarmupHeadTalk(); 
-
         game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {            
+        {                  
             if(warmUps[2])
             {
                 warmupHead.play('talk');
-                warmupKeys.play('sBlink');
-                balloon.frame = 14;
-                sounds['findS'].play();
+                addBalloontext('Skrifaðu ð',24);
+                sounds['skrifD'].play();
                 // Display the letter in the textArea
-                addWarmUpTextArea('s', 50, '#000000');
-            }          
+                addWarmUpTextArea('ð', 100, '#000000');
+            }
+            
+                            
         }, this).autoDestroy = true;
     });
 
-    sounds['findS'].onStop.addOnce(function()
+    sounds['skrifD'].onStop.addOnce(function()
     { 
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
         stopWarmupHeadTalk(); 
+
         game.input.keyboard.start();
         game.input.keyboard.addCallbacks(this, null, null, function(char)
         {    
-            if(char === 's')
+            if(char === 'ð')
             {
                 game.input.keyboard.stop();
                 textArea.destroy();
+
                 // Display the letter in the textArea
-                addWarmUpTextArea('s', 50, '#00ff00');
+                addWarmUpTextArea('ð', 100, '#00ff00');
+
                 game.time.events.add(Phaser.Timer.SECOND * 2, function()
                 {
                     warmupHead.play('talk');
-                    warmupKeys.play('lBlink');
-                    balloon.frame = 15;
-                    sounds['findL'].play();
-                    textArea.destroy();
-                    // Display the letter in the textArea
-                    addWarmUpTextArea('l', 50, '#000000');
-                });
-            }
-        }); 
-     });
-
-     sounds['findL'].onStop.addOnce(function()
-     { 
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
-        stopWarmupHeadTalk();
-
-        game.input.keyboard.start();
-        game.input.keyboard.addCallbacks(this, null, null, function(char)
-        {
-            if(char === 'l')
-            {
-                game.input.keyboard.stop();
-                textArea.destroy();
-                // Display the letter in the textArea
-                addWarmUpTextArea('l', 50, '#00ff00');
-                game.time.events.add(Phaser.Timer.SECOND * 1, function()
-                {
-                    sounds['finalSL'].play();
-                    balloon.frame = 16;
-                    warmUps[2] = false;
-                    Assignment(assignmentNr, exerciseNr);
+                    sounds['findV'].play();
+                    addBalloontext('Rabbit! Finndu nú stafinn v á lyklaborðinu',24);
+                    game.time.events.add(Phaser.Timer.SECOND * 1, function(){
+                            //balloon.frame = 10;
+                            keyboardKeysMap.get('v').play('blink');
+                            textArea.destroy();
+                        }, this).autoDestroy = true;
                 });
             }
         });
      });
 
-    sounds['leftFJ'].play();
+     sounds['findV'].onStop.addOnce(function()
+     {
+        stopWarmupHeadTalk(); 
+        game.time.events.add(Phaser.Timer.SECOND * 2, function()
+        {                  
+            if(warmUps[2])
+            {
+                warmupHead.play('talk');
+                leftHand.play('v');
+                addBalloontext('Þú notar vísifingur haegri handar til að skrifa m',24);
+                //warmupKeys.play('bothBlink');
+                //balloon.frame = 8;
+                sounds['visVV'].play();
+            }
+            
+                            
+        }, this).autoDestroy = true;
+     });
+
+     sounds['visVV'].onStop.addOnce(function()
+     {
+         leftHand.animations.stop();
+         leftHand.frame = 0;
+         stopWarmupHeadTalk(); 
+         game.time.events.add(Phaser.Timer.SECOND * 2, function()
+         {                  
+             if(warmUps[2])
+             {
+                 warmupHead.play('talk');
+                 addBalloontext('Skrifaðu v',24);
+                 sounds['skrifV'].play();
+                 // Display the letter in the textArea
+                 addWarmUpTextArea('v', 100, '#000000');
+             }
+             
+                             
+         }, this).autoDestroy = true;
+     });
+
+     sounds['skrifV'].onStop.addOnce(function()
+    { 
+        stopWarmupHeadTalk(); 
+
+        game.input.keyboard.start();
+        game.input.keyboard.addCallbacks(this, null, null, function(char)
+        {    
+            if(char === 'v')
+            {
+                game.input.keyboard.stop();
+                textArea.destroy();
+
+                // Display the letter in the textArea
+                addWarmUpTextArea('v', 100, '#00ff00');
+
+                game.time.events.add(Phaser.Timer.SECOND * 2, function()
+                {
+                    warmupHead.play('talk');
+                    sounds['finalDV'].play();
+                    warmUps[2] = false;
+                    Assignment(assignmentNr, exerciseNr);
+                    textArea.destroy();
+                });
+            }
+        });
+     });
+
+    sounds['byrjunDV'].play();
     warmupHead.play('talk');
-    warmupKeys.play('asdfBlink');
 }
 
 //The soundclips are played in the following order: leftFJ, rightFJ, findAAE, findA, findAE and finalAAE
 function WarmUpAAE(assignmentNr, exerciseNr){
-    console.log('WarmupAAE');
+        
+    console.log('WarmupSL');
     warmUps[3] = true;
-    
+
     initGame();
 
     loadBackground(assignmentNr);
-    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
+
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
-    warmupKeys = game.add.sprite(150, 380, 'warmupKeys', 0);
-    warmupKeys.animations.add('asdfBlink', [0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0], 2, false, true);
-    warmupKeys.animations.add('jklæBlink', [0, 16, 0, 16, 0, 16, 0, 16, 0, 16, 0], 2, false, true);
-    warmupKeys.animations.add('aBlink', [0, 1, 0, 1, 0, 1, 0], 2, false, true);
-    warmupKeys.animations.add('aeBlink', [0, 10, 0, 10, 0, 10, 0], 2, false, true);
-    warmupKeys.animations.add('bothBlink', [0, 14, 0, 14, 0, 14, 0, 14, 0, 14, 0], 2, false, true);
+    loadKeyboard(0,0);
 
-    warmupHead = game.add.sprite(1096, 210, 'warmupHead', 0);
+    warmupHead = game.add.sprite(800, 300, 'instructorByfluga', 0);
     warmupHead.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
-    warmupHead.anchor.setTo(0.75, 1);
+    warmupHead.anchor.setTo(0.65, 1);
 
-    leftHand = game.add.sprite(155, 700, 'lHand', 2);
+    leftHand = game.add.sprite(75, 720, 'lHand', 0);
     leftHand.scale.setTo(1.1);  
-
-    balloon = game.add.sprite(500, 25, 'balloonSprite', 0);
-
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
+    rightHand = game.add.sprite(410, 550, 'rHand', 0);
+    rightHand.animations.add('p', [0, 2, 2, 2, 0, 0, 0], 4, true);
+    rightHand.animations.add('u', [0, 8, 8, 8, 0, 0, 0], 4, true);
+    rightHand.scale.setTo(1.1);
+    
     addMuteButton();
     addExitButton();
+    addBalloontext('Fingurna á heimalyklana.',24);
 
-    sounds['leftFJ'].onStop.addOnce(function()
+    sounds['byrjunPU'].onStop.addOnce(function()
     {
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
+            stopWarmupHeadTalk(); 
+            
+            game.time.events.add(Phaser.Timer.SECOND * 2, function()
+            {   
+                if(warmUps[3])
+                {
+                    warmupHead.play('talk');
+                    sounds['findP'].play();
+                    addBalloontext('Hvar er stafurinn p á lyklaborðinu?',24);
+            
+                    keyboardKeysMap.get('p').play('blink');
+                }
+            }, this).autoDestroy = true;  
+    }, this);
+
+     sounds['findP'].onStop.addOnce(function()
+     {
         stopWarmupHeadTalk(); 
 
         game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {
+        {         
             if(warmUps[3])
             {
                 warmupHead.play('talk');
-                sounds['rightFJ'].play();
-                warmupKeys.play('jklæBlink');
-                balloon.frame = 1;
-                rightHand = game.add.sprite(535, 700, 'rHand', 0);
-                rightHand.scale.setTo(1.1);
-            }  
+                rightHand.play('p');
+                addBalloontext('Þú notar litlaputta hægri handar til að skrifa p',24);
+                sounds['lilP'].play();
+            }              
         }, this).autoDestroy = true;  
     }, this);
 
-    sounds['rightFJ'].onStop.addOnce(function()
+    sounds['lilP'].onStop.addOnce(function()
     {
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
+        rightHand.frame = 0;
+        rightHand.animations.stop();
         stopWarmupHeadTalk(); 
-
-        game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {
-            if(warmUps[3])
-            {
-                warmupHead.play('talk');
-                warmupKeys.play('bothBlink');
-                balloon.frame = 17;
-                sounds['findAAE'].play();
-            }                            
-        }, this).autoDestroy = true;  
-    }, this);
-
-    sounds['findAAE'].onStop.addOnce(function()
-    {
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
-        stopWarmupHeadTalk(); 
-
         game.time.events.add(Phaser.Timer.SECOND * 2, function()
         {                  
             if(warmUps[3])
             {
                 warmupHead.play('talk');
-                warmupKeys.play('aBlink');
-                balloon.frame = 18;
-                sounds['findA'].play();
-
+                addBalloontext('Skrifaðu p',24);
+                sounds['skrifP'].play();
                 // Display the letter in the textArea
-                addWarmUpTextArea('a', 50, '#000000');
-            }                            
+                addWarmUpTextArea('p', 100, '#000000');
+            }
+            
+                            
         }, this).autoDestroy = true;
     });
 
-    sounds['findA'].onStop.addOnce(function()
+    sounds['skrifP'].onStop.addOnce(function()
     { 
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
         stopWarmupHeadTalk(); 
 
         game.input.keyboard.start();
         game.input.keyboard.addCallbacks(this, null, null, function(char)
         {    
-            if(char === 'a')
+            if(char === 'p')
             {
                 game.input.keyboard.stop();
                 textArea.destroy();
 
                 // Display the letter in the textArea
-                addWarmUpTextArea('a', 50, '#00ff00');
+                addWarmUpTextArea('p', 100, '#00ff00');
 
                 game.time.events.add(Phaser.Timer.SECOND * 2, function()
                 {
                     warmupHead.play('talk');
-                    warmupKeys.play('aeBlink');
-                    balloon.frame = 19;
-                    sounds['findAE'].play();
-                    textArea.destroy();
-                    // Display the letter in the textArea
-                    addWarmUpTextArea('æ', 50, '#000000');
+                    sounds['findU'].play();
+                    addBalloontext('Rabbit! Finndu nú stafinn u á lyklaborðinu',24);
+                    game.time.events.add(Phaser.Timer.SECOND * 1, function(){
+                            //balloon.frame = 10;
+                            keyboardKeysMap.get('u').play('blink');
+                            textArea.destroy();
+                        }, this).autoDestroy = true;
                 });
             }
         });
      });
 
-    sounds['findAE'].onStop.addOnce(function()
+     sounds['findU'].onStop.addOnce(function()
+     {
+        stopWarmupHeadTalk(); 
+        game.time.events.add(Phaser.Timer.SECOND * 2, function()
+        {                  
+            if(warmUps[3])
+            {
+                warmupHead.play('talk');
+                rightHand.play('u');
+                addBalloontext('Þú notar vísifingur haegri handar til að skrifa u',24);
+                sounds['visU'].play();
+            }
+            
+                            
+        }, this).autoDestroy = true;
+     });
+
+     sounds['visU'].onStop.addOnce(function()
+     {
+         rightHand.animations.stop();
+         rightHand.frame = 0;
+         stopWarmupHeadTalk(); 
+         game.time.events.add(Phaser.Timer.SECOND * 2, function()
+         {                  
+             if(warmUps[3])
+             {
+                 warmupHead.play('talk');
+                 addBalloontext('Skrifaðu u',24);
+                 sounds['skrifU'].play();
+                 // Display the letter in the textArea
+                 addWarmUpTextArea('u', 100, '#000000');
+             }
+             
+                             
+         }, this).autoDestroy = true;
+     });
+
+     sounds['skrifU'].onStop.addOnce(function()
     { 
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
         stopWarmupHeadTalk(); 
 
         game.input.keyboard.start();
         game.input.keyboard.addCallbacks(this, null, null, function(char)
-        {
-            if(char === 'æ')
+        {    
+            if(char === 'u')
             {
                 game.input.keyboard.stop();
                 textArea.destroy();
+
                 // Display the letter in the textArea
-                addWarmUpTextArea('æ', 50, '#00ff00');
-                game.time.events.add(Phaser.Timer.SECOND * 1, function()
+                addWarmUpTextArea('u', 100, '#00ff00');
+
+                game.time.events.add(Phaser.Timer.SECOND * 2, function()
                 {
-                    sounds['finalAAE'].play();
-                    balloon.frame = 21;
+                    warmupHead.play('talk');
+                    sounds['finalPU'].play();
+                    warmUps[3] = false;
                     Assignment(assignmentNr, exerciseNr);
+                    textArea.destroy();
                 });
             }
         });
-    });
+     });
 
-    sounds['leftFJ'].play();
+    sounds['byrjunPU'].play();
     warmupHead.play('talk');
-    warmupKeys.play('asdfBlink');
 }
 
 //The soundclips are played in the following order: leftAll1, rightAll1
 function WarmUpALL1(assignmentNr, exerciseNr)
 {
-    console.log('WarmupALL1');
+
     warmUps[4] = true;
-    
+
     initGame();
 
     loadBackground(assignmentNr);
-    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
+
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
-    var instructor = game.add.sprite(750, 100, 'pig', 0);
-    instructor.scale.setTo(0.50);
-    instructor.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
+    loadKeyboard(0,0);
 
-    warmupKeys = game.add.sprite(150, 380, 'warmupKeys', 0);
-    warmupKeys.animations.add('asdfBlink', [0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0], 2, false, true);
-    warmupKeys.animations.add('jklæBlink', [0, 16, 0, 16, 0, 16, 0, 16, 0, 16, 0], 2, false, true);
+    warmupHead = game.add.sprite(800, 300, 'instructorByfluga', 0);
+    warmupHead.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
+    warmupHead.anchor.setTo(0.65, 1);
 
-
-    leftHand = game.add.sprite(155, 700, 'lHand', 2);
+    leftHand = game.add.sprite(75, 720, 'lHand', 0);
     leftHand.scale.setTo(1.1);  
-
-    balloon = game.add.sprite(500, 25, 'balloonSprite', 22);
+    rightHand = game.add.sprite(410, 300, 'rHand', 0);
+    rightHand.animations.add('þ', [0, 11,11,11, 0, 0, 0], 4, true);
+    rightHand.animations.add('y', [0, 2, 2, 2, 0, 0, 0], 4, true);
+    rightHand.scale.setTo(1.1);
     
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addMuteButton();
     addExitButton();
+    addBalloontext('Fingurna á heimalyklana.',24);
 
-    sounds['leftAll1'].onStop.addOnce(function()
-    { 
-        stopInstructorTalk();
-        
+    sounds['byrjunÞY'].onStop.addOnce(function()
+    {
+            stopWarmupHeadTalk(); 
+            
+            game.time.events.add(Phaser.Timer.SECOND * 2, function()
+            {   
+                if(warmUps[4])
+                {
+                    moveDownRight = true;
+                    warmupHead.play('talk');
+                    sounds['findÞ'].play();
+                    addBalloontext('Hvar er stafurinn p á lyklaborðinu?',24);
+            
+                    keyboardKeysMap.get('þ').play('blink');
+                }
+            }, this).autoDestroy = true;  
+    }, this);
+
+     sounds['findÞ'].onStop.addOnce(function()
+     {
+        stopWarmupHeadTalk(); 
+        moveDownRight = false;
         game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {
+        {         
             if(warmUps[4])
             {
-                instructor.play('talk');
-                sounds['rightAll1'].play();
-                warmupKeys.play('jklæBlink');
-                balloon.frame = 23;
-                rightHand = game.add.sprite(535, 700, 'rHand', 0);
-                rightHand.scale.setTo(1.1);
+                warmupHead.play('talk');
+                rightHand.play('þ');
+                addBalloontext('Þú notar litlaputta hægri handar til að skrifa þ',24);
+                sounds['lilÞ'].play();
+            }              
+        }, this).autoDestroy = true;  
+    }, this);
+
+    sounds['lilÞ'].onStop.addOnce(function()
+    {
+        rightHand.frame = 0;
+        rightHand.animations.stop();
+        stopWarmupHeadTalk(); 
+        game.time.events.add(Phaser.Timer.SECOND * 2, function()
+        {                  
+            if(warmUps[4])
+            {
+                warmupHead.play('talk');
+                addBalloontext('Skrifaðu þ',24);
+                sounds['skrifÞ'].play();
+                // Display the letter in the textArea
+                addWarmUpTextArea('þ', 100, '#000000');
             }
-        }, this).autoDestroy = true;  
-    }, this);
+            
+                            
+        }, this).autoDestroy = true;
+    });
 
-     sounds['rightAll1'].onStop.addOnce(function()
-     { 
-        stopInstructorTalk();
-        
+    sounds['skrifÞ'].onStop.addOnce(function()
+    { 
+        stopWarmupHeadTalk(); 
+
+        game.input.keyboard.start();
+        game.input.keyboard.addCallbacks(this, null, null, function(char)
+        {    
+            if(char === 'þ')
+            {
+                game.input.keyboard.stop();
+                textArea.destroy();
+
+                // Display the letter in the textArea
+                addWarmUpTextArea('þ', 100, '#00ff00');
+
+                game.time.events.add(Phaser.Timer.SECOND * 2, function()
+                {
+                    warmupHead.play('talk');
+                    sounds['findY'].play();
+                    addBalloontext('Rabbit! Finndu nú stafinn y á lyklaborðinu',24);
+                    game.time.events.add(Phaser.Timer.SECOND * 1, function(){
+                            //balloon.frame = 10;
+                            keyboardKeysMap.get('y').play('blink');
+                            textArea.destroy();
+                        }, this).autoDestroy = true;
+                });
+            }
+        });
+     });
+
+     sounds['findY'].onStop.addOnce(function()
+     {
+        stopWarmupHeadTalk(); 
         game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {           
+        {                  
             if(warmUps[4])
             {
-                Assignment(assignmentNr, exerciseNr);
-            }            
-        }, this).autoDestroy = true;  
-    }, this);
+                warmupHead.play('talk');
+                rightHand.play('y');
+                addBalloontext('Þú notar vísifingur haegri handar til að skrifa y',24);
+                sounds['visY'].play();
+            }
+            
+                            
+        }, this).autoDestroy = true;
+     });
 
-    sounds['leftAll1'].play();
-    instructor.play('talk');
-    warmupKeys.play('asdfBlink');
+     sounds['visY'].onStop.addOnce(function()
+     {
+         rightHand.animations.stop();
+         rightHand.frame = 0;
+         stopWarmupHeadTalk(); 
+         game.time.events.add(Phaser.Timer.SECOND * 2, function()
+         {                  
+             if(warmUps[4])
+             {
+                 warmupHead.play('talk');
+                 addBalloontext('Skrifaðu y',24);
+                 sounds['skrifY'].play();
+                 // Display the letter in the textArea
+                 addWarmUpTextArea('y', 100, '#000000');
+             }
+             
+                             
+         }, this).autoDestroy = true;
+     });
+
+     sounds['skrifY'].onStop.addOnce(function()
+    { 
+        stopWarmupHeadTalk(); 
+
+        game.input.keyboard.start();
+        game.input.keyboard.addCallbacks(this, null, null, function(char)
+        {    
+            if(char === 'y')
+            {
+                game.input.keyboard.stop();
+                textArea.destroy();
+
+                // Display the letter in the textArea
+                addWarmUpTextArea('y', 100, '#00ff00');
+
+                game.time.events.add(Phaser.Timer.SECOND * 2, function()
+                {
+                    warmupHead.play('talk');
+                    sounds['finalÞY'].play();
+                    warmUps[4] = false;
+                    Assignment(assignmentNr, exerciseNr);
+                    textArea.destroy();
+                });
+            }
+        });
+     });
+
+    sounds['byrjunÞY'].play();
+    warmupHead.play('talk');
 }
 
 //The soundclips are played in the following order: leftAll2, rightAll2
 function WarmUpALL2(assignmentNr, exerciseNr)
 {
-    console.log('WarmupALL2');
+    console.log('byrjunleddari');
     warmUps[5] = true;
-    
+
     initGame();
 
     loadBackground(assignmentNr);
-    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
+
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
-    var instructor = game.add.sprite(750, 100, 'pig', 0);
-    instructor.scale.setTo(0.50);
-    instructor.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
+    loadKeyboard(0,0);
 
-    warmupKeys = game.add.sprite(150, 380, 'warmupKeys', 0);
-    warmupKeys.animations.add('asdfBlink', [0, 15, 0, 15, 0, 15, 0, 15, 0, 15, 0], 2, false, true);
-    warmupKeys.animations.add('jklæBlink', [0, 16, 0, 16, 0, 16, 0, 16, 0, 16, 0], 2, false, true);
+    warmupHead = game.add.sprite(800, 300, 'instructurLedurblaka', 0);
+    warmupHead.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
+    warmupHead.anchor.setTo(0.65, 1);
 
-    leftHand = game.add.sprite(155, 700, 'lHand', 2);
+    leftHand = game.add.sprite(75, 720, 'lHand', 0);
     leftHand.scale.setTo(1.1);  
-
-    balloon = game.add.sprite(500, 25, 'balloonSprite', 25);
-
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
+    rightHand = game.add.sprite(410, 300, 'rHand', 0);
+    rightHand.animations.add('ö', [0, 9,9,9, 0, 0, 0], 4, true);
+    leftHand.animations.add('c', [0, 2, 2, 2, 0, 0, 0], 4, true);
+    rightHand.scale.setTo(1.1);
     addMuteButton();
     addExitButton();
+    addBalloontext('Fingurna á heimalyklana.',24);
 
-    sounds['leftAll2'].onStop.addOnce(function()
-    { 
-        stopInstructorTalk();
-        
+    sounds['byrjunÖC'].onStop.addOnce(function()
+    {
+
+            stopWarmupHeadTalk(); 
+            
+            game.time.events.add(Phaser.Timer.SECOND * 2, function()
+            {   
+                if(warmUps[5])
+                {
+                    warmupHead.play('talk');
+                    sounds['findÖ'].play();
+                    addBalloontext('Hvar er stafurinn ö á lyklaborðinu?',24);
+            
+                    keyboardKeysMap.get('ö').play('blink');
+                }
+            }, this).autoDestroy = true;  
+    }, this);
+
+     sounds['findÖ'].onStop.addOnce(function()
+     {
+        stopWarmupHeadTalk(); 
         game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {
+        {         
             if(warmUps[5])
             {
-                instructor.play('talk');
-                sounds['rightAll2'].play();
-                warmupKeys.play('jklæBlink');
-                balloon.frame = 26;
-                rightHand = game.add.sprite(535, 700, 'rHand', 0);
-                rightHand.scale.setTo(1.1);
-            }
+                warmupHead.play('talk');
+                rightHand.play('ö');
+                addBalloontext('Þú notar litlaputta hægri handar til að skrifa ö',24);
+                sounds['lilÖ'].play();
+            }              
         }, this).autoDestroy = true;  
     }, this);
 
-    sounds['rightAll2'].onStop.addOnce(function()
-    { 
-        stopInstructorTalk();
-        
+    sounds['lilÖ'].onStop.addOnce(function()
+    {
+        rightHand.frame = 0;
+        rightHand.animations.stop();
+        stopWarmupHeadTalk(); 
         game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {
+        {                  
             if(warmUps[5])
             {
-                Assignment(assignmentNr, exerciseNr);
+                warmupHead.play('talk');
+                addBalloontext('Skrifaðu ö',24);
+                sounds['skrifÖ'].play();
+                // Display the letter in the textArea
+                addWarmUpTextArea('ö', 100, '#000000');
             }
-        }, this).autoDestroy = true;  
-    }, this);
+            
+                            
+        }, this).autoDestroy = true;
+    });
 
-    sounds['leftAll2'].play();
-    instructor.play('talk');
-    warmupKeys.play('asdfBlink');
+    sounds['skrifÖ'].onStop.addOnce(function()
+    { 
+        stopWarmupHeadTalk(); 
+
+        game.input.keyboard.start();
+        game.input.keyboard.addCallbacks(this, null, null, function(char)
+        {    
+            if(char === 'ö')
+            {
+                game.input.keyboard.stop();
+                textArea.destroy();
+
+                // Display the letter in the textArea
+                addWarmUpTextArea('ö', 100, '#00ff00');
+
+                game.time.events.add(Phaser.Timer.SECOND * 2, function()
+                {
+                    warmupHead.play('talk');
+                    moveDownLeft = true;
+                    sounds['findC'].play();
+                    addBalloontext('Rabbit! Finndu nú stafinn c á lyklaborðinu',24);
+                    game.time.events.add(Phaser.Timer.SECOND * 1, function(){
+                            //balloon.frame = 10;
+                            keyboardKeysMap.get('c').play('blink');
+                            textArea.destroy();
+                        }, this).autoDestroy = true;
+                });
+            }
+        });
+     });
+
+     sounds['findC'].onStop.addOnce(function()
+     {
+        moveDownLeft = false;
+        stopWarmupHeadTalk(); 
+        game.time.events.add(Phaser.Timer.SECOND * 2, function()
+        {                  
+            if(warmUps[5])
+            {
+                warmupHead.play('talk');
+                leftHand.play('c');
+                addBalloontext('Þú notar vísifingur haegri handar til að skrifa c',24);
+                sounds['visC'].play();
+            }
+            
+                            
+        }, this).autoDestroy = true;
+     });
+
+     sounds['visC'].onStop.addOnce(function()
+     {
+         leftHand.animations.stop();
+         leftHand.frame = 0;
+         stopWarmupHeadTalk(); 
+         game.time.events.add(Phaser.Timer.SECOND * 2, function()
+         {                  
+             if(warmUps[5])
+             {
+                 warmupHead.play('talk');
+                 addBalloontext('Skrifaðu c',24);
+                 sounds['skrifC'].play();
+                 // Display the letter in the textArea
+                 addWarmUpTextArea('c', 100, '#000000');
+             }
+             
+                             
+         }, this).autoDestroy = true;
+     });
+
+     sounds['skrifC'].onStop.addOnce(function()
+    { 
+        stopWarmupHeadTalk(); 
+
+        game.input.keyboard.start();
+        game.input.keyboard.addCallbacks(this, null, null, function(char)
+        {    
+            if(char === 'c')
+            {
+                game.input.keyboard.stop();
+                textArea.destroy();
+
+                // Display the letter in the textArea
+                addWarmUpTextArea('c', 100, '#00ff00');
+
+                game.time.events.add(Phaser.Timer.SECOND * 2, function()
+                {
+                    warmupHead.play('talk');
+                    sounds['finalÖC'].play();
+                    warmUps[5] = false;
+                    Assignment(assignmentNr, exerciseNr);
+                    textArea.destroy();
+                });
+            }
+        });
+     });
+
+    sounds['byrjunÖC'].play();
+    warmupHead.play('talk');
 }
 
+//kommustafir
 //The soundclips are played in the following order: handsEH, findE, typingE, typeE, findH, typingH, typeH
 function WarmUpEH(assignmentNr, exerciseNr)
 {
-    console.log('WarmupEH');
     warmUps[6] = true;
 
     initGame();
 
     loadBackground(assignmentNr);
-    // addSkipButton(assignmentNr, exerciseNr,  Assignment);
+
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
-    instructor = game.add.sprite(810, 125, 'whale', 0);
-    instructor.scale.setTo(0.5);
-    instructor.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
+    loadKeyboard(0,0);
 
-    loadKeyboard(assignmentNr, exerciseNr);
+    warmupHead = game.add.sprite(800, 300, 'instructurLedurblaka', 0);
+    warmupHead.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
+    warmupHead.anchor.setTo(0.65, 1);
 
-    leftHand = game.add.sprite(210, 700, 'hands', 9);
-    leftHand.animations.add('type', [9, 16, 9, 16, 9, 16, 9], 2, false);
-
-    rightHand = game.add.sprite(475, 700, 'hands', 0);
-    rightHand.animations.add('type', [0, 1, 0, 1, 0, 1, 0], 2, false);
-
-    balloon = game.add.sprite(475, 5, 'balloonSprite', 29);
-    balloon.scale.setTo(0.9);
-
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
+    leftHand = game.add.sprite(75, 720, 'lHand', 0);
+    leftHand.scale.setTo(1.1);  
+    rightHand = game.add.sprite(410, 560, 'rHand', 0);
+    rightHand.animations.add('´', [0, 9,9,9, 0, 0, 0], 4, true);
+    rightHand.animations.add(',', [0, 2, 2, 2, 0, 0, 0], 4, true);
+    leftHand.animations.add('e', [0, 7, 7, 7, 0, 0, 0], 4, true);
+    rightHand.scale.setTo(1.1);
     addMuteButton();
     addExitButton();
+    addBalloontext('Fingurna á heimalyklana.',24);
 
-    sounds['handsEH'].onStop.addOnce(function()
-    { 
-        stopInstructorTalk();
-        
-        game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {    
-            if(warmUps[6])
-            {
-                instructor.play('talk');
-                sounds['findE'].play();
-                keyboardKeysMap.get('e').play('blink');
-                balloon.frame = 30;
-            }   
-        }, this).autoDestroy = true;  
+    sounds['byrjunKomma'].onStop.addOnce(function()
+    {
+
+            stopWarmupHeadTalk(); 
+            
+            game.time.events.add(Phaser.Timer.SECOND * 2, function()
+            {   
+                if(warmUps[6])
+                {
+                    warmupHead.play('talk');
+                    sounds['findUppKomma'].play();
+                    addBalloontext('Hvar er stafurinn ö á lyklaborðinu?',24);
+            
+                    keyboardKeysMap.get('´').play('blink');
+                }
+            }, this).autoDestroy = true;  
     }, this);
 
-    sounds['findE'].onStop.addOnce(function()
-    { 
-        stopInstructorTalk();
-        
-        game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {            
-            if(warmUps[6])
-            {
-                instructor.play('talk');
-                balloon.frame = 31;
-                sounds['typingE'].play();
-                leftHand.play('type');
-            }            
-        }, this).autoDestroy = true;  
-    }, this);
-
-    sounds['typingE'].onStop.addOnce(function()
-    { 
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
+     sounds['findUppKomma'].onStop.addOnce(function()
+     {
         stopWarmupHeadTalk(); 
-
         game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {
+        {         
             if(warmUps[6])
             {
-                instructor.play('talk');
-                balloon.frame = 32;
-                sounds['typeE'].play();
-                keyboardKeysMap.get('e').play('blink');
-                
+                warmupHead.play('talk');
+                rightHand.play('´');
+                addBalloontext('Þú notar litlaputta hægri handar til að skrifa ö',24);
+                sounds['lilUppKomma'].play();
+            }              
+        }, this).autoDestroy = true;  
+    }, this);
+
+    sounds['lilUppKomma'].onStop.addOnce(function()
+    {
+       stopWarmupHeadTalk(); 
+       game.time.events.add(Phaser.Timer.SECOND * 2, function()
+       {         
+           if(warmUps[6])
+           {
+               warmupHead.play('talk');
+               leftHand.play('e');
+               addBalloontext('Þú notar litlaputta hægri handar til að skrifa ö',24);
+               sounds['pressE'].play();
+           }              
+       }, this).autoDestroy = true;  
+   }, this);
+
+    sounds['pressE'].onStop.addOnce(function()
+    {
+        rightHand.frame = 0;
+        rightHand.animations.stop();
+        stopWarmupHeadTalk(); 
+        game.time.events.add(Phaser.Timer.SECOND * 2, function()
+        {                  
+            if(warmUps[6])
+            {
+                warmupHead.play('talk');
+                addBalloontext('Skrifaðu á',24);
+                sounds['skrifÁ'].play();
                 // Display the letter in the textArea
-                addWarmUpTextArea('e', 150, '#000000');
+                addWarmUpTextArea('á', 100, '#000000');
             }
-        });
+            
+                            
+        }, this).autoDestroy = true;
     });
 
-    sounds['typeE'].onStop.addOnce(function()
+    sounds['skrifÁ'].onStop.addOnce(function()
     { 
-        stopInstructorTalk();
-        
+        stopWarmupHeadTalk(); 
+
         game.input.keyboard.start();
         game.input.keyboard.addCallbacks(this, null, null, function(char)
         {    
-            if(char === 'e')
+            if(char === 'á')
             {
                 game.input.keyboard.stop();
                 textArea.destroy();
 
                 // Display the letter in the textArea
-                addWarmUpTextArea('e', 150, '#00ff00');
+                addWarmUpTextArea('á', 100, '#00ff00');
+
                 game.time.events.add(Phaser.Timer.SECOND * 2, function()
                 {
-                    sounds['findH'].play();
-                    instructor.play('talk');
-                    balloon.frame = 33;
-                    keyboardKeysMap.get('h').play('blink');
-                    textArea.destroy();
+                    warmupHead.play('talk');
+                    moveDownLeft = true;
+                    sounds['findKomma'].play();
+                    addBalloontext('Rabbit! Finndu nú stafinn c á lyklaborðinu',24);
+                    game.time.events.add(Phaser.Timer.SECOND * 1, function(){
+                            //balloon.frame = 10;
+                            keyboardKeysMap.get(',').play('blink');
+                            textArea.destroy();
+                        }, this).autoDestroy = true;
                 });
-            }
-        });
-    });
-
-    sounds['findH'].onStop.addOnce(function()
-    { 
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
-        stopWarmupHeadTalk(); 
-
-        game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {
-            if(warmUps[6])
-            {
-                instructor.play('talk');
-                balloon.frame = 35;
-                sounds['typingH'].play();
-                keyboardKeysMap.get('h').play('blink');
-                rightHand.play('type');
             }
         });
      });
 
-    
-    sounds['typingH'].onStop.addOnce(function()
+     sounds['findKomma'].onStop.addOnce(function()
+     {
+        moveDownLeft = false;
+        stopWarmupHeadTalk(); 
+        game.time.events.add(Phaser.Timer.SECOND * 2, function()
+        {                  
+            if(warmUps[6])
+            {
+                warmupHead.play('talk');
+                rightHand.play(',');
+                addBalloontext('Þú notar vísifingur haegri handar til að skrifa c',24);
+                sounds['langKomma'].play();
+            }
+            
+                            
+        }, this).autoDestroy = true;
+     });
+
+     sounds['langKomma'].onStop.addOnce(function()
+     {
+         leftHand.animations.stop();
+         leftHand.frame = 0;
+         stopWarmupHeadTalk(); 
+         game.time.events.add(Phaser.Timer.SECOND * 2, function()
+         {                  
+             if(warmUps[6])
+             {
+                 warmupHead.play('talk');
+                 addBalloontext('Skrifaðu c',24);
+                 sounds['skrifKomma'].play();
+                 // Display the letter in the textArea
+                 addWarmUpTextArea(',', 100, '#000000');
+             }
+             
+                             
+         }, this).autoDestroy = true;
+     });
+
+     sounds['skrifKomma'].onStop.addOnce(function()
     { 
-        //Make Maggi stop moving his mouth in the 2 second pause between animations 
         stopWarmupHeadTalk(); 
 
-        game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {
-            if(warmUps[6])
-                {
-                    instructor.play('talk');
-                    balloon.frame = 36;
-                    sounds['typeH'].play();
-                    keyboardKeysMap.get('h').play('blink');
-                    // Display the letter in the textArea
-                    addWarmUpTextArea('h', 150, '#000000');
-                }
-        });
-    });
-
-    sounds['typeH'].onStop.addOnce(function()
-    { 
-        stopInstructorTalk();
-        
         game.input.keyboard.start();
         game.input.keyboard.addCallbacks(this, null, null, function(char)
         {    
-            if(char === 'h')
+            if(char === ',')
             {
                 game.input.keyboard.stop();
                 textArea.destroy();
+
                 // Display the letter in the textArea
-                addWarmUpTextArea('h', 150, '#00ff00');
-                game.time.events.add(Phaser.Timer.SECOND * 1, function()
+                addWarmUpTextArea(',', 100, '#00ff00');
+
+                game.time.events.add(Phaser.Timer.SECOND * 2, function()
                 {
+                    warmupHead.play('talk');
+                    sounds['finalKomma'].play();
+                    warmUps[6] = false;
                     Assignment(assignmentNr, exerciseNr);
+                    textArea.destroy();
                 });
             }
         });
-    });     
+     });
 
-    sounds['handsEH'].play();
-    instructor.play('talk');
+    sounds['byrjunKomma'].play();
+    warmupHead.play('talk');
 }
 
 //The soundclips are played in the following order: handsIG, findI, typingI, typeI, gjIG1, findG, typingG, typeG, gjIG2
 function WarmUpIG(assignmentNr, exerciseNr)
 {
     warmUps[7] = true;
-
+    
     initGame();
 
     loadBackground(assignmentNr);
@@ -2329,194 +2629,87 @@ function WarmUpIG(assignmentNr, exerciseNr)
 
 //The soundclips are played in the following order: handsBN, findB, typingB, typeB, gjBN1, findN, typingN, typeN, gjBN2
 function WarmUpBN(assignmentNr, exerciseNr){
+    //Set warmUps[0] to true so that all the callBacks here work while in the warmup
+    console.log('sfsfs');
+    
     warmUps[8] = true;
     initGame();
-
+    
     loadBackground(assignmentNr);
-    addSkipButton(assignmentNr, exerciseNr,  Assignment);
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
-    instructor = game.add.sprite(785, 100, 'fish', 0);
-    instructor.scale.setTo(0.5);
-    instructor.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
+    //Add keyboard
+    loadKeyboard(assignmentNr);
 
-    loadKeyboard(assignmentNr, exerciseNr);
+    //Add the image and talking animation of the instructor
+    warmupHead = game.add.sprite(900, 350, 'instructorMarglytta', 0);
+    warmupHead.animations.add('talk', [0, 1, 0, 1, 1, 0], 4, true);
+    warmupHead.scale.setTo(0.8);
+    warmupHead.anchor.setTo(0.75, 1);
 
-    leftHand = game.add.sprite(210, 700, 'hands', 9);
-    leftHand.animations.add('type', [9, 10, 9, 10, 9, 10, 9], 2, false); 
-    leftHand.scale.setTo(1.1);
-
-    rightHand = game.add.sprite(470, 700, 'hands', 0);
-    rightHand.animations.add('type', [0, 3, 0, 3, 0, 3, 0], 2, false);
-    rightHand.scale.setTo(1.1);
-
-    balloon = game.add.sprite(475, 5, 'balloonSprite', 47);
-    balloon.scale.setTo(0.9);
-
+    //Bætum við tökkum
     addMuteButton();
     addExitButton();
+    
+    warmupHead.play('talk');
+    sounds['findLTextar'].play();
+    //Add the speech bubble with the correct text
+    addBalloontext('Settu nú puttana á vinstri hendi á rétta lykla',14);
+    //Add the left hand to the game so that it starts moving from below the visible canvas to the A, S, D and F keys.
+    leftHand = game.add.sprite(75, 700, 'lHand', 0);
+    leftHand.scale.setTo(1.1);  
+    //warmupKeys.play('jklæBlink');
+    keyboardKeysMap.get('a').play('blink');
+    keyboardKeysMap.get('s').play('blink');
+    keyboardKeysMap.get('d').play('blink');
+    keyboardKeysMap.get('f').play('blink');
 
-    sounds['handsBN'].onStop.addOnce(function()
-    { 
-        stopInstructorTalk();
-        
-        game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {
-            if(warmUps[8])
-            {
-                instructor.play('talk');
-                keyboardKeysMap.get('b').play('blink');
-                sounds['findB'].play();
-                balloon.frame = 49;
-            }
-        }, this).autoDestroy = true;  
-    }, this);
-
-    sounds['findB'].onStop.addOnce(function()
-    { 
-        stopInstructorTalk();
-        
-        game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {         
-            if(warmUps[8])
-            {
-                instructor.play('talk');
-                balloon.frame = 50;
-                sounds['typingB'].play();
-                leftHand.play('type');
-            }                        
-        }, this).autoDestroy = true;  
-    }, this);
-
-    sounds['typingB'].onStop.addOnce(function()
-    { 
-        stopInstructorTalk();
-
-        game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {                  
-            if(warmUps[8])
-            {
-                instructor.play('talk');
-                balloon.frame = 51;
-                sounds['typeB'].play();
-                // Display the letter in the textArea
-                addWarmUpTextArea('b', 150, '#000000');
-                keyboardKeysMap.get('b').play('blink');
-            }            
-        }, this).autoDestroy = true;
-    });
-
-    sounds['typeB'].onStop.addOnce(function()
-    {  
-        stopInstructorTalk();
-        
-        game.input.keyboard.start();
-        game.input.keyboard.addCallbacks(this, null, null, function(char)
-        {    
-            if(char === 'b' && warmUps[8])
-            {
-                game.input.keyboard.stop();
-                textArea.destroy();
-                // Display the letter in the textArea
-                addWarmUpTextArea('b', 150, '#00ff00');
-                game.time.events.add(Phaser.Timer.SECOND * 2, function()
+     //fogj2 is the soundclip where he says "Finndu stafina J, K, L og Æ"
+     sounds['findLTextar'].onStop.addOnce(function()
+     {
+            //Make Maggi stop moving his mouth in the 2 second pause between animations 
+            stopWarmupHeadTalk();
+            //Pause for 2 seconds, then play the soundclip "Finndu stafina F og J" and make both F and J blink
+            game.time.events.add(Phaser.Timer.SECOND * 2, function()
+            {          
+                //Make Maggi talk, blink both F and J, set correct text in speech bubble and play soundclip
+                if(warmUps[8])
                 {
-                    instructor.play('talk');
-                    balloon.frame = 52;
-                    sounds['gjBN1'].play();
-                    textArea.destroy();
-                });
-            }
-        });
-    });
+                sounds['findRTextar'].play();
+                    warmupHead.play('talk');
+                    addBalloontext('Settu nú puttana á hægri hendi á rétta lykla',14);
+                    keyboardKeysMap.get('j').play('blink');
+                    keyboardKeysMap.get('k').play('blink');
+                    keyboardKeysMap.get('l').play('blink');
+                    keyboardKeysMap.get('æ').play('blink');
+                    rightHand = game.add.sprite(405, 700, 'rHand', 0);
+                    rightHand.scale.setTo(1.1);
+                }           
+            }, this).autoDestroy = true;  
+    }, this);   
 
-     sounds['gjBN1'].onStop.addOnce(function()
-     { 
-        stopInstructorTalk();
-        
-        game.time.events.add(Phaser.Timer.SECOND * 1, function()
-        {
-            if(warmUps[8])
-            {
-                instructor.play('talk');
-                balloon.frame = 52;
-                sounds['findN'].play();
-                keyboardKeysMap.get('n').play('blink');
-            }
-        });
-     });
+    //fogj2 is the soundclip where he says "Finndu stafina J, K, L og Æ"
+     sounds['findRTextar'].onStop.addOnce(function()
+     {
+            //Make Maggi stop moving his mouth in the 2 second pause between animations 
+            stopWarmupHeadTalk();
+            //Pause for 2 seconds, then play the soundclip "Finndu stafina F og J" and make both F and J blink
+            game.time.events.add(Phaser.Timer.SECOND * 2, function()
+            {          
+                //Make Maggi talk, blink both F and J, set correct text in speech bubble and play soundclip
+                if(warmUps[8])
+                {
+                    warmupHead.play('talk');
+                    addBalloontext('Uúúú….flott! Nú skaltu velja verkefni. Thad er svaka snidugt ad byrja thar sem thu haettir sidast',14);
+                    Assignment(assignmentNr,exerciseNr);
+                    sounds['finalTextar'].play();
+                }           
+            }, this).autoDestroy = true;  
+    }, this);
 
-     sounds['findN'].onStop.addOnce(function()
-     { 
-        stopInstructorTalk();
-        
-        game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {
-            if(warmUps[8])
-            {
-                instructor.play('talk');
-                balloon.frame = 53;
-                sounds['typingN'].play();
-                rightHand.play('type');
-            }
-        });
-     });
-
-     sounds['typingN'].onStop.addOnce(function()
-     { 
-        stopInstructorTalk();
-        
-        game.time.events.add(Phaser.Timer.SECOND * 2, function()
-        {
-            if(warmUps[8])
-            {
-                instructor.play('talk');
-                balloon.frame = 54;
-                sounds['typeN'].play();
-                keyboardKeysMap.get('n').play('blink');
-                // Display the letter in the textArea
-                addWarmUpTextArea('n', 150, '#000000');
-            }
-        });
-     });
-
-     sounds['typeN'].onStop.addOnce(function()
-     { 
-        stopInstructorTalk();
-
-        game.input.keyboard.start();
-        game.input.keyboard.addCallbacks(this, null, null, function(char)
-        {
-            if(char === 'n' && warmUps[8])
-            {
-                game.input.keyboard.stop();
-                textArea.destroy();
-                // Display the letter in the textArea
-                addWarmUpTextArea('n', 150, '#00ff00');
-                game.time.events.add(Phaser.Timer.SECOND * 2, function()
-                {  
-                    instructor.play('talk');
-                    sounds['gjBN2'].play();
-                });
-            }
-        });
-     });
-
-     sounds['gjBN2'].onStop.addOnce(function()
-     { 
-        stopInstructorTalk();
-
-        game.time.events.add(Phaser.Timer.SECOND * 1, function()
-        {
-            if(warmUps[8])
-            {
-                Assignment(assignmentNr, exerciseNr);
-            }
-        });
-     });
-
-    sounds['handsBN'].play();
-    instructor.play('talk');
+    //Play soundclip byrjunUpprifjun
+    sounds['findLTextar'].play();
+    warmupHead.play('talk');
 }
 
 //The soundclips are played in the following order: handsRO, findR, typingR, typeR, findO, typingO, typeO
@@ -3010,12 +3203,11 @@ function loadAbout()
     exitBtn.events.onInputOut.add(function(){ exitBtn.frame = 0;});
     exitBtn.events.onInputDown.add(function(){ exitBtn.destroy(); aboutWindow.destroy(); });
 }
-
 //Array which stores all the warmUp functions and are called from the Instructions function with the assignmentNr variable
 var warmUpFunctions =
 [
     warmupUpprifjun,
-    WarmUpDK,
+    warmupTM,
     WarmUpSL,
     WarmUpAAE,
     WarmUpALL1,
@@ -3027,4 +3219,3 @@ var warmUpFunctions =
     WarmUpBRODD,
     WarmUpHA
 ];
-
