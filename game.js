@@ -62,13 +62,14 @@ var warmUps = [ false, false, false, false, false, false, false, false, false, f
 var nextPage = [false, false, false, false, false, false, false, false, false];
 var preloadBar;
 var moreExerSoundPlay = false;
-
+var distXSpider = 0.7;
 
 function create() 
 {
     //Objects that need to be created at first to be moved later by the Update() function
     balloon = game.add.sprite(100, 100, 'balloonSprite', 0);
     clouds = game.add.image(0, 10,'clouds');
+    spider = game.add.image(0, 10,'spider');
     fish1 = game.add.sprite(50, 50, 'fishes', 2);
     fish2 = game.add.sprite(50, 150, 'fishes', 1);
     instructorMaggi = game.add.sprite(500, 150, 'instructorMaggi', 0);
@@ -114,7 +115,7 @@ function update()
 
     //The clouds will constantly move to the right, although the clouds are not visible when not inside the
     //Allir heimalyklar 1 and 2.
-    clouds.x += 1;
+    clouds.x += 0.3;
 
     //The clouds position will reset at a certain position and keep moving from there, making the illusion that
     //they are continiously moving to the right 
@@ -123,6 +124,11 @@ function update()
         clouds.x = -995;
     }
 
+    if(spider.x > 50){
+    distXSpider -= 0.0001;
+    spider.x -= distXSpider;
+    spider.y += distXSpider/6;
+    }
     //The orange fish in "E og H" and "I og G" assignments moves at different speeds depending on which direction
     //he is heading.
     if(fish1.frame === 0)
@@ -381,7 +387,7 @@ function Assignment(assignmentNr, exerciseNr)
 
     // Add the correct instructor with a talking animation
     var instructor = addAssignmentInstructor(assignmentNr);
-    instructor.play('talk');
+    
     // Load keyboard and animations which make the keys blink
     loadKeyboard(assignmentNr, exerciseNr);
 
@@ -416,7 +422,7 @@ function Assignment(assignmentNr, exerciseNr)
         
         // instructionText.anchor.set(0.5);
         addFinalSound(assignmentNr);
-        //instructor.play('talk');
+        instructor.play('talk');
     }
     addMoreExerButton(assignmentNr,exerciseNr);
     //Add the exit button to the canvas so we can return to the home page
@@ -443,6 +449,21 @@ function Assignment(assignmentNr, exerciseNr)
         complimentSound.onStop.addOnce(function(){ stopInstructorTalk(); });
         complimentSound.play();
         comingFromExercise = false;
+    }
+    if(exerciseNr >= 15){
+        if(nextPage[assignmentNr]){
+        }else{
+            nextPage[assignmentNr] = true;
+            moreExerSoundPlay = true;
+            Assignment(assignmentNr,exerciseNr);
+        }
+    }else{
+        if(nextPage[assignmentNr]){
+            nextPage[assignmentNr] = false;
+            moreExerSoundPlay = false;
+            Assignment(assignmentNr,exerciseNr);
+        }else{
+        }
     }
 }
 
@@ -831,12 +852,17 @@ function getSpriteName(assignmentNumb){
 function addLogoAndAssignmentID(assignmentNr, exerciseNr)
 {
     //Add the Fingrafimi logo
-    logoS = game.add.button(25, 25, 'logoS');
+    logoS = game.add.button(25, 25, 'logoS'); 
+    
     //Add the click event that loads the home page
     logoS.events.onInputDown.add(function(){quitExercise(); loadHomePage();});
 
     //Add the assignment button
-    assignmentBtn = game.add.button(60, 90, getSpriteName(assignmentNr));
+    if(assignmentNr === 3){
+        assignmentBtn = game.add.button(60, 35, getSpriteName(assignmentNr));
+    }else{
+        assignmentBtn = game.add.button(60, 90, getSpriteName(assignmentNr));
+    }
     assignmentBtn.frame = 0;
     //If mouse hovers over the arrow it will turn red
     assignmentBtn.events.onInputOver.add(function(){ assignmentBtn.frame = 1; }, this);
@@ -1028,8 +1054,8 @@ function loadBackground(assignmentNr)
     {
         //Add farm background
         background = game.add.image(game.world.centerX, game.world.centerY, 'ledurblakaBakgrunnur');
-        //Add clouds which will be constantly moving to the right
-        clouds = game.add.image(-1000, 10,'clouds');
+        //Move spider
+        spider = game.add.image(750, 300, 'spider');
     }
     else if(assignmentNr === 1 || assignmentNr === 2)
     {
@@ -1039,6 +1065,9 @@ function loadBackground(assignmentNr)
         fish1 = game.add.sprite(800, 35, 'fishes', 2);
         //Add green fish which will move from end to end then turn around repeatedly
         fish2 = game.add.sprite(25, 175, 'fishes', 1);
+        //Add clouds which will be constantly moving to the right
+        clouds = game.add.image(-1000, -10,'clouds');
+
     }
     else if(assignmentNr === 3 || assignmentNr === 4)
     {
@@ -1266,14 +1295,31 @@ function addMoreExerButton(assignmentNr, exerciseNr){
 
     btnMoreExer.events.onInputDown.add(function(){ 
         if(nextPage[assignmentNr]){
+            var nextFirstPage = 0;
             nextPage[assignmentNr] = false;
-            Assignment(assignmentNr,exerciseNr);
+            for(var i = 0; i < 15; i++){
+                if(!exercisesFinished[assignmentNr][i]){
+                    nextFirstPage = i;
+                    break;
+                }
+            }
+            console.log(i);
+            
+            Assignment(assignmentNr,i);
         } else {
+            var nextSecondPage = 15;
             nextPage[assignmentNr] = true;
             moreExerSoundPlay = true;
-            Assignment(assignmentNr,exerciseNr);
+            for(var i = 15; i < 30; i++){
+                if(!exercisesFinished[assignmentNr][i]){
+                    nextSecondPage = i;
+                    break;
+                }
+            }
+            Assignment(assignmentNr,i);
         }
      });
+
     //Frame 0 is a blue arrow
     btnMoreExer.frame = 0;
     //If mouse hovers over the arrow it will turn red
@@ -1705,7 +1751,7 @@ function warmupDogV(assignmentNr, exerciseNr)
             {
                 warmupHead.play('talk');
                 leftHand.play('v');
-                addBalloontext('Þú notar vísifingur haegri handar til að skrifa m',16);
+                addBalloontext('Þú notar vísifingur vinstri handar til að skrifa v',16);
                 sounds['visVV'].play();
             }
             

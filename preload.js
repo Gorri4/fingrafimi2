@@ -18,7 +18,8 @@ function preload()
     
     // // game.load.image('instructionBg',            'Assets/Images/Backgrounds/instructionBackground.png');
     // // game.load.image('farm',                     'Assets/Images/Backgrounds/farm.png');
-    // // game.load.image('clouds',                   'Assets/Images/Backgrounds/clouds.png');
+     game.load.image('clouds',                   'Assets/Images/Backgrounds/clouds.png');
+     game.load.image('spider',                   'Assets/myndir/Backgrounds/spider.png');
     // // game.load.image('box',                      'Assets/Images/Backgrounds/box.png');
     // // game.load.image('stage',                    'Assets/Images/Backgrounds/svid.png');
     // // game.load.image('ocean',                    'Assets/Images/Backgrounds/sandur.png');
@@ -77,7 +78,7 @@ function preload()
     game.load.image('logoL',                    'Assets/myndir/titill.png');
     game.load.image('teacher',                  'Assets/Images/Buttons/Global/teacher.png');
     game.load.image('mat',                      'Assets/Images/Buttons/Global/mat.png');
-    game.load.image('aboutButton',                    'Assets/myndir/Buttons/aboutButton.png');
+    game.load.image('aboutButton',              'Assets/myndir/Buttons/aboutButton.png');
     game.load.image('aboutInfo',                'Assets/myndir/Buttons/Global/about.png');
     game.load.spritesheet('exit',               'Assets/Images/Buttons/Global/xSprite.png', 32, 32);
     game.load.spritesheet('sound',              'Assets/Images/Buttons/Global/soundSprite.png', 100, 96);
@@ -90,17 +91,17 @@ function preload()
     game.load.spritesheet('pogu',               'Assets/myndir/Buttons/Assignments/pogu_forsida.png',125,100);
     game.load.spritesheet('þogy',               'Assets/myndir/Buttons/Assignments/þogy_forsida.png',145,55);
     game.load.spritesheet('oogc',               'Assets/myndir/Buttons/Assignments/ogoc_forsida.png',127,80);
-    game.load.spritesheet('moreExMarg',               'Assets/myndir/Buttons/moreExMarg.png',116,80);
-    game.load.spritesheet('moreExLedur',               'Assets/myndir/Buttons/moreExLedur.png',116,80);
-    game.load.spritesheet('moreExFroskur',               'Assets/myndir/Buttons/moreExFroskur.png',116,80);
-    game.load.spritesheet('moreExByfluga',               'Assets/myndir/Buttons/moreExByfluga.png',116,80);
+    game.load.spritesheet('moreExMarg',         'Assets/myndir/Buttons/moreExMarg.png',116,80);
+    game.load.spritesheet('moreExLedur',        'Assets/myndir/Buttons/moreExLedur.png',116,80);
+    game.load.spritesheet('moreExFroskur',      'Assets/myndir/Buttons/moreExFroskur.png',116,80);
+    game.load.spritesheet('moreExByfluga',      'Assets/myndir/Buttons/moreExByfluga.png',116,80);
     // game.load.image('eh',                       'Assets/Images/Buttons/Assignments/eogh.png');
     // game.load.image('ig',                       'Assets/Images/Buttons/Assignments/iogg.png');
-    game.load.spritesheet('texta',              'Assets/myndir/Buttons/Assignments/texta_forsida.png',130,80);
+    game.load.spritesheet('texta',              'Assets/myndir/Buttons/Assignments/texta_forsida.png',130,65);
     // game.load.image('ro',                       'Assets/Images/Buttons/Assignments/rogo.png');
     game.load.spritesheet('broddstafir',        'Assets/myndir/Buttons/Assignments/broddstafir_forsida.png',163,60);
     game.load.spritesheet('bandogspurn',        'Assets/myndir/Buttons/Assignments/bandogspurn_forsida.png',120,65);
-    game.load.spritesheet('btnSprite',          'Assets/Images/Buttons/Assignments/buttons.png', 124, 81);
+    // game.load.spritesheet('btnSprite',          'Assets/Images/Buttons/Assignments/buttons.png', 124, 81);
 
     // Images for exercise buttons
     // game.load.spritesheet('mus',                'Assets/Images/Buttons/Exercises/mus.png', 110, 70);
@@ -181,7 +182,7 @@ function preload()
 
     // =================================== Audio ===================================
     //Audio for when entering game
-    game.load.audio('intro',            'Assets/Sounds/Inngangur.mp3');
+    game.load.audio('intro',            'Assets/hljod/audio/Alfur_01.mp3');
 
     //Audio for when a wrong key is pressed in an exercise
     game.load.audio('wrongSound',      'Assets/Sounds/wrongSound.mp3');
