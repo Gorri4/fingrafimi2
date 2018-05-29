@@ -72,6 +72,20 @@ function createSounds(){
     sounds['skrifKomma'] =     game.add.audio('skrifKomma');
     sounds['pressE'] =      game.add.audio('pressE');
 
+    sounds['upphafSpurn'] =      game.add.audio('upphafSpurn');
+    sounds['findStrik'] =       game.add.audio('findStrik');
+    sounds['lilStrik'] =       game.add.audio('lilStrik');
+    sounds['skrifStrik'] =     game.add.audio('skrifStrik');
+    sounds['findPunktur'] =      game.add.audio('findPunktur');
+    sounds['baugPunktur'] =       game.add.audio('baugPunktur');
+    sounds['skrifPunktur'] =       game.add.audio('skrifPunktur');
+    sounds['findSpurn'] =     game.add.audio('findSpurn');
+    sounds['shiftSpurn'] =      game.add.audio('shiftSpurn');
+    sounds['shiftSpurn2'] =       game.add.audio('shiftSpurn2');
+    sounds['skrifSpurn'] =     game.add.audio('skrifSpurn');
+    sounds['finalSpurn'] =      game.add.audio('finalSpurn');
+
+
     sounds['byrjunTextar'] =      game.add.audio('byrjunTextar');
     sounds['findLTextar'] =       game.add.audio('findLTextar');
     sounds['findRTextar'] =       game.add.audio('findRTextar');
@@ -102,6 +116,8 @@ function createSounds(){
     sounds['typingH'] =     game.add.audio('typingH');
     sounds['typeH'] =       game.add.audio('typeH');
     sounds['finalEH'] =     game.add.audio('finalEH');
+
+    
 
     //Sounds initialized in map regarding the I og G assignment
     sounds['handsIG'] =     game.add.audio('handsIG');
@@ -174,52 +190,58 @@ function addFinalSound(assignmentNr)
     switch(assignmentNr)
     {
         case 0:
+        if(nextPage[assignmentNr] === false){
             sounds['endirUpprifjun'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
             sounds['endirUpprifjun'].play();
+        }
             break;
         case 1:
+        if(nextPage[assignmentNr] === false){
             sounds['finalTM'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
             sounds['finalTM'].play();
+        }
             break;
         case 2:
+        if(nextPage[assignmentNr] === false){
             sounds['finalDV'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
             sounds['finalSL'].play();
+        }
             break;
         case 3:
+        if(nextPage[assignmentNr] === false){
             sounds['finalPU'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
             sounds['finalPU'].play();
+        }
             break;
         case 4:
+        if(nextPage[assignmentNr] === false){
             sounds['finalÞY'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
             sounds['finalÞY'].play();
+        }
             break;
         case 5:
+        if(nextPage[assignmentNr] === false){
             sounds['finalÖC'].onStop.addOnce(function(){ stopInstructorTalk(); }, this);
             sounds['finalÖC'].play();
+        }
             break;
         case 6:
+        if(nextPage[assignmentNr] === false){
             sounds['finalKomma'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
             sounds['finalKomma'].play();
+        }
             break;
         case 7:
-            sounds['finalTextar'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
-            sounds['finalTextar'].play();
+        if(nextPage[assignmentNr] === false){
+            sounds['finalSpurn'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
+            sounds['finalSpurn'].play();
+        }
             break;
         case 8:
+        if(nextPage[assignmentNr] === false){
             sounds['finalTextar'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
             sounds['finalTextar'].play();
-            break;
-        case 9:
-            sounds['finalRO'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
-            sounds['finalRO'].play();
-            break;
-        case 10:
-            sounds['finalBRODD'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
-            sounds['finalBRODD'].play();
-            break;
-        case 11:
-            sounds['finalHA'].onStop.addOnce(function(){  stopInstructorTalk(); }, this);
-            sounds['finalHA'].play();
+        }
             break;
     }
 }
@@ -278,49 +300,88 @@ function addInstructionSound(assignmentNr)
     }
 }
 
-
 //Returns the correct audio to play for when you have finished an exercises in an assignment
-function addComplimentSound(assignmentNr)
+function addComplimentSound(assignmentNr,exerciseNr)
 {
     if(assignmentNr === 0)
     {
-        return this.game.add.sound('complimentFJ');
+        return game.add.audio(hrosMarglytta[exerciseNr]);
     }
     else if(assignmentNr === 1)
     {
-        return game.add.audio('complimentDK');
+        return game.add.audio(hrosFroskur[exerciseNr]);
     }
     else if(assignmentNr === 2)
     {
-        return game.add.audio('complimentSL');
+        return game.add.audio(hrosFroskur[exerciseNr]);
     }
     else if(assignmentNr === 3)
     {
-        return game.add.audio('complimentAAE');
+        return game.add.audio(hrosByfluga[exerciseNr]);
     }
     else if(assignmentNr === 4)
     {
-        return game.add.audio('complimentALL1');
+        return game.add.audio(hrosByfluga[exerciseNr]);
     }
     else if(assignmentNr === 5)
     {
-        return game.add.audio('complimentALL2');
+        return game.add.audio(hrosLedur[exerciseNr]);
     }
     else if(assignmentNr === 6)
     {
-        return game.add.audio('complimentEH');
+        return game.add.audio(hrosLedur[exerciseNr]);
     }
     else if(assignmentNr === 7)
     {
-        return game.add.audio('complimentIG');
+        return game.add.audio(hrosMarglytta[exerciseNr]);
     }
-    else if(assignmentNr === 8 || assignmentNr === 9)
+    else if(assignmentNr === 8)
     {
-        return game.add.audio('complimentBN');
+        return game.add.audio(hrosMarglytta[exerciseNr]);
     }
-    else if(assignmentNr === 10 || assignmentNr === 11)
+}
+
+function addMoreExerSound(assignmentNr){
+    if(assignmentNr === 0)
     {
-        return game.add.audio('complimentBRODD');
+        console.log('hingad');
+        
+        return game.add.audio('UpprifjunFleiri');
+    }
+    else if(assignmentNr === 1)
+    {
+        return game.add.audio('TogMFleiri');
+    }
+    else if(assignmentNr === 2)
+    {
+        return game.add.audio('DogVFleiri');
+    }
+    else if(assignmentNr === 3)
+    {
+        return game.add.audio('PogUFleiri');
+    }
+    else if(assignmentNr === 4)
+    {
+        return game.add.audio('ÞogYFleiri');
+    }
+    else if(assignmentNr === 5)
+    {
+        return game.add.audio('OogCFleiri');
+    }
+    else if(assignmentNr === 6)
+    {
+        return game.add.audio('BroddFleiri');
+    }
+    else if(assignmentNr === 7)
+    {
+        return game.add.audio('SpurnFleiri');
+    }
+    else if(assignmentNr === 8)
+    {
+        return game.add.audio('TextiFleiri');
+    }
+    else {
+        return game.add.audio('TextiFleiri');
     }
 }
 
@@ -329,42 +390,38 @@ function addFinishSound(assignmentNr)
 {
     if(assignmentNr === 0)
     {
-        return game.add.audio('finishFJ');
+        return game.add.audio('finishUpprifjun');
     }
     else if(assignmentNr === 1)
     {
-        return game.add.audio('finishDK');
+        return game.add.audio('finishTogM');
     }
     else if(assignmentNr === 2)
     {
-        return game.add.audio('finishSL');
+        return game.add.audio('finishDogV');
     }
     else if(assignmentNr === 3)
     {
-        return game.add.audio('finishAAE');
+        return game.add.audio('finishPogU');
     }
     else if(assignmentNr === 4)
     {
-        return game.add.audio('finishALL1');
+        return game.add.audio('finishÞogY');
     }
     else if(assignmentNr === 5)
     {
-        return game.add.audio('finishALL2');
+        return game.add.audio('finishOogC');
     }
     else if(assignmentNr === 6)
     {
-        return game.add.audio('finishEH');
+        return game.add.audio('finishBrodd');
     }
     else if(assignmentNr === 7)
     {
-        return game.add.audio('finishIG');
+        return game.add.audio('finishSpurn');
     }
-    else if(assignmentNr === 8 || assignmentNr === 9)
+    else if(assignmentNr === 8)
     {
-        return game.add.audio('finishBN');
-    }
-    else if(assignmentNr === 10 || assignmentNr === 11)
-    {
-        return game.add.audio('finishBRODD');
+        return game.add.audio('finishTexti');
     }
 }
