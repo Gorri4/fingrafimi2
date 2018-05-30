@@ -1,6 +1,6 @@
 /*jshint sub:true*/
 
-// Entering each assignment ("F og J" or "D og K") is a sequence of functions which we have named the following:
+// Entering each assignment is a sequence of functions which we have named the following:
 // Instruction: The first animation when you choose an assignment
 // WarmUp: The rest of the animations which happen when you press the arrow ("Skip button") after the first animation
 // Assignment: The main screen of an assignment. Here you can choose different exercises, once an exercise is selected
@@ -45,7 +45,6 @@ var balloon;
 var clouds;
 var fish1;
 var fish2;
-var instructorMaggi;
 var leftHand;
 var rightHand;
 var warmupHead;
@@ -70,13 +69,12 @@ function create()
     balloon = game.add.sprite(100, 100, 'balloonSprite', 0);
     clouds = game.add.image(0, 10,'clouds');
     spider = game.add.image(0, 10,'spider');
-    fish1 = game.add.sprite(50, 50, 'fishes', 2);
-    fish2 = game.add.sprite(50, 150, 'fishes', 1);
-    instructorMaggi = game.add.sprite(500, 150, 'instructorMaggi', 0);
+    solBak = game.add.sprite(0,10,'solBak');
+    bee = game.add.image(0,10,'bee');
     intro = game.add.audio('intro');
     leftHand = game.add.sprite(75, 700, 'lHand', 0);
     rightHand = game.add.sprite(205, 700, 'rHand', 0);
-    warmupHead = game.add.sprite(1000, 210, 'warmupHead', 0);
+    warmupHead = game.add.sprite(1000, 210, 'instructorMarglytta', 0);
 
     createSounds();
 
@@ -84,16 +82,20 @@ function create()
     loadHomePage();    
 }
 
+function animateBee(){
+    if(bee.x > 500){
+        bee.x -= 1;
+        bee.y -= 0.2;
+    }
+    if(bee.x < 500 || bee.x === 500){
+        bee.x -= 1;
+        bee.y += 0.5;
+    }
+}
+
 //This function is called upon and repaints the canvas constantly, thus the actions in here are only called upon at certain times
 function update()
 {
-        //Maggi minnkur peeks from the right side of the screen, angle of image at start is 0 and will stop rotating at -46. It will also
-        //slightly move the image to the left.
-        if(warmupHead.angle > -46 && warmupHead.x > 1015)
-        {
-            warmupHead.x -= 2;
-            warmupHead.angle -= 1;
-        }
 
         //This will make the left and right hand move from below the visible part of the canvas to their correct positions above the keys
         if(leftHand.y > 303 && balloon.visible === true && moveDownLeft===false)
@@ -117,6 +119,9 @@ function update()
     //Allir heimalyklar 1 and 2.
     clouds.x += 0.3;
 
+    //Animate moving bee
+    animateBee();
+
     //The clouds position will reset at a certain position and keep moving from there, making the illusion that
     //they are continiously moving to the right 
     if(clouds.x === -129)
@@ -124,56 +129,12 @@ function update()
         clouds.x = -995;
     }
 
+    //Animate moving spider
     if(spider.x > 50){
-    distXSpider -= 0.0001;
-    spider.x -= distXSpider;
-    spider.y += distXSpider/6;
+        distXSpider -= 0.0001;
+        spider.x -= distXSpider;
+        spider.y += distXSpider/6;
     }
-    //The orange fish in "E og H" and "I og G" assignments moves at different speeds depending on which direction
-    //he is heading.
-    if(fish1.frame === 0)
-    {
-        fish1.x += 1.5;
-    }
-    else
-    {
-        fish1.x -= 1;
-    }
-
-    //If the orange fish reaches a certain point on the right side of the canvas, we switch frames in the sprite
-    //which makes the fish face the other direction, by switching frames he will move in the opposite direction too
-    if(fish1.x >= 850)
-    {
-        fish1.frame = 2;
-    }
-    if(fish1.x <= 15)
-    {
-        fish1.frame = 0;
-    }
-
-    //The green fish in "E og H" and "I og G" assignments moves at different speeds depending on which direction
-    //he is heading.
-    if(fish2.frame === 1)
-    {
-        fish2.x += 2;
-    }
-    else
-    {
-        fish2.x -= 1;
-    }
-
-    //If the green fish reaches a certain point on the right side of the canvas, we switch frames in the sprite
-    //which makes the fish face the other direction, by switching frames he will move in the opposite direction too
-    if(fish2.x >= 850)
-    {
-        fish2.frame = 3;
-    }
-    if(fish2.x <= 25)
-    {
-        fish2.frame = 1;
-    }
-
-    
 }
 
 // loadHomePage initializes and displays the necessary items for the Home Page of the game where the user can
@@ -194,104 +155,63 @@ function loadHomePage()
     //Fingrafimi logo loaded
     var logoL = game.add.image(0, 0, 'logoL');
 
-    // //Instructor Maggi Minnkur loaded and the animation of moving his mouth to make him talk.
-    // var instructorMaggi = game.add.sprite(500, 150, 'instructorMaggi', 0);
-    // instructorMaggi.scale.setTo(0.8);
-    // instructorMaggi.animations.add('talk', [0, 1, 0, 1, 1, 0], 6, true);
-
     //Buttons for all assignments added, clicking on them calls on the Instructions function first sending into it
     //the number of the assignment and exercise chosen
     
     var btnUpprifjun = game.add.button(125, 300, 'upprifjun');
     btnUpprifjun.events.onInputDown.add(function(){ Instructions(0, -1); });
-    //Frame 0 is a blue arrow
     btnUpprifjun.frame = 0;
-    //If mouse hovers over the arrow it will turn red
     btnUpprifjun.events.onInputOver.add(function(){ btnUpprifjun.frame = 1; }, this);
-    //If mouse hovers out of the arrow it will turn blue again
     btnUpprifjun.events.onInputOut.add(function(){ btnUpprifjun.frame = 0; }, this);
 
     var btnTogM = game.add.button(165, 420, 'togm');
     btnTogM.events.onInputDown.add(function(){ Instructions(1, -1); });
-    //Frame 0 is a blue arrow
     btnTogM.frame = 0;
-    //If mouse hovers over the arrow it will turn red
     btnTogM.events.onInputOver.add(function(){ btnTogM.frame = 1; }, this);
-    //If mouse hovers out of the arrow it will turn blue again
     btnTogM.events.onInputOut.add(function(){ btnTogM.frame = 0; }, this);
 
     var btnDogV = game.add.button(220, 480, 'dogv');
     btnDogV.events.onInputDown.add(function(){ Instructions(2, -1); });
-     //Frame 0 is a blue arrow
      btnDogV.frame = 0;
-     //If mouse hovers over the arrow it will turn red
      btnDogV.events.onInputOver.add(function(){ btnDogV.frame = 1; }, this);
-     //If mouse hovers out of the arrow it will turn blue again
      btnDogV.events.onInputOut.add(function(){ btnDogV.frame = 0; }, this);
      
     var btnPogU = game.add.button(330, 470, 'pogu');
     btnPogU.events.onInputDown.add(function(){ Instructions(3, -1); });
-    //Frame 0 is a blue arrow
     btnPogU.frame = 0;
-    //If mouse hovers over the arrow it will turn red
     btnPogU.events.onInputOver.add(function(){ btnPogU.frame = 1; }, this);
-    //If mouse hovers out of the arrow it will turn blue again
     btnPogU.events.onInputOut.add(function(){ btnPogU.frame = 0; }, this);
 
     var btnÞogY = game.add.button(450, 515, 'þogy');
     btnÞogY.events.onInputDown.add(function(){ Instructions(4, -1); });
-    //Frame 0 is a blue arrow
     btnÞogY.frame = 0;
-    //If mouse hovers over the arrow it will turn red
     btnÞogY.events.onInputOver.add(function(){ btnÞogY.frame = 1; }, this);
-    //If mouse hovers out of the arrow it will turn blue again
     btnÞogY.events.onInputOut.add(function(){ btnÞogY.frame = 0; }, this);
 
     var btnOogC = game.add.button(540, 460, 'oogc');
     btnOogC.events.onInputDown.add(function(){ Instructions(5, -1); });
-    //Frame 0 is a blue arrow
     btnOogC.frame = 0;
-    //If mouse hovers over the arrow it will turn red
     btnOogC.events.onInputOver.add(function(){ btnOogC.frame = 1; }, this);
-    //If mouse hovers out of the arrow it will turn blue again
     btnOogC.events.onInputOut.add(function(){ btnOogC.frame = 0; }, this);
 
     var btnBroddstafir = game.add.button(560, 410, 'broddstafir');
     btnBroddstafir.events.onInputDown.add(function(){ Instructions(6, -1); });
-    //Frame 0 is a blue arrow
     btnBroddstafir.frame = 0;
-    //If mouse hovers over the arrow it will turn red
     btnBroddstafir.events.onInputOver.add(function(){ btnBroddstafir.frame = 1; }, this);
-    //If mouse hovers out of the arrow it will turn blue again
     btnBroddstafir.events.onInputOut.add(function(){ btnBroddstafir.frame = 0; }, this);
 
     var btnBandogSpurn = game.add.button(145, 365, 'bandogspurn');
     btnBandogSpurn.events.onInputDown.add(function(){ Instructions(7, -1); });
-     //Frame 0 is a blue arrow
      btnBandogSpurn.frame = 0;
-     //If mouse hovers over the arrow it will turn red
      btnBandogSpurn.events.onInputOver.add(function(){ btnBandogSpurn.frame = 1; }, this);
-     //If mouse hovers out of the arrow it will turn blue again
      btnBandogSpurn.events.onInputOut.add(function(){ btnBandogSpurn.frame = 0; }, this);
  
 
     var btnTexta = game.add.button(615, 355, 'texta');
     btnTexta.events.onInputDown.add(function(){ Instructions(8, -1); });
-    //Frame 0 is a blue arrow
     btnTexta.frame = 0;
-    //If mouse hovers over the arrow it will turn red
     btnTexta.events.onInputOver.add(function(){ btnTexta.frame = 1; }, this);
-    //If mouse hovers out of the arrow it will turn blue again
     btnTexta.events.onInputOut.add(function(){ btnTexta.frame = 0; }, this);
-
-    // var btnRo = game.add.button(30, 485, 'ro'); 
-    // btnRo.events.onInputDown.add(function(){ Instructions(9, -1); });
-
-    // var btnBrodd = game.add.button(30, 535, 'broddstafir');
-    // btnBrodd.events.onInputDown.add(function(){ Instructions(10, -1); });
-    
-    // var btnHastafir = game.add.button(30, 605, 'hastafir');
-    // btnHastafir.events.onInputDown.add(function(){ Instructions(11, -1); });
     
     // Turn off keyboard listening events
     game.input.keyboard.stop();
@@ -299,15 +219,8 @@ function loadHomePage()
     //Resets all variables regarding the exercise text
     initTextVariables();
 
-    //Displays the logo from Menntamálastofnun in the botton left corner
-    addLogo(170, 0.5);
-
     //Displays a button which can mute or unmute the sound for the game
     addMuteButton();
-
-    // //Displays a button which when clicked on it will open a teachers manual PDF on the game in a new tab
-    // var btnteacher = game.add.button(830, 610, 'teacher', function() { window.open("http://vefir.nams.is/fingrafimi/fingrafimi_klbtilb.pdf", "_blank");}, this);   
-    // btnteacher.scale.setTo(0.8);
 
     //Displays a button which when clicked on it will open a progress sheet PDF for students in a new tab
     var btnmat = game.add.button(790, 520, 'mat', function() { window.open("https://vefir.mms.is/fingrafimi2/fingrafimi2_matsbl.pdf", "_blank");}, this);    
@@ -320,17 +233,11 @@ function loadHomePage()
     //If this is the first time loadHomePage is loaded then do the following
     if(firstLoad)
     {
-        //Once the intro sound file is finished playing stop the talking animation and the the frame on Maggi minnkur
-        //to 0 which will leave his mouth closed 
-        intro.onStop.addOnce(function(){ instructorMaggi.animations.stop(); instructorMaggi.frame = 0; }, this);
         //Start playing intro audio
         intro.play();
-        //Start animation of Maggi Minnkur talking
-        instructorMaggi.play('talk');
         //Make sure this will not be played again unless browser is refreshed
         firstLoad = false;
     }
-    //loadKeyboard(0);
 }
 
 //Resets all variables regarding the exercise text
@@ -382,9 +289,6 @@ function Assignment(assignmentNr, exerciseNr)
 
     addLogoAndAssignmentID(assignmentNr, exerciseNr);
 
-    //Add logo 
-    addLogo(30, 0.45);
-
     // Add the correct instructor with a talking animation
     var instructor = addAssignmentInstructor(assignmentNr);
     
@@ -411,6 +315,7 @@ function Assignment(assignmentNr, exerciseNr)
             }
         },null);
     }
+
     //If exercise number is less than 0, then we are calling the Assignment function from the WarmUp function, thus
     //we must add the speech bubble for the instructor, play the correct audio and make the instructor talk
     else
@@ -424,6 +329,7 @@ function Assignment(assignmentNr, exerciseNr)
         addFinalSound(assignmentNr);
         instructor.play('talk');
     }
+    //Add button that displays more exercises
     addMoreExerButton(assignmentNr,exerciseNr);
     //Add the exit button to the canvas so we can return to the home page
     addExitButton();
@@ -433,13 +339,13 @@ function Assignment(assignmentNr, exerciseNr)
 
     addExercises(assignmentNr);
 
-    console.log(comingFromExercise);
-
+    //If user pressed more exercises button
     if(moreExerSoundPlay){
         var moreExerSound = addMoreExerSound(assignmentNr);
         moreExerSound.play();
         moreExerSoundPlay = false;
     }
+
     //Simple boolean variable comingFromExercise tells us if we are calling the Assignment function from another Assignment function, this
     //means that we have come from completing an exercise and so we must play the audio that compliments the user when he finishes an exercise
     if(comingFromExercise)
@@ -749,7 +655,7 @@ function findNextExercise(assignmentNr, exerciseNr)
 // Add the mute button to the canvas, this is called upon on all functions, Home Page, Instructions, WarmUps and Assignment
 function addMuteButton()
 {
-    muteBtn = game.add.button(800, 20, 'sound');
+    muteBtn = game.add.button(850, 20, 'sound');
     // Add hover affect
     muteBtn.events.onInputOver.add(function()
     { 
@@ -876,9 +782,6 @@ function addLogoAndAssignmentID(assignmentNr, exerciseNr)
             Assignment(assignmentNr, exerciseNr);
             balloon.visible = false;
     });
-
-    //Add the logo of Menntamálastofnun
-    addLogo(30, 0.45);
 }
 
 //Adds a skip button in Instruction and WarmUps, where the user can skip the animations if he choses too, if the user skips in Instruction
@@ -1061,10 +964,6 @@ function loadBackground(assignmentNr)
     {
         //Load ocean floor background
         background = game.add.image(game.world.centerX, game.world.centerY, 'sundlaugBakgrunnur');
-        //Add orange fish which will move from end to end then turn around repeatedly
-        fish1 = game.add.sprite(800, 35, 'fishes', 2);
-        //Add green fish which will move from end to end then turn around repeatedly
-        fish2 = game.add.sprite(25, 175, 'fishes', 1);
         //Add clouds which will be constantly moving to the right
         clouds = game.add.image(-1000, -10,'clouds');
 
@@ -1073,6 +972,10 @@ function loadBackground(assignmentNr)
     {
         //Add stage background
         background = game.add.image(game.world.centerX, game.world.centerY, 'byflugaBakgrunnur');
+        solBak = game.add.sprite(240, 20, 'solBak',0);
+        solBak.animations.add('shine', [0, 5, 0, 8, 0, 5, 0, 8, 0], true);
+        solBak.play('shine');
+        bee = game.add.image(900, 100, 'bee');
     }
     else if(assignmentNr === 10 || assignmentNr === 11)
     {
@@ -1120,13 +1023,6 @@ function addExerciseImages(image, imageGlow, posArr, count, assignmentNr, exerci
             exerciseBtnArray[assignmentNr][exerciseNr+i].events.onInputDown.add(function(){ quitExercise(); Assignment(assignmentNr, exerciseNum); });
         }()); // immediate invocation
     }
-}
-
-//Add the logo from Menntamálastofnun on the bottom left of the screen, x is the x coordinate on where to put the logo and sc is the scale we want
-function addLogo(x, sc)
-{
-    logo = game.add.image(x, 660, 'logo');
-    logo.scale.setTo(sc);
 }
 
 //Load and display the Instruction for the Assignments, after Instructions the WarmUp is called
@@ -2030,7 +1926,7 @@ function warmupÞogY(assignmentNr, exerciseNr)
                     moveDownRight = true;
                     warmupHead.play('talk');
                     sounds['findÞ'].play();
-                    addBalloontext('Hvar er stafurinn þ á lyklaborðinu',16);
+                    addBalloontext('Hvar er stafurinn þ á lyklaborðinu?',16);
             
                     keyboardKeysMap.get('þ').play('blink');
                 }

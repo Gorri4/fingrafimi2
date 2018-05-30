@@ -10,20 +10,17 @@ function preload()
     //Background images
     game.load.image('homePage',                 'Assets/myndir/Backgrounds/bakgrunnur_forsida.png');
     game.load.image('homeKeysBackground',       'Assets/Images/Backgrounds/homeKeysBackground.png');
+
     //Fingrafimi2 bakgrunnir
-    game.load.image('marglyttaBakgrunnur',                'Assets/myndir/Backgrounds/marglytta.png');
-    game.load.image('sundlaugBakgrunnur',                 'Assets/myndir/Backgrounds/sundlaug.png');
-    game.load.image('byflugaBakgrunnur',                  'Assets/myndir/Backgrounds/byfluga.png');
-    game.load.image('ledurblakaBakgrunnur',               'Assets/myndir/Backgrounds/ledurblaka.png');
+    game.load.image('marglyttaBakgrunnur',      'Assets/myndir/Backgrounds/marglytta.png');
+    game.load.image('sundlaugBakgrunnur',       'Assets/myndir/Backgrounds/sundlaug.png');
+    game.load.image('byflugaBakgrunnur',        'Assets/myndir/Backgrounds/byfluga.png');
+    game.load.image('ledurblakaBakgrunnur',     'Assets/myndir/Backgrounds/ledurblaka.png');
     
-    // // game.load.image('instructionBg',            'Assets/Images/Backgrounds/instructionBackground.png');
-    // // game.load.image('farm',                     'Assets/Images/Backgrounds/farm.png');
-     game.load.image('clouds',                   'Assets/Images/Backgrounds/clouds.png');
-     game.load.image('spider',                   'Assets/myndir/Backgrounds/spider.png');
-    // // game.load.image('box',                      'Assets/Images/Backgrounds/box.png');
-    // // game.load.image('stage',                    'Assets/Images/Backgrounds/svid.png');
-    // // game.load.image('ocean',                    'Assets/Images/Backgrounds/sandur.png');
-    // game.load.spritesheet('fishes',             'Assets/Images/Backgrounds/fishes.png', 149, 94);
+    game.load.image('clouds',                   'Assets/Images/Backgrounds/clouds.png');
+    game.load.image('spider',                   'Assets/myndir/Backgrounds/spider.png');
+    game.load.image('bee',                      'Assets/myndir/Backgrounds/bee.png');
+    game.load.spritesheet('solBak',             'Assets/myndir/Backgrounds/solBak.png',130,120);
 
     //Keyboard related images and sprites
     game.load.image('keyboard',                 'Assets/myndir/Keyboard/lyklabord.png');
@@ -57,23 +54,15 @@ function preload()
     game.load.spritesheet('?',                  'Assets/myndir/Keyboard/spurningamerki.png', 35, 36);
     game.load.spritesheet('-',                  'Assets/myndir/Keyboard/bandstrik.png', 35, 36);
     game.load.spritesheet('.',                  'Assets/myndir/Keyboard/punktur.png', 38, 38);
-    game.load.spritesheet('lshift',                  'Assets/myndir/Keyboard/lshift.png', 45, 36);
-    game.load.spritesheet('hshift',                  'Assets/myndir/Keyboard/hshift.png', 97, 36);
+    game.load.spritesheet('lshift',             'Assets/myndir/Keyboard/lshift.png', 45, 36);
+    game.load.spritesheet('hshift',             'Assets/myndir/Keyboard/hshift.png', 97, 36);
     game.load.spritesheet(' ',                  'Assets/myndir/Keyboard/space.png', 210, 36);
-
-    // game.load.spritesheet('spacebar',           'Assets/Images/Keyboard/spacebarSprite.png', 259, 44);
-    // game.load.spritesheet('lShift',             'Assets/myndir/Keyboard/leftShiftSprite.png', 56, 43);
-    // game.load.spritesheet('rShift',             'Assets/myndir/Keyboard/rightShiftSprite.png', 125, 45);
-    // game.load.spritesheet('warmupKeys',         'Assets/Images/Keyboard/asdfgh.png', 699, 77);
 
     // //Images of hands used in game
     game.load.spritesheet('lHand',                    'Assets/myndir/Hands/lhand.png',393,380);
     game.load.spritesheet('rHand',                    'Assets/myndir/Hands/hhand.png',291,400);
-    // game.load.spritesheet('handsSprite',        'Assets/Images/Hands/handSprite.png', 276, 450);
-    // game.load.spritesheet('hands',              'Assets/Images/Hands/handSpriteBigger1.png', 240, 450);
 
     // Various images
-    // game.load.image('logo',                     'Assets/Images/logo.png');
     game.load.image('logoS',                    'Assets/myndir/titillS.png');
     game.load.image('logoL',                    'Assets/myndir/titill.png');
     game.load.image('teacher',                  'Assets/Images/Buttons/Global/teacher.png');
@@ -95,31 +84,11 @@ function preload()
     game.load.spritesheet('moreExLedur',        'Assets/myndir/Buttons/moreExLedur.png',116,80);
     game.load.spritesheet('moreExFroskur',      'Assets/myndir/Buttons/moreExFroskur.png',116,80);
     game.load.spritesheet('moreExByfluga',      'Assets/myndir/Buttons/moreExByfluga.png',116,80);
-    // game.load.image('eh',                       'Assets/Images/Buttons/Assignments/eogh.png');
-    // game.load.image('ig',                       'Assets/Images/Buttons/Assignments/iogg.png');
     game.load.spritesheet('texta',              'Assets/myndir/Buttons/Assignments/texta_forsida.png',130,65);
-    // game.load.image('ro',                       'Assets/Images/Buttons/Assignments/rogo.png');
     game.load.spritesheet('broddstafir',        'Assets/myndir/Buttons/Assignments/broddstafir_forsida.png',163,60);
     game.load.spritesheet('bandogspurn',        'Assets/myndir/Buttons/Assignments/bandogspurn_forsida.png',120,65);
-    // game.load.spritesheet('btnSprite',          'Assets/Images/Buttons/Assignments/buttons.png', 124, 81);
 
-    // Images for exercise buttons
-    // game.load.spritesheet('mus',                'Assets/Images/Buttons/Exercises/mus.png', 110, 70);
-    // game.load.spritesheet('robot',              'Assets/Images/Buttons/Exercises/robot.png', 105, 127);
-    // game.load.spritesheet('heyBaggi',           'Assets/Images/Buttons/Exercises/hey.png', 80, 62);
-    // game.load.spritesheet('blom',               'Assets/Images/Buttons/Exercises/blom.png', 73, 95);
-    // game.load.spritesheet('mus2',               'Assets/Images/Buttons/Exercises/mus2.png', 91, 84);
-    // game.load.spritesheet('blakbolti',          'Assets/Images/Buttons/Exercises/blakbolti.png', 48, 52);
-    // game.load.spritesheet('fotbolti',           'Assets/Images/Buttons/Exercises/fotbolti.png', 45, 45);
-    // game.load.spritesheet('korfubolti',         'Assets/Images/Buttons/Exercises/korfubolti.png', 50, 52);
-    // game.load.spritesheet('rubbybolti',         'Assets/Images/Buttons/Exercises/rubbybolti.png', 62, 42);
-    // game.load.spritesheet('tennisbolti',        'Assets/Images/Buttons/Exercises/tennisbolti.png', 26, 26);
-    // game.load.spritesheet('gitar',              'Assets/Images/Buttons/Exercises/gitar.png', 51, 73);
-    // game.load.spritesheet('tromma',             'Assets/Images/Buttons/Exercises/trommur.png', 37, 35);
-    // game.load.spritesheet('nota',               'Assets/Images/Buttons/Exercises/nota.png', 50, 40);
-    // game.load.spritesheet('piano',              'Assets/Images/Buttons/Exercises/piano.png', 81, 38);
-    // game.load.spritesheet('saxafonn',           'Assets/Images/Buttons/Exercises/saxafonn.png', 57, 96);
-
+    //Exercises Buttons
     game.load.spritesheet('jellyfish',          'Assets/myndir/Buttons/Exercises/jellyfish.png', 63, 68);
     game.load.spritesheet('starfish',           'Assets/myndir/Buttons/Exercises/krossfiskur.png', 61, 76);
     game.load.spritesheet('shrimp',             'Assets/myndir/Buttons/Exercises/shrimp.png', 77, 50);
@@ -139,39 +108,10 @@ function preload()
     game.load.spritesheet('stjarna',            'Assets/myndir/Buttons/Exercises/stjarna.png', 64, 80);
     game.load.spritesheet('tungl',              'Assets/myndir/Buttons/Exercises/tungl.png', 48, 80);
     game.load.spritesheet('ledurblakaEx',       'Assets/myndir/Buttons/Exercises/ledurblaka.png', 112, 80);
-    
-    // //Images for glow around exercise buttons for the exercise you are currently in
-    // game.load.image('musGlow',                  'Assets/Images/Buttons/Exercises/mus-glow.png');
-    // game.load.image('robotGlow',                'Assets/Images/Buttons/Exercises/robot-glow.png');
-    // game.load.image('heyBaggiGlow',             'Assets/Images/Buttons/Exercises/hey-glow.png');
-    // game.load.image('blomGlow',                 'Assets/Images/Buttons/Exercises/blom-glow.png');
-    // game.load.image('mus2Glow',                 'Assets/Images/Buttons/Exercises/mus2-glow.png');
-    // game.load.image('blakboltiGlow',            'Assets/Images/Buttons/Exercises/blakbolti-glow.png');
-    // game.load.image('tennisboltiGlow',          'Assets/Images/Buttons/Exercises/tennisbolti-glow.png');
-    // game.load.image('fotboltiGlow',             'Assets/Images/Buttons/Exercises/fotbolti-glow.png');
-    // game.load.image('korfuboltiGlow',           'Assets/Images/Buttons/Exercises/korfubolti-glow.png');
-    // game.load.image('rubbyboltiGlow',           'Assets/Images/Buttons/Exercises/rubbybolti-glow.png');
-    // game.load.image('gitarGlow',                'Assets/Images/Buttons/Exercises/gitar-glow.png');
-    // game.load.image('trommurGlow',              'Assets/Images/Buttons/Exercises/trommur-glow.png');
-    // game.load.image('notaGlow',                 'Assets/Images/Buttons/Exercises/nota-glow.png');
-    // game.load.image('pianoGlow',                'Assets/Images/Buttons/Exercises/piano-glow.png');
-    // game.load.image('saxafonnGlow',             'Assets/Images/Buttons/Exercises/saxafonn-glow.png');
-    // game.load.image('jellyfishGlow',            'Assets/Images/Buttons/Exercises/jellyfish-glow.png');
-    // game.load.image('starfishGlow',             'Assets/Images/Buttons/Exercises/starfish-glow.png');
-    // game.load.image('shrimpGlow',               'Assets/Images/Buttons/Exercises/shrimp-glow.png');
-    // game.load.image('seahorseGlow',             'Assets/Images/Buttons/Exercises/seahorse-glow.png');
-    // game.load.image('shellGlow',                'Assets/Images/Buttons/Exercises/shell-glow.png');
-
-    // // Images related to WarmUp animations
-    // game.load.spritesheet('warmupHead',         'Assets/Images/Instructors/warmupHead2.png', 159, 155);
-    // game.load.spritesheet('instructorMaggi',    'Assets/Images/Instructors/instructionMaggi.png', 524, 572);
-    // game.load.spritesheet('pig',                'Assets/Images/Instructors/svin.png', 522, 756);
-    // game.load.spritesheet('fish',               'Assets/Images/Instructors/fish.png', 414, 503);
-    // game.load.spritesheet('horse',              'Assets/Images/Instructors/horse.png', 371, 672);
-    // game.load.spritesheet('whale',              'Assets/Images/Instructors/whale.png', 372, 711);
 
     game.load.spritesheet('balloonSprite',      'Assets/myndir/bladra.png', 512, 512);
 
+    //Instructors
     game.load.spritesheet('instructorMarglytta',    'Assets/myndir/Instructors/instructorMarglytta.png', 386, 400);
     game.load.spritesheet('instructorFroskur',      'Assets/myndir/Instructors/instructorFroskur.png', 373, 360);
     game.load.spritesheet('instructorFroskurWarmup',      'Assets/myndir/Instructors/instructorFroskurWarmup.png', 248, 360);
@@ -193,12 +133,6 @@ function preload()
     game.load.audio('leftFJ',                  'Assets/hljod/audio/Marglytta_04.mp3');
     game.load.audio('rightFJ',                 'Assets/hljod/audio/Marglytta_05.mp3');
     game.load.audio('uuuFlott',                'Assets/hljod/audio/Marglytta_06.mp3');
-
-    // game.load.audio('findFJ',           'Assets/Sounds/F_og_J_3.mp3');
-    // game.load.audio('findF',            'Assets/Sounds/F_og_J_4.mp3');
-    // game.load.audio('findJ',            'Assets/Sounds/F_og_J_5.mp3');
-    // game.load.audio('spaceFJ',          'Assets/Sounds/F_og_J_6.mp3');
-    // game.load.audio('finalFJ',          'Assets/Sounds/F_og_J_7.mp3');
     
     //Audio files related to WarmUp animation for "D og K"
     game.load.audio('byrjunTM',         'Assets/hljod/audio/Fusi_Froskur_02.mp3');
@@ -207,12 +141,8 @@ function preload()
     game.load.audio('visH',             'Assets/hljod/audio/Fusi_Froskur_07.mp3');
     game.load.audio('skrifT',           'Assets/hljod/audio/Fusi_Froskur_05.mp3');
     game.load.audio('findM',            'Assets/hljod/audio/Fusi_Froskur_06.mp3');
-    // game.load.audio('findDK',           'Assets/Sounds/D_og_K_3.mp3');
-    // game.load.audio('findD',            'Assets/Sounds/D_og_K_4.mp3');
-    // game.load.audio('findK',            'Assets/Sounds/D_og_K_5.mp3');
     game.load.audio('finalTM',          'Assets/hljod/audio/Fusi_Froskur_09.mp3');
     game.load.audio('skrifM',             'Assets/hljod/audio/Fusi_Froskur_08.mp3');
-
     
     //Audio files related to WarmUp animation for "S og L"
     game.load.audio('byrjunDV',         'Assets/hljod/audio/Fusi_Froskur_21.mp3');
@@ -372,73 +302,70 @@ function preload()
      game.load.audio('instructionOC',             'Assets/hljod/audio/Ledurblaka_01.mp3');
      game.load.audio('instructionBrodd',          'Assets/hljod/audio/Ledurblaka_24_oogcAllir2.mp3');
      game.load.audio('instructionTexti',          'Assets/hljod/audio/Marglytta_30.mp3');
-     // game.load.audio('instructionRO',          'Assets/Sounds/Instructions/RO_instruction.mp3');
-     // game.load.audio('instructionBRODD',       'Assets/Sounds/Instructions/Broddstafir_instruction.mp3');
-     // game.load.audio('instructionHA',          'Assets/Sounds/Instructions/Hastafir_instruction.mp3');
 
     //Hrós Marglytta
     game.load.audio('hros1Margl',         'Assets/hljod/audio/Marglytta_09_hros1.mp3');
     game.load.audio('hros2Margl',         'Assets/hljod/audio/Marglytta_10_hros2.mp3');
     game.load.audio('hros3Margl',         'Assets/hljod/audio/Marglytta_11_hros3.mp3');
-    game.load.audio('hros4Margl',        'Assets/hljod/audio/Marglytta_12_hros4.mp3');
-    game.load.audio('hros5Margl',       'Assets/hljod/audio/Marglytta_13_hros5.mp3');
-    game.load.audio('hros6Margl',       'Assets/hljod/audio/Marglytta_14_hros6.mp3');
+    game.load.audio('hros4Margl',         'Assets/hljod/audio/Marglytta_12_hros4.mp3');
+    game.load.audio('hros5Margl',         'Assets/hljod/audio/Marglytta_13_hros5.mp3');
+    game.load.audio('hros6Margl',         'Assets/hljod/audio/Marglytta_14_hros6.mp3');
     game.load.audio('hros7Margl',         'Assets/hljod/audio/Marglytta_15_hros7.mp3');
 
     //Hrós Froskur
     game.load.audio('hros1Froskur',         'Assets/hljod/audio/Fusi_Froskur_11_hros1.mp3');
     game.load.audio('hros2Froskur',         'Assets/hljod/audio/Fusi_Froskur_12_hros2.mp3');
     game.load.audio('hros3Froskur',         'Assets/hljod/audio/Fusi_Froskur_13_hros3.mp3');
-    game.load.audio('hros4Froskur',        'Assets/hljod/audio/Fusi_Froskur_14_hros4.mp3');
-    game.load.audio('hros5Froskur',       'Assets/hljod/audio/Fusi_Froskur_15_hros5.mp3');
-    game.load.audio('hros6Froskur',       'Assets/hljod/audio/Fusi_Froskur_16_hros6.mp3');
+    game.load.audio('hros4Froskur',         'Assets/hljod/audio/Fusi_Froskur_14_hros4.mp3');
+    game.load.audio('hros5Froskur',         'Assets/hljod/audio/Fusi_Froskur_15_hros5.mp3');
+    game.load.audio('hros6Froskur',         'Assets/hljod/audio/Fusi_Froskur_16_hros6.mp3');
     game.load.audio('hros7Froskur',         'Assets/hljod/audio/Fusi_Froskur_17_hros7.mp3');
-    game.load.audio('hros8Froskur',       'Assets/hljod/audio/Fusi_Froskur_18_hros8.mp3');
+    game.load.audio('hros8Froskur',         'Assets/hljod/audio/Fusi_Froskur_18_hros8.mp3');
     game.load.audio('hros9Froskur',         'Assets/hljod/audio/Fusi_Froskur_19_hros10.mp3');
 
     //Hrós Byfluga
     game.load.audio('hros1Byfluga',         'Assets/hljod/audio/Byfluga_11_hros1.mp3');
     game.load.audio('hros2Byfluga',         'Assets/hljod/audio/Byfluga_12_hros2.mp3');
     game.load.audio('hros3Byfluga',         'Assets/hljod/audio/Byfluga_13_hros3.mp3');
-    game.load.audio('hros4Byfluga',        'Assets/hljod/audio/Byfluga_14_hros4.mp3');
-    game.load.audio('hros5Byfluga',       'Assets/hljod/audio/Byfluga_15_hros5.mp3');
-    game.load.audio('hros6Byfluga',       'Assets/hljod/audio/Byfluga_16_hros6.mp3');
+    game.load.audio('hros4Byfluga',         'Assets/hljod/audio/Byfluga_14_hros4.mp3');
+    game.load.audio('hros5Byfluga',         'Assets/hljod/audio/Byfluga_15_hros5.mp3');
+    game.load.audio('hros6Byfluga',         'Assets/hljod/audio/Byfluga_16_hros6.mp3');
     game.load.audio('hros7Byfluga',         'Assets/hljod/audio/Byfluga_17_hros7.mp3');
-    game.load.audio('hros8Byfluga',       'Assets/hljod/audio/Byfluga_18_hros8.mp3');
+    game.load.audio('hros8Byfluga',         'Assets/hljod/audio/Byfluga_18_hros8.mp3');
     game.load.audio('hros9Byfluga',         'Assets/hljod/audio/Byfluga_19_hros9.mp3');
-    game.load.audio('hros10Byfluga',         'Assets/hljod/audio/Byfluga_20_hros10.mp3');
+    game.load.audio('hros10Byfluga',        'Assets/hljod/audio/Byfluga_20_hros10.mp3');
 
     //Hrós Ledurblaka
     game.load.audio('hros1Ledur',         'Assets/hljod/audio/Ledurblaka_11_hros1.mp3');
     game.load.audio('hros2Ledur',         'Assets/hljod/audio/Ledurblaka_12_hros2.mp3');
     game.load.audio('hros3Ledur',         'Assets/hljod/audio/Ledurblaka_13_hros3.mp3');
-    game.load.audio('hros4Ledur',        'Assets/hljod/audio/Ledurblaka_14_hros4.mp3');
-    game.load.audio('hros5Ledur',       'Assets/hljod/audio/Ledurblaka_15_hros5.mp3');
-    game.load.audio('hros6Ledur',       'Assets/hljod/audio/Ledurblaka_16_hros6.mp3');
+    game.load.audio('hros4Ledur',         'Assets/hljod/audio/Ledurblaka_14_hros4.mp3');
+    game.load.audio('hros5Ledur',         'Assets/hljod/audio/Ledurblaka_15_hros5.mp3');
+    game.load.audio('hros6Ledur',         'Assets/hljod/audio/Ledurblaka_16_hros6.mp3');
     game.load.audio('hros7Ledur',         'Assets/hljod/audio/Ledurblaka_17_hros7.mp3');
-    game.load.audio('hros8Ledur',       'Assets/hljod/audio/Ledurblaka_18_hros8.mp3');
+    game.load.audio('hros8Ledur',         'Assets/hljod/audio/Ledurblaka_18_hros8.mp3');
     game.load.audio('hros9Ledur',         'Assets/hljod/audio/Ledurblaka_20_hros9.mp3');
-    game.load.audio('hros10Ledur',         'Assets/hljod/audio/Ledurblaka_21_hros10.mp3');
+    game.load.audio('hros10Ledur',        'Assets/hljod/audio/Ledurblaka_21_hros10.mp3');
     
     //Fleiri aefingar
-    game.load.audio('UpprifjunFleiri',         'Assets/hljod/audio/Marglytta_08_fleiri.mp3');
+    game.load.audio('UpprifjunFleiri',    'Assets/hljod/audio/Marglytta_08_fleiri.mp3');
     game.load.audio('TogMFleiri',         'Assets/hljod/audio/Fusi_Froskur_10_fleiri1.mp3');
     game.load.audio('DogVFleiri',         'Assets/hljod/audio/Fusi_Froskur_29_fleiri.mp3');
     game.load.audio('SpurnFleiri',        'Assets/hljod/audio/Marglytta_29_fleiri2.mp3');
-    game.load.audio('PogUFleiri',       'Assets/hljod/audio/Byfluga_10_fleiri.mp3');
-    game.load.audio('ÞogYFleiri',       'Assets/hljod/audio/Byfluga_30_fleiri.mp3');
+    game.load.audio('PogUFleiri',         'Assets/hljod/audio/Byfluga_10_fleiri.mp3');
+    game.load.audio('ÞogYFleiri',         'Assets/hljod/audio/Byfluga_30_fleiri.mp3');
     game.load.audio('OogCFleiri',         'Assets/hljod/audio/Ledurblaka_21_hros10.mp3');
-    game.load.audio('BroddFleiri',       'Assets/hljod/audio/Ledurblaka_21_hros10.mp3');
-    game.load.audio('TextiFleiri',         'Assets/hljod/audio/Marglytta_33_fleiri3.mp3');
+    game.load.audio('BroddFleiri',        'Assets/hljod/audio/Ledurblaka_21_hros10.mp3');
+    game.load.audio('TextiFleiri',        'Assets/hljod/audio/Marglytta_33_fleiri3.mp3');
 
     //Audio files that are played when the user has finished all the exercises in an assignment
-    game.load.audio('finishUpprifjun',         'Assets/hljod/audio/Marglytta_16_UpprifjunAllar.mp3');
+    game.load.audio('finishUpprifjun',     'Assets/hljod/audio/Marglytta_16_UpprifjunAllar.mp3');
     game.load.audio('finishSpurn',         'Assets/hljod/audio/Marglytta_34_textiAllir.mp3');
-    game.load.audio('finishTogM',         'Assets/hljod/audio/Fusi_Froskur_20_togmAllir.mp3');
-    game.load.audio('finishDogV',        'Assets/hljod/audio/Fusi_Froskur_30_dogvAllir.mp3');
-    game.load.audio('finishPogU',       'Assets/hljod/audio/Byfluga_21_poguAllir.mp3');
-    game.load.audio('finishÞogY',       'Assets/hljod/audio/Byfluga_31_þogyAllir.mp3');
-    game.load.audio('finishOogC',         'Assets/hljod/audio/Ledurblaka_24_oogcAllir2.mp3');
+    game.load.audio('finishTogM',          'Assets/hljod/audio/Fusi_Froskur_20_togmAllir.mp3');
+    game.load.audio('finishDogV',          'Assets/hljod/audio/Fusi_Froskur_30_dogvAllir.mp3');
+    game.load.audio('finishPogU',          'Assets/hljod/audio/Byfluga_21_poguAllir.mp3');
+    game.load.audio('finishÞogY',          'Assets/hljod/audio/Byfluga_31_þogyAllir.mp3');
+    game.load.audio('finishOogC',          'Assets/hljod/audio/Ledurblaka_24_oogcAllir2.mp3');
     game.load.audio('finishBrodd',         'Assets/hljod/audio/Ledurblaka_34_BroddAllir.mp3');
     game.load.audio('finishTexti',         'Assets/hljod/audio/Marglytta_34_textiAllir.mp3');
     

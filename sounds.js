@@ -1,14 +1,15 @@
 function createSounds(){
+
     //Upprifjun
-    sounds['leftFJ']      = game.add.audio('leftFJ');
-    sounds['byrjunUpprifjun']      = game.add.audio('byrjunUpprifjun');
-    sounds['endirUpprifjun']      = game.add.audio('endirUpprifjun');
-    sounds['rightFJ'] =     game.add.audio('rightFJ');
-    sounds['findFJ'] =      game.add.audio('findFJ');
-    sounds['findF'] =       game.add.audio('findF');
-    sounds['findJ'] =       game.add.audio('findJ');
-    sounds['spaceFJ'] =     game.add.audio('spaceFJ');
-    sounds['finalFJ'] =     game.add.audio('finalFJ');
+    sounds['leftFJ']      =          game.add.audio('leftFJ');
+    sounds['byrjunUpprifjun'] =      game.add.audio('byrjunUpprifjun');
+    sounds['endirUpprifjun'] =       game.add.audio('endirUpprifjun');
+    sounds['rightFJ'] =              game.add.audio('rightFJ');
+    sounds['findFJ'] =               game.add.audio('findFJ');
+    sounds['findF'] =                game.add.audio('findF');
+    sounds['findJ'] =                game.add.audio('findJ');
+    sounds['spaceFJ'] =              game.add.audio('spaceFJ');
+    sounds['finalFJ'] =              game.add.audio('finalFJ');
 
     //T og M
     sounds['byrjunTM']      = game.add.audio('byrjunTM');
@@ -90,88 +91,6 @@ function createSounds(){
     sounds['findLTextar'] =       game.add.audio('findLTextar');
     sounds['findRTextar'] =       game.add.audio('findRTextar');
     sounds['finalTextar'] =     game.add.audio('finalTextar');
-
-    // //Sounds initialized in map regarding the A og Æ assignment
-    // sounds['findAAE'] =     game.add.audio('findAAE');
-    // sounds['findA'] =       game.add.audio('findA');
-    // sounds['findAE'] =      game.add.audio('findAE');
-    // sounds['finalAAE'] =    game.add.audio('finalAAE');
-
-    // //Sounds initialized in map regarding the Allir heimalyklar 1 assignment
-    // sounds['leftAll1'] =    game.add.audio('leftAll1');
-    // sounds['rightAll1'] =   game.add.audio('rightAll1');
-    // sounds['finalAll1'] =   game.add.audio('finalAll1');
-
-    // //Sounds initialized in map regarding the Allir heimalyklar 2 assignment
-    // sounds['leftAll2'] =    game.add.audio('leftAll2');
-    // sounds['rightAll2'] =   game.add.audio('rightAll2');
-    // sounds['finalAll2'] =   game.add.audio('finalAll2');
-
-    // //Sounds initialized in map regarding the E og H assignment
-    // sounds['handsEH'] =     game.add.audio('handsEH');
-    // sounds['findE'] =       game.add.audio('findE');
-    // sounds['typingE'] =     game.add.audio('typingE');
-    // sounds['typeE'] =       game.add.audio('typeE');
-    // sounds['findH'] =       game.add.audio('findH');
-    // sounds['typingH'] =     game.add.audio('typingH');
-    // sounds['typeH'] =       game.add.audio('typeH');
-    // sounds['finalEH'] =     game.add.audio('finalEH');
-
-
-    //Sounds initialized in map regarding the I og G assignment
-    // sounds['handsIG'] =     game.add.audio('handsIG');
-    // sounds['findI'] =       game.add.audio('findI');
-    // sounds['typingI'] =     game.add.audio('typingI');
-    // sounds['typeI'] =       game.add.audio('typeI');
-    // sounds['gjIG1'] =       game.add.audio('gjIG');
-    // sounds['gjIG2'] =       game.add.audio('gjIG');
-    // sounds['findG'] =       game.add.audio('findG');
-    // sounds['typingG'] =     game.add.audio('typingG');
-    // sounds['typeG'] =       game.add.audio('typeG');
-    // sounds['finalIG'] =     game.add.audio('finalIG');
-
-    // //Sounds initialized in map regarding the B og N assignment
-    // sounds['handsBN'] =     game.add.audio('handsBN');
-    // sounds['findB'] =       game.add.audio('findB');
-    // sounds['typingB'] =     game.add.audio('typingB');
-    // sounds['typeB'] =       game.add.audio('typeB');
-    // sounds['gjBN1'] =       game.add.audio('gjBN');
-    // sounds['gjBN2'] =       game.add.audio('gjBN');
-    // sounds['findN'] =       game.add.audio('findN');
-    // sounds['typingN'] =     game.add.audio('typingN');
-    // sounds['typeN'] =       game.add.audio('typeN');
-    // sounds['finalBN'] =     game.add.audio('finalBN'); 
-
-    // //Sounds initialized in map regarding the R og O assignment
-    // sounds['handsRO'] =     game.add.audio('handsRO');
-    // sounds['findR'] =       game.add.audio('findR');
-    // sounds['typingR'] =     game.add.audio('typingR');
-    // sounds['typeR'] =       game.add.audio('typeR');
-    // sounds['findO'] =       game.add.audio('findO');
-    // sounds['typingO'] =     game.add.audio('typingO');
-    // sounds['typeO'] =       game.add.audio('typeO');
-    // sounds['finalRO'] =     game.add.audio('finalRO');
-
-    // //Sounds initialized in map regarding the Broddstafir assignment
-    // sounds['handsBRODD'] =      game.add.audio('handsBRODD');
-    // sounds['findComma'] =       game.add.audio('findComma');
-    // sounds['typingComma'] =     game.add.audio('typingComma');
-    // sounds['typingComma2'] =    game.add.audio('typingComma2');
-    // sounds['typingComma3'] =    game.add.audio('typingComma3');
-    // sounds['typeCommaE'] =      game.add.audio('typeCommaE');
-    // sounds['finalBRODD'] =      game.add.audio('finalBRODD');
-
-    // //Sounds initialized in map regarding the Hástafir assignment
-    // sounds['handsHA'] =         game.add.audio('handsHA');
-    // sounds['findLShift'] =      game.add.audio('findLShift');
-    // sounds['typingLShift'] =    game.add.audio('typingLShift');
-    // sounds['findRShift'] =      game.add.audio('findRShift');
-    // sounds['typingRShift'] =    game.add.audio('typingRShift');
-    // sounds['typingOHA'] =       game.add.audio('typingOHA');
-    // sounds['typingOHA2'] =      game.add.audio('typingOHA2');
-    // sounds['typeOHA'] =         game.add.audio('typeOHA');
-    // sounds['finalHA'] =         game.add.audio('finalHA');
-
 }
 
 function stopAllSounds()
