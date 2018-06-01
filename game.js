@@ -141,6 +141,8 @@ function update()
 // select assignments to practice in
 function loadHomePage() 
 {
+    console.log('loadhomepage');
+    
     //Sets all of the warmUps array to false
     initWarmUps();
     //Clears canvas, stops all currently playing sounds and erases all CallBack events.
@@ -655,7 +657,7 @@ function findNextExercise(assignmentNr, exerciseNr)
 // Add the mute button to the canvas, this is called upon on all functions, Home Page, Instructions, WarmUps and Assignment
 function addMuteButton()
 {
-    muteBtn = game.add.button(850, 20, 'sound');
+    muteBtn = game.add.button(800, 20, 'sound');
     // Add hover affect
     muteBtn.events.onInputOver.add(function()
     { 
@@ -759,9 +761,9 @@ function addLogoAndAssignmentID(assignmentNr, exerciseNr)
 {
     //Add the Fingrafimi logo
     logoS = game.add.button(25, 25, 'logoS'); 
-    
+    addExitButton();
     //Add the click event that loads the home page
-    logoS.events.onInputDown.add(function(){quitExercise(); loadHomePage();});
+    //logoS.events.onInputDown.add(function(){quitExercise(); loadHomePage();});
 
     //Add the assignment button
     if(assignmentNr === 3){
