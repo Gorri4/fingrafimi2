@@ -63,6 +63,7 @@ function preload()
     game.load.spritesheet('rHand',                    'Assets/myndir/Hands/hhand.png',291,400);
 
     // Various images
+    game.load.image('logoMennt',                   'Assets/Images/logo.png');
     game.load.image('logoS',                    'Assets/myndir/titillS.png');
     game.load.image('logoL',                    'Assets/myndir/titill.png');
     game.load.image('teacher',                  'Assets/Images/Buttons/Global/teacher.png');

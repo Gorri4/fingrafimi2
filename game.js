@@ -20,7 +20,7 @@ var textAreaY = 65;
 // Variables for the assignments texts and its stylings
 var style = { font: '44px Arial', fill: 'white', align: 'left', wordWrap: true, wordWrapWidth: 900, backgroundColor: "rgba(0,0,0,0.4)", boundsAlignH: "center", boundsAlignV: "middle"};
 var instrstyle = { font: '14px Arial', fill: 'black', wordWrap: true, align: 'center', wordWrapWidth: 200,backgroundColor: "rgba(0,0,0,0)"}
-var instructionStyle = { font: '64px Arial', fill: 'white', align: 'left', wordWrap: true, wordWrapWidth: 600,backgroundColor: "rgba(0,0,0,0.4)" };
+var instructionStyle = { font: '64px Arial', fill: 'white', align: 'left', wordWrap: true, wordWrapWidth: 600,backgroundColor: "rgba(0,0,0,0)" };
 var text = "";
 var textX = 500;
 var textY = 50;
@@ -141,7 +141,6 @@ function update()
 // select assignments to practice in
 function loadHomePage() 
 {
-    console.log('loadhomepage');
     
     //Sets all of the warmUps array to false
     initWarmUps();
@@ -218,6 +217,9 @@ function loadHomePage()
     // Turn off keyboard listening events
     game.input.keyboard.stop();
     
+    //Displays the logo from Menntamálastofnun in the botton left corner
+    addLogo(20, 0.4);
+
     //Resets all variables regarding the exercise text
     initTextVariables();
 
@@ -304,15 +306,18 @@ function Assignment(assignmentNr, exerciseNr)
     {
         // Create the textArea
         text = exercisesArray[assignmentNr][exerciseNr];
-        textArea = game.add.text(game.world.centerX, game.world.centerY/2 - 20, text, style);
+        textArea = game.add.text(game.world.centerX, game.world.centerY/2 + 20, text, style);
         textArea.anchor.set(0.5);
 
         // When key is pressed the function keyPress is called
         game.input.keyboard.addCallbacks(this, null, function(){
             char = document.getElementById('assignment').value;
+            console.log(char);
+            
             $("#assignment").val(""); 
-            if(char !== '' && char !== "´")
+            if(char !== '' && char !== "´" && char !== "´´")
             {
+                console.log("nuna");
                 keyPress(char, assignmentNr, exerciseNr);
             }
         },null);
@@ -324,8 +329,17 @@ function Assignment(assignmentNr, exerciseNr)
     {
         balloon = game.add.sprite(440, 25, 'balloonSprite', 0);
         balloon.scale.setTo(0.6);
+        if(assignmentNr === 8){
+            balloon.scale.setTo(0.7);
+            addBalloontext(addBalloon(assignmentNr),14,35,100);
 
-        addBalloontext(addBalloon(assignmentNr),12);
+        }
+        else if(assignmentNr === 2){
+            addBalloontext(addBalloon(assignmentNr),16,5,100);
+        }else{
+            addBalloontext(addBalloon(assignmentNr),18,25,100);
+
+        }
         
         // instructionText.anchor.set(0.5);
         addFinalSound(assignmentNr);
@@ -338,6 +352,7 @@ function Assignment(assignmentNr, exerciseNr)
     //Add the mute button to the canvas so we can mute the in-game sound if we want
     addMuteButton();
     //Add the exercise buttons which will activate 
+    addLogo(20,0.4);
 
     addExercises(assignmentNr);
 
@@ -388,10 +403,19 @@ function stopKeyboardAnimations()
     });
 }
 
+//Add the logo from Menntamálastofnun on the bottom left of the screen, x is the x coordinate on where to put the logo and sc is the scale we want
+function addLogo(x, sc)
+{
+    logo = game.add.image(x, 570, 'logoMennt');
+    logo.scale.setTo(sc);
+}
+
 //This function resolves the key that is pressed, here we play the wrongSound soundclip if the key pressed is not the correct one, we update the text area
 //and make the keys on the keyboard blink to show which key the game expects the user to press.
 function keyPress(char, assignmentNr, exerciseNr) 
 {
+    console.log("keypressed");
+    
     //Iterate through the keyboardKeysMap and call animations.stop() on all keys
     stopKeyboardAnimations();
    
@@ -566,7 +590,7 @@ function keyPress(char, assignmentNr, exerciseNr)
     // Clear the textArea
     textArea.destroy();
     //Display the part of the exercise text that we have completed in green
-    textArea = game.add.text(game.world.centerX, game.world.centerY/2 - 20, text, style);
+    textArea = game.add.text(game.world.centerX, game.world.centerY/2 + 20, text, style);
     textArea.anchor.set(0.5);
     textArea.addColor('#00ff00', 0);
 
@@ -766,7 +790,19 @@ function addLogoAndAssignmentID(assignmentNr, exerciseNr)
     //logoS.events.onInputDown.add(function(){quitExercise(); loadHomePage();});
 
     //Add the assignment button
-    if(assignmentNr === 3){
+    if(assignmentNr === 5){
+        assignmentBtn = game.add.button(65, 75, getSpriteName(assignmentNr));
+    }
+    else if(assignmentNr === 6){
+        assignmentBtn = game.add.button(45, 85, getSpriteName(assignmentNr));
+    }
+    else if(assignmentNr === 1){
+        assignmentBtn = game.add.button(55, 85, getSpriteName(assignmentNr));
+    }
+    else if(assignmentNr === 7){
+        assignmentBtn = game.add.button(70, 85, getSpriteName(assignmentNr));
+    }
+    else if(assignmentNr === 3){
         assignmentBtn = game.add.button(60, 35, getSpriteName(assignmentNr));
     }else{
         assignmentBtn = game.add.button(60, 90, getSpriteName(assignmentNr));
@@ -1170,22 +1206,22 @@ function addWarmUpTextArea(letter, offset, color)
     textArea.addColor(color, 0);
 }
 
-function addBalloontext(text,fontSize){
+function addBalloontext(text, fontSize,x,y){
     instrstyle.font = String(fontSize) + 'px';
     balloon = game.add.sprite(440, 25, 'balloonSprite', 0);
     balloon.scale.setTo(0.6);
-    var instructionText = game.add.text(game.world.centerX+23, game.world.centerY/2 - 80, text, instrstyle);
+    var instructionText = game.add.text(game.world.centerX+x, game.world.centerY/2 - y, text, instrstyle);
 }
 
 function addMoreExerButton(assignmentNr, exerciseNr){
     if(assignmentNr === 0 || assignmentNr === 7 || assignmentNr === 8){
-        var btnMoreExer = game.add.button(770, 400, 'moreExMarg');
-    }
-    if(assignmentNr === 1 || assignmentNr === 2){
         var btnMoreExer = game.add.button(770, 400, 'moreExFroskur');
     }
-    if(assignmentNr === 3 || assignmentNr === 4){
+    if(assignmentNr === 1 || assignmentNr === 2){
         var btnMoreExer = game.add.button(770, 400, 'moreExByfluga');
+    }
+    if(assignmentNr === 3 || assignmentNr === 4){
+        var btnMoreExer = game.add.button(770, 400, 'moreExLedur');
     }
     if(assignmentNr === 5 || assignmentNr === 6){
         var btnMoreExer = game.add.button(770, 400, 'moreExLedur');
@@ -1255,6 +1291,7 @@ function warmupUpprifjun(assignmentNr, exerciseNr)
     //Bætum við tökkum
     addMuteButton();
     addExitButton();
+    console.log('sdfsef');
     
 //Warmup Upprifjun
     sounds['byrjunUpprifjun'].onStop.addOnce(function()
@@ -1270,7 +1307,7 @@ function warmupUpprifjun(assignmentNr, exerciseNr)
                     warmupHead.play('talk');
                     sounds['leftFJ'].play();
                     //Add the speech bubble with the correct text
-                    addBalloontext('Settu nú puttana á vinstri hendi á rétta lykla. Flott!',16);
+                    addBalloontext('Settu nú puttana á vinstri hendi á rétta lykla. Flott!',25,22,90);
                     //Add the left hand to the game so that it starts moving from below the visible canvas to the A, S, D and F keys.
                     leftHand = game.add.sprite(75, 700, 'lHand', 0);
                     leftHand.scale.setTo(1.1);  
@@ -1299,7 +1336,7 @@ function warmupUpprifjun(assignmentNr, exerciseNr)
                 {
                 sounds['rightFJ'].play();
                     warmupHead.play('talk');
-                    addBalloontext('Settu nú puttana á hægri hendi á rétta lykla',14);
+                    addBalloontext('Settu nú puttana á hægri hendi á rétta lykla',25,22,90);
                     keyboardKeysMap.get('j').play('blink');
                     keyboardKeysMap.get('k').play('blink');
                     keyboardKeysMap.get('l').play('blink');
@@ -1364,7 +1401,7 @@ function warmupTM(assignmentNr, exerciseNr)
 
     addMuteButton();
     addExitButton();
-    addBalloontext('Fingurna á heimalyklana já!',16);
+    addBalloontext('Fingurna á heimalyklana já!',25,22,90);
 
     sounds['byrjunTM'].onStop.addOnce(function()
     {
@@ -1376,7 +1413,7 @@ function warmupTM(assignmentNr, exerciseNr)
                 {
                     warmupHead.play('talk');
                     sounds['findTTM'].play();
-                    addBalloontext('Hvar er stafurinn t á lyklaborðinu?',16);
+                    addBalloontext('Hvar er stafurinn t á lyklaborðinu?',25,22,85);
             
                     keyboardKeysMap.get('t').play('blink');
                     //warmupKeys.play('jklæBlink');
@@ -1394,7 +1431,7 @@ function warmupTM(assignmentNr, exerciseNr)
             {
                 warmupHead.play('talk');
                 leftHand.play('t');
-                addBalloontext('Þú notar vísifingur vinstri handar til að skrifa t.',16);
+                addBalloontext('Þú notar vísifingur vinstri handar til að skrifa t.',25,22,90);
                 //warmupKeys.play('bothBlink');
                 //balloon.frame = 8;
                 sounds['visV'].play();
@@ -1412,7 +1449,7 @@ function warmupTM(assignmentNr, exerciseNr)
             if(warmUps[1])
             {
                 warmupHead.play('talk');
-                addBalloontext('Skrifaðu stafinn t.',16);
+                addBalloontext('Skrifaðu stafinn t.',28,25,75);
                 sounds['skrifT'].play();
                 // Display the letter in the textArea
                 addWarmUpTextArea('t', 100, '#000000');
@@ -1441,7 +1478,7 @@ function warmupTM(assignmentNr, exerciseNr)
                 {
                     warmupHead.play('talk');
                     sounds['findM'].play();
-                    addBalloontext('Rabbit! Finndu nú stafinn m á lyklaborðinu.',16);
+                    addBalloontext('Rabbit! Finndu nú stafinn m á lyklaborðinu.',25,22,90);
                     game.time.events.add(Phaser.Timer.SECOND * 1, function(){
                             //balloon.frame = 10;
                             keyboardKeysMap.get('m').play('blink');
@@ -1466,7 +1503,7 @@ function warmupTM(assignmentNr, exerciseNr)
             {
                 warmupHead.play('talk');
                 rightHand.play('m');
-                addBalloontext('Þú notar vísifingur hægri handar til að skrifa m',16);
+                addBalloontext('Þú notar vísifingur hægri handar til að skrifa m',25,22,90);
                 //warmupKeys.play('bothBlink');
                 //balloon.frame = 8;
                 sounds['visH'].play();
@@ -1486,7 +1523,7 @@ function warmupTM(assignmentNr, exerciseNr)
              if(warmUps[1])
              {
                  warmupHead.play('talk');
-                 addBalloontext('Skrifaðu m.',16);
+                 addBalloontext('Skrifaðu m.',28,25,75);
                  sounds['skrifM'].play();
                  // Display the letter in the textArea
                  addWarmUpTextArea('m', 100, '#000000');
@@ -1554,7 +1591,7 @@ function warmupDogV(assignmentNr, exerciseNr)
     
     addMuteButton();
     addExitButton();
-    addBalloontext('Fingurna á heimalyklana.',16);
+    addBalloontext('Fingurna á heimalyklana.',25,35,80);
 
     sounds['byrjunDV'].onStop.addOnce(function()
     {
@@ -1566,7 +1603,7 @@ function warmupDogV(assignmentNr, exerciseNr)
                 {
                     warmupHead.play('talk');
                     sounds['findD'].play();
-                    addBalloontext('Hvar er stafurinn ð á lyklaborðinu?',16);
+                    addBalloontext('Hvar er stafurinn ð á lyklaborðinu?',25,22,80);
             
                     keyboardKeysMap.get('dd').play('blink');
                 }
@@ -1584,7 +1621,7 @@ function warmupDogV(assignmentNr, exerciseNr)
                 warmupHead.play('talk');
                 rightHand.x += 10;
                 rightHand.play('d');
-                addBalloontext('Þú notar litlaputta hægri handar til að skrifa ð',16);
+                addBalloontext('Þú notar litlaputta hægri handar til að skrifa ð',25,22,90);
                 sounds['lilD'].play();
             }              
         }, this).autoDestroy = true;  
@@ -1601,7 +1638,7 @@ function warmupDogV(assignmentNr, exerciseNr)
             if(warmUps[2])
             {
                 warmupHead.play('talk');
-                addBalloontext('Skrifaðu ð',16);
+                addBalloontext('Skrifaðu ð',35,30,80);
                 sounds['skrifD'].play();
                 // Display the letter in the textArea
                 addWarmUpTextArea('ð', 100, '#000000');
@@ -1630,7 +1667,7 @@ function warmupDogV(assignmentNr, exerciseNr)
                 {
                     warmupHead.play('talk');
                     sounds['findV'].play();
-                    addBalloontext('Rabbit! Finndu nú stafinn v á lyklaborðinu',16);
+                    addBalloontext('Rabbit! Finndu nú stafinn v á lyklaborðinu',25,22,90);
                     game.time.events.add(Phaser.Timer.SECOND * 1, function(){
                             keyboardKeysMap.get('v').play('blink');
                             textArea.destroy();
@@ -1649,7 +1686,7 @@ function warmupDogV(assignmentNr, exerciseNr)
             {
                 warmupHead.play('talk');
                 leftHand.play('v');
-                addBalloontext('Þú notar vísifingur vinstri handar til að skrifa v',16);
+                addBalloontext('Þú notar vísifingur vinstri handar til að skrifa v',25,22,90);
                 sounds['visVV'].play();
             }
             
@@ -1667,7 +1704,7 @@ function warmupDogV(assignmentNr, exerciseNr)
              if(warmUps[2])
              {
                  warmupHead.play('talk');
-                 addBalloontext('Skrifaðu v',16);
+                 addBalloontext('Skrifaðu v',35,30,80);
                  sounds['skrifV'].play();
 
                  // Display the letter in the textArea
@@ -1736,7 +1773,7 @@ function warmupPogU(assignmentNr, exerciseNr){
     
     addMuteButton();
     addExitButton();
-    addBalloontext('Nú setjum við fingurna á heimalyklana.',16);
+    addBalloontext('Nú setjum við fingurna á heimalyklana.',25,38,90);
 
     sounds['byrjunPU'].onStop.addOnce(function()
     {
@@ -1748,7 +1785,7 @@ function warmupPogU(assignmentNr, exerciseNr){
                 {
                     warmupHead.play('talk');
                     sounds['findP'].play();
-                    addBalloontext('Hvar er stafurinn p á lyklaborðinu?',16);
+                    addBalloontext('Hvar er stafurinn p á lyklaborðinu?',25,22,85);
             
                     keyboardKeysMap.get('p').play('blink');
                 }
@@ -1765,7 +1802,7 @@ function warmupPogU(assignmentNr, exerciseNr){
             {
                 warmupHead.play('talk');
                 rightHand.play('p');
-                addBalloontext('Þú notar litlafingur hægri handar til að skrifa p.',16);
+                addBalloontext('Þú notar litlafingur hægri handar til að skrifa p.',25,22,90);
                 sounds['lilP'].play();
             }              
         }, this).autoDestroy = true;  
@@ -1781,7 +1818,7 @@ function warmupPogU(assignmentNr, exerciseNr){
             if(warmUps[3])
             {
                 warmupHead.play('talk');
-                addBalloontext('Skrifaðu p.',16);
+                addBalloontext('Skrifaðu p.',35,30,75);
                 sounds['skrifP'].play();
                 // Display the letter in the textArea
                 addWarmUpTextArea('p', 100, '#000000');
@@ -1810,7 +1847,7 @@ function warmupPogU(assignmentNr, exerciseNr){
                 {
                     warmupHead.play('talk');
                     sounds['findU'].play();
-                    addBalloontext('Finndu nú stafinn u á lyklaborðinu.',16);
+                    addBalloontext('Finndu nú stafinn u á lyklaborðinu.',25,22,85);
                     game.time.events.add(Phaser.Timer.SECOND * 1, function(){
                             keyboardKeysMap.get('u').play('blink');
                             textArea.destroy();
@@ -1829,7 +1866,7 @@ function warmupPogU(assignmentNr, exerciseNr){
             {
                 warmupHead.play('talk');
                 rightHand.play('u');
-                addBalloontext('Þú notar vísifingur hægri handar til að skrifa u.',16);
+                addBalloontext('Þú notar vísifingur hægri handar til að skrifa u.',25,22,90);
                 sounds['visU'].play();
             }
             
@@ -1847,7 +1884,7 @@ function warmupPogU(assignmentNr, exerciseNr){
              if(warmUps[3])
              {
                  warmupHead.play('talk');
-                 addBalloontext('Skrifaðu stafinn u.',16);
+                 addBalloontext('Skrifaðu stafinn u.',35,35,90);
                  sounds['skrifU'].play();
                  // Display the letter in the textArea
                  addWarmUpTextArea('u', 100, '#000000');
@@ -1888,6 +1925,7 @@ function warmupPogU(assignmentNr, exerciseNr){
     warmupHead.play('talk');
 }
 
+
 //Warmup Þ og Y
 function warmupÞogY(assignmentNr, exerciseNr)
 {
@@ -1915,7 +1953,7 @@ function warmupÞogY(assignmentNr, exerciseNr)
     
     addMuteButton();
     addExitButton();
-    addBalloontext('Puttarnir á heimalyklana já!',16);
+    addBalloontext('Puttarnir á heimalyklana já!',25,30,90);
 
     sounds['byrjunÞY'].onStop.addOnce(function()
     {
@@ -1928,7 +1966,7 @@ function warmupÞogY(assignmentNr, exerciseNr)
                     moveDownRight = true;
                     warmupHead.play('talk');
                     sounds['findÞ'].play();
-                    addBalloontext('Hvar er stafurinn þ á lyklaborðinu?',16);
+                    addBalloontext('Hvar er stafurinn þ á lyklaborðinu?',25,22,90);
             
                     keyboardKeysMap.get('þ').play('blink');
                 }
@@ -1945,7 +1983,7 @@ function warmupÞogY(assignmentNr, exerciseNr)
             {
                 warmupHead.play('talk');
                 rightHand.play('þ');
-                addBalloontext('Þú notar litlaputta hægri handar til að skrifa þ.',16);
+                addBalloontext('Þú notar litlaputta hægri handar til að skrifa þ.',25,22,90);
                 sounds['lilÞ'].play();
             }              
         }, this).autoDestroy = true;  
@@ -1961,7 +1999,7 @@ function warmupÞogY(assignmentNr, exerciseNr)
             if(warmUps[4])
             {
                 warmupHead.play('talk');
-                addBalloontext('Skrifaðu stafinn þ.',16);
+                addBalloontext('Skrifaðu stafinn þ.',35,35,90);
                 sounds['skrifÞ'].play();
                 // Display the letter in the textArea
                 addWarmUpTextArea('þ', 100, '#000000');
@@ -1990,7 +2028,7 @@ function warmupÞogY(assignmentNr, exerciseNr)
                 {
                     warmupHead.play('talk');
                     sounds['findY'].play();
-                    addBalloontext('Ji en flott! Hvar er stafurinn y á lyklaborðinu?',16);
+                    addBalloontext('Ji en flott! Hvar er stafurinn y á lyklaborðinu?',25,22,90);
                     game.time.events.add(Phaser.Timer.SECOND * 1, function(){
                             keyboardKeysMap.get('y').play('blink');
                             textArea.destroy();
@@ -2009,7 +2047,7 @@ function warmupÞogY(assignmentNr, exerciseNr)
             {
                 warmupHead.play('talk');
                 rightHand.play('y');
-                addBalloontext('Þú notar vísifingur haegri handar til að skrifa y.',16);
+                addBalloontext('Þú notar vísifingur hægri handar til að skrifa y.',25,22,90);
                 sounds['visY'].play();
             }
             
@@ -2027,7 +2065,7 @@ function warmupÞogY(assignmentNr, exerciseNr)
              if(warmUps[4])
              {
                  warmupHead.play('talk');
-                 addBalloontext('Skrifaðu stafinn y.',16);
+                 addBalloontext('Skrifaðu stafinn y.',35,35,90);
                  sounds['skrifY'].play();
                  // Display the letter in the textArea
                  addWarmUpTextArea('y', 100, '#000000');
@@ -2067,7 +2105,7 @@ function warmupÞogY(assignmentNr, exerciseNr)
     sounds['byrjunÞY'].play();
     warmupHead.play('talk');
 }
-
+//herna
 //Warmup Ö og C
 function warmupOogC(assignmentNr, exerciseNr)
 {
@@ -2094,7 +2132,7 @@ function warmupOogC(assignmentNr, exerciseNr)
     rightHand.scale.setTo(1.1);
     addMuteButton();
     addExitButton();
-    addBalloontext('Skelltu nú krumlunum á heimalyklana.',16);
+    addBalloontext('Skelltu nú krumlunum á heimalyklana.',25,40,90);
 
     sounds['byrjunÖC'].onStop.addOnce(function()
     {
@@ -2107,7 +2145,7 @@ function warmupOogC(assignmentNr, exerciseNr)
                 {
                     warmupHead.play('talk');
                     sounds['findÖ'].play();
-                    addBalloontext('Hvar er stafurinn ö á lyklaborðinu?',16);
+                    addBalloontext('Hvar er stafurinn ö á lyklaborðinu?',25,22,90);
             
                     keyboardKeysMap.get('ö').play('blink');
                 }
@@ -2123,7 +2161,7 @@ function warmupOogC(assignmentNr, exerciseNr)
             {
                 warmupHead.play('talk');
                 rightHand.play('ö');
-                addBalloontext('Þú notar litlaputta hægri handar til að skrifa ö.',16);
+                addBalloontext('Þú notar litlaputta hægri handar til að skrifa ö.',25,22,90);
                 sounds['lilÖ'].play();
             }              
         }, this).autoDestroy = true;  
@@ -2139,7 +2177,7 @@ function warmupOogC(assignmentNr, exerciseNr)
             if(warmUps[5])
             {
                 warmupHead.play('talk');
-                addBalloontext('Skrifaðu ö.',16);
+                addBalloontext('Skrifaðu ö.',35,35,80);
                 sounds['skrifÖ'].play();
                 // Display the letter in the textArea
                 addWarmUpTextArea('ö', 100, '#000000');
@@ -2169,7 +2207,7 @@ function warmupOogC(assignmentNr, exerciseNr)
                     warmupHead.play('talk');
                     moveDownLeft = true;
                     sounds['findC'].play();
-                    addBalloontext('Svalt! Hvar er stafurinn c á lyklaborðinu?',16);
+                    addBalloontext('Svalt! Hvar er stafurinn c á lyklaborðinu?',25,45,90);
                     game.time.events.add(Phaser.Timer.SECOND * 1, function(){
                             //balloon.frame = 10;
                             keyboardKeysMap.get('c').play('blink');
@@ -2190,7 +2228,7 @@ function warmupOogC(assignmentNr, exerciseNr)
             {
                 warmupHead.play('talk');
                 leftHand.play('c');
-                addBalloontext('Þú notar vísifingur vinstri handar til að skrifa c.',16);
+                addBalloontext('Þú notar vísifingur vinstri handar til að skrifa c.',25,22,90);
                 sounds['visC'].play();
             }
             
@@ -2208,7 +2246,7 @@ function warmupOogC(assignmentNr, exerciseNr)
              if(warmUps[5])
              {
                  warmupHead.play('talk');
-                 addBalloontext('Skrifaðu c.',16);
+                 addBalloontext('Skrifaðu c.',35,35,80);
                  sounds['skrifC'].play();
                  // Display the letter in the textArea
                  addWarmUpTextArea('c', 100, '#000000');
@@ -2276,7 +2314,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
     rightHand.scale.setTo(1.1);
     addMuteButton();
     addExitButton();
-    addBalloontext('Krumlurnar á heimalyklana! Jebb.',16);
+    addBalloontext('Krumlurnar á heimalyklana! Jebb.',25,40,90);
 
     sounds['byrjunKomma'].onStop.addOnce(function()
     {
@@ -2289,7 +2327,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
                 {
                     warmupHead.play('talk');
                     sounds['findUppKomma'].play();
-                    addBalloontext('Hvar er komman til að setja yfir stafi á lyklaborðinu?',16);
+                    addBalloontext('Hvar er komman til að setja yfir stafi á lyklaborðinu?',25,22,90);
             
                     keyboardKeysMap.get('´').play('blink');
                 }
@@ -2305,7 +2343,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
             {
                 warmupHead.play('talk');
                 rightHand.play('´');
-                addBalloontext('Þú notar litlaputta á hægri hendi til að setja kommu yfir staf.',16);
+                addBalloontext('Þú notar litlaputta á hægri hendi til að setja kommu yfir staf.',25,22,100);
                 sounds['lilUppKomma'].play();
             }              
         }, this).autoDestroy = true;  
@@ -2322,7 +2360,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
            {
                warmupHead.play('talk');
                leftHand.play('e');
-               addBalloontext('Síðan ýtir þú til dæmis á e til að skrifa é.',16);
+               addBalloontext('Síðan ýtir þú til dæmis á e til að skrifa é.',25,30,90);
                sounds['pressE'].play();
            }              
        }, this).autoDestroy = true;  
@@ -2338,7 +2376,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
             if(warmUps[6])
             {
                 warmupHead.play('talk');
-                addBalloontext('Skrifaðu stafinn á.',16);
+                addBalloontext('Skrifaðu stafinn á.',35,45,80);
                 sounds['skrifÁ'].play();
                 // Display the letter in the textArea
                 addWarmUpTextArea('á', 100, '#000000');
@@ -2355,6 +2393,8 @@ function warmupKommustafir(assignmentNr, exerciseNr)
         game.input.keyboard.start();
         game.input.keyboard.addCallbacks(this, null, null, function(char)
         {    
+            console.log(char);
+            
             if(char === 'á')
             {
                 game.input.keyboard.stop();
@@ -2368,7 +2408,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
                     warmupHead.play('talk');
                     moveDownLeft = true;
                     sounds['findKomma'].play();
-                    addBalloontext('Töff- finndu nú kommuna (,) á lyklaborðinu.',16);
+                    addBalloontext('Töff- finndu nú kommuna (,) á lyklaborðinu.',25,22,90);
                     game.time.events.add(Phaser.Timer.SECOND * 1, function(){
                             //balloon.frame = 10;
                             keyboardKeysMap.get(',').play('blink');
@@ -2389,7 +2429,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
             {
                 warmupHead.play('talk');
                 rightHand.play(',');
-                addBalloontext('Þú notar löngutöng á hægri hendi til að skrifa kommu (,).',16);
+                addBalloontext('Þú notar löngutöng á hægri hendi til að skrifa kommu (,).',25,22,90);
                 sounds['langKomma'].play();
             }
             
@@ -2407,7 +2447,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
              if(warmUps[6])
              {
                  warmupHead.play('talk');
-                 addBalloontext('Skrifaðu kommu (,)',16);
+                 addBalloontext('Skrifaðu kommu (,)',35,35,80);
                  sounds['skrifKomma'].play();
                  // Display the letter in the textArea
                  addWarmUpTextArea(',', 100, '#000000');
@@ -2736,7 +2776,7 @@ function warmupTexti(assignmentNr, exerciseNr){
     warmupHead.play('talk');
     sounds['findLTextar'].play();
     //Add the speech bubble with the correct text
-    addBalloontext('Setjið puttana á vinstri hendi á heimalyklana.',14);
+    addBalloontext('Setjið puttana á vinstri hendi á heimalyklana.',25,32,90);
     //Add the left hand to the game so that it starts moving from below the visible canvas to the A, S, D and F keys.
     leftHand = game.add.sprite(75, 700, 'lHand', 0);
     leftHand.scale.setTo(1.1);  
@@ -2759,7 +2799,7 @@ function warmupTexti(assignmentNr, exerciseNr){
                 {
                 sounds['findRTextar'].play();
                     warmupHead.play('talk');
-                    addBalloontext('Svo puttana á hægri.',14);
+                    addBalloontext('Svo puttana á hægri.',25,32,85);
                     keyboardKeysMap.get('j').play('blink');
                     keyboardKeysMap.get('k').play('blink');
                     keyboardKeysMap.get('l').play('blink');
