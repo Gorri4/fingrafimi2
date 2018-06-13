@@ -134,8 +134,11 @@ function loadKeyboard(assignmentNr)
      keyboardKeysMap.get('hshift').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 2, false);
      keyboardKeysMap.get('hshift').scale.setTo(1.2);
 
+     keyboardKeysMap.set(',', game.add.sprite(502, 376, ',', 0));
+     keyboardKeysMap.get(',').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 2, false);
+     keyboardKeysMap.get(',').scale.setTo(1.2);
+
      keyboardKeysMap.set(' ', game.add.sprite(284, 419, ' ', 0));
      keyboardKeysMap.get(' ').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 2, false);
      keyboardKeysMap.get(' ').scale.setTo(1.2);
-
 }

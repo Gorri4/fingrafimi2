@@ -2395,7 +2395,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
         {    
             console.log(char);
             
-            if(char === 'á')
+            if(char === 'a')
             {
                 game.input.keyboard.stop();
                 textArea.destroy();
@@ -2406,7 +2406,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
                 game.time.events.add(Phaser.Timer.SECOND * 2, function()
                 {
                     warmupHead.play('talk');
-                    moveDownLeft = true;
+                    moveDownRight = true;
                     sounds['findKomma'].play();
                     addBalloontext('Töff- finndu nú kommuna (,) á lyklaborðinu.',25,22,90);
                     game.time.events.add(Phaser.Timer.SECOND * 1, function(){
@@ -2421,7 +2421,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
 
      sounds['findKomma'].onStop.addOnce(function()
      {
-        moveDownLeft = false;
+        moveDownRight = false;
         stopWarmupHeadTalk(); 
         game.time.events.add(Phaser.Timer.SECOND * 2, function()
         {                  
@@ -2439,8 +2439,8 @@ function warmupKommustafir(assignmentNr, exerciseNr)
 
      sounds['langKomma'].onStop.addOnce(function()
      {
-         leftHand.animations.stop();
-         leftHand.frame = 0;
+         rightHand.animations.stop();
+         rightHand.frame = 0;
          stopWarmupHeadTalk(); 
          game.time.events.add(Phaser.Timer.SECOND * 2, function()
          {                  

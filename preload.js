@@ -51,6 +51,7 @@ function preload()
     game.load.spritesheet('c',                  'Assets/myndir/Keyboard/c.png', 37, 36);
     game.load.spritesheet('ö',                  'Assets/myndir/Keyboard/ö.png', 37, 36);
     game.load.spritesheet('´',                  'Assets/myndir/Keyboard/komma.png', 37, 37);
+    game.load.spritesheet(',',                  'Assets/myndir/Keyboard/KommaN.png', 37, 37);
     game.load.spritesheet('?',                  'Assets/myndir/Keyboard/spurningamerki.png', 35, 36);
     game.load.spritesheet('-',                  'Assets/myndir/Keyboard/bandstrik.png', 35, 36);
     game.load.spritesheet('.',                  'Assets/myndir/Keyboard/punktur.png', 38, 38);
