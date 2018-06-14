@@ -18,9 +18,9 @@ var textAreaX = 1000;
 var textAreaY = 65;
 
 // Variables for the assignments texts and its stylings
-var style = { font: '46px Arial', fill: 'white', align: 'right', wordWrap: true, wordWrapWidth: 900, backgroundColor: "rgba(0,0,0,0.4)"};
-var instrstyle = { font: '14px Arial', fill: 'black', wordWrap: true, align: 'center', wordWrapWidth: 200,backgroundColor: "rgba(0,0,0,0)"}
-var instructionStyle = { font: '64px Arial', fill: 'white', align: 'left', wordWrap: true, wordWrapWidth: 600,backgroundColor: "rgba(0,0,0,0)" };
+var style = { font: '46px Calibri', fill: 'white', align: 'right', wordWrap: true, wordWrapWidth: 900, backgroundColor: "rgba(0,0,0,0.4)"};
+var instrstyle = { font: '14px Calibri', fill: 'black', wordWrap: true, align: 'center', wordWrapWidth: 200,backgroundColor: "rgba(0,0,0,0)"}
+var instructionStyle = { font: '64px Calibri', fill: 'white', align: 'left', wordWrap: true, wordWrapWidth: 600,backgroundColor: "rgba(0,0,0,0)" };
 var text = "";
 var textX = 500;
 var textY = 50;
@@ -1207,7 +1207,7 @@ function addWarmUpTextArea(letter, offset, color)
 }
 
 function addBalloontext(text, fontSize,x,y){
-    instrstyle.font = String(fontSize) + 'px';
+    instrstyle.font = String(fontSize) + 'px Calibri';
     balloon = game.add.sprite(440, 25, 'balloonSprite', 0);
     balloon.scale.setTo(0.6);
     var instructionText = game.add.text(game.world.centerX+x, game.world.centerY/2 - y, text, instrstyle);
