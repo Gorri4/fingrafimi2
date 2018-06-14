@@ -18,7 +18,7 @@ var textAreaX = 1000;
 var textAreaY = 65;
 
 // Variables for the assignments texts and its stylings
-var style = { font: '44px Arial', fill: 'white', align: 'left', wordWrap: true, wordWrapWidth: 900, backgroundColor: "rgba(0,0,0,0.4)", boundsAlignH: "center", boundsAlignV: "middle"};
+var style = { font: '46px Arial', fill: 'white', align: 'right', wordWrap: true, wordWrapWidth: 900, backgroundColor: "rgba(0,0,0,0.4)"};
 var instrstyle = { font: '14px Arial', fill: 'black', wordWrap: true, align: 'center', wordWrapWidth: 200,backgroundColor: "rgba(0,0,0,0)"}
 var instructionStyle = { font: '64px Arial', fill: 'white', align: 'left', wordWrap: true, wordWrapWidth: 600,backgroundColor: "rgba(0,0,0,0)" };
 var text = "";
@@ -306,7 +306,7 @@ function Assignment(assignmentNr, exerciseNr)
     {
         // Create the textArea
         text = exercisesArray[assignmentNr][exerciseNr];
-        textArea = game.add.text(game.world.centerX, game.world.centerY/2 + 20, text, style);
+        textArea = game.add.text(game.world.centerX, game.world.centerY/2 + 40, text, style);
         textArea.anchor.set(0.5);
 
         // When key is pressed the function keyPress is called
@@ -590,7 +590,7 @@ function keyPress(char, assignmentNr, exerciseNr)
     // Clear the textArea
     textArea.destroy();
     //Display the part of the exercise text that we have completed in green
-    textArea = game.add.text(game.world.centerX, game.world.centerY/2 + 20, text, style);
+    textArea = game.add.text(game.world.centerX, game.world.centerY/2 + 40, text, style);
     textArea.anchor.set(0.5);
     textArea.addColor('#00ff00', 0);
 
