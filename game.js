@@ -1263,7 +1263,7 @@ function addMoreExerButton(assignmentNr, exerciseNr){
 
     instrstyle.font = '16px';
     if(nextPage[assignmentNr]){
-        game.add.text(game.world.centerX+340, game.world.centerY/2+265, 'Til baka', instrstyle);
+        game.add.text(game.world.centerX+350, game.world.centerY/2+265, 'Til baka', instrstyle);
     }else{
         game.add.text(game.world.centerX+335, game.world.centerY/2+265, 'Fleiri æfingar', instrstyle);
     }
