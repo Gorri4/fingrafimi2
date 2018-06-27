@@ -441,8 +441,8 @@ function keyPress(char, assignmentNr, exerciseNr)
                 //We check if the letter is in Uppercase to make the shift keys blink as well
                 if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
                 {                     
-                    keyboardKeysMap.get('lShift').play('blink');
-                    keyboardKeysMap.get('rShift').play('blink');
+                    keyboardKeysMap.get('lshift').play('blink');
+                    keyboardKeysMap.get('hshift').play('blink');
                 }
 
                 //We make both a and ´ keys blink to indicate that we want the letter Á
@@ -455,8 +455,8 @@ function keyPress(char, assignmentNr, exerciseNr)
                 //We check if the letter is in Uppercase to make the shift keys blink as well
                 if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
                 {                      
-                    keyboardKeysMap.get('lShift').play('blink');
-                    keyboardKeysMap.get('rShift').play('blink');
+                    keyboardKeysMap.get('lshift').play('blink');
+                    keyboardKeysMap.get('hshift').play('blink');
                 }
                 
                 //We make both e and ´ keys blink to indicate that we want the letter Á
@@ -469,8 +469,8 @@ function keyPress(char, assignmentNr, exerciseNr)
                 //We check if the letter is in Uppercase to make the shift keys blink as well
                 if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
                 {                      
-                    keyboardKeysMap.get('lShift').play('blink');
-                    keyboardKeysMap.get('rShift').play('blink');
+                    keyboardKeysMap.get('lshift').play('blink');
+                    keyboardKeysMap.get('hshift').play('blink');
                 }
 
                 //We make both i and ´ keys blink to indicate that we want the letter Á
@@ -483,8 +483,8 @@ function keyPress(char, assignmentNr, exerciseNr)
                 //We check if the letter is in Uppercase to make the shift keys blink as well
                 if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
                 {                      
-                    keyboardKeysMap.get('lShift').play('blink');
-                    keyboardKeysMap.get('rShift').play('blink');
+                    keyboardKeysMap.get('lshift').play('blink');
+                    keyboardKeysMap.get('hshift').play('blink');
                 }
 
                 //We make both o and ´ keys blink to indicate that we want the letter Á
@@ -501,8 +501,8 @@ function keyPress(char, assignmentNr, exerciseNr)
             else if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
             {
                 //Make the shift keys blink                     
-                keyboardKeysMap.get('lShift').play('blink');
-                keyboardKeysMap.get('rShift').play('blink');
+                keyboardKeysMap.get('lshift').play('blink');
+                keyboardKeysMap.get('hshift').play('blink');
                 //Since the map keys are all in lowercase, we turn the character to lowercase to get the sprite object and make it blink
                 keyboardKeysMap.get(text.charAt(incorrPos).toLowerCase()).play('blink');
             }
@@ -526,8 +526,8 @@ function keyPress(char, assignmentNr, exerciseNr)
             {
                 if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
                 {                     
-                    keyboardKeysMap.get('lShift').play('blink');
-                    keyboardKeysMap.get('rShift').play('blink');
+                    keyboardKeysMap.get('lshift').play('blink');
+                    keyboardKeysMap.get('hshift').play('blink');
                 }
 
                 keyboardKeysMap.get('a').play('blink');                
@@ -537,8 +537,8 @@ function keyPress(char, assignmentNr, exerciseNr)
             {
                 if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
                 {                     
-                    keyboardKeysMap.get('lShift').play('blink');
-                    keyboardKeysMap.get('rShift').play('blink');
+                    keyboardKeysMap.get('lshift').play('blink');
+                    keyboardKeysMap.get('hshift').play('blink');
                 }
 
                 keyboardKeysMap.get('e').play('blink');
@@ -548,8 +548,8 @@ function keyPress(char, assignmentNr, exerciseNr)
             {
                 if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
                 { 
-                    keyboardKeysMap.get('lShift').play('blink');
-                    keyboardKeysMap.get('rShift').play('blink');
+                    keyboardKeysMap.get('lshift').play('blink');
+                    keyboardKeysMap.get('hshift').play('blink');
                 }
 
                 keyboardKeysMap.get('i').play('blink');
@@ -559,8 +559,8 @@ function keyPress(char, assignmentNr, exerciseNr)
             {
                 if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
                 { 
-                    keyboardKeysMap.get('lShift').play('blink');
-                    keyboardKeysMap.get('rShift').play('blink');
+                    keyboardKeysMap.get('lshift').play('blink');
+                    keyboardKeysMap.get('hshift').play('blink');
                 }
 
                 keyboardKeysMap.get('o').play('blink');
@@ -576,8 +576,8 @@ function keyPress(char, assignmentNr, exerciseNr)
             }
             else if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
             {
-                keyboardKeysMap.get('lShift').play('blink');
-                keyboardKeysMap.get('rShift').play('blink');
+                keyboardKeysMap.get('lshift').play('blink');
+                keyboardKeysMap.get('hshift').play('blink');
                 keyboardKeysMap.get(text.charAt(incorrPos).toLowerCase()).play('blink');
             }
             else
