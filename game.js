@@ -18,9 +18,9 @@ var textAreaX = 1000;
 var textAreaY = 65;
 
 // Variables for the assignments texts and its stylings
-var style = { font: '42px Calibri', fill: 'black', align: 'right', wordWrap: true, wordWrapWidth: 900, backgroundColor: "rgba(110,255,255,1)", align: 'center'};
+var style = { font: '42px Calibri', fill: 'black', align: 'right', wordWrap: true, wordWrapWidth: 900, backgroundColor: "rgba(50,245,255,1)", align: 'center'};
 var instrstyle = { font: '14px Calibri', fill: 'black', wordWrap: true, align: 'center', wordWrapWidth: 200,backgroundColor: "rgba(0,0,0,0)"}
-var instructionStyle = { font: '64px Calibri', fill: 'black', align: 'left', wordWrap: true, wordWrapWidth: 600,backgroundColor: "rgba(110,255,255,1)", align: 'center'};
+var instructionStyle = { font: '64px Calibri', fill: 'black', align: 'left', wordWrap: true, wordWrapWidth: 600,backgroundColor: "rgba(50,245,255,1)", align: 'center'};
 var text = "";
 var textX = 500;
 var textY = 50;
@@ -660,12 +660,18 @@ function finishedAssignment(assignmentNr)
 //Find the next exercise in the assignment which is not complete, returns the index for said exercise
 function findNextExercise(assignmentNr, exerciseNr)
 {
+    for(var i = 0; i < 30; i++){
+        for(var a = 0; a < 13; a++){
+        exercisesGlow[a][i] = false
+        }
+    }
     //Iterate through exercisesFinished[assignmentNr] and return the first index which is not complete, said index is then used 
     //in exercisesArray to load the correct next unfinished exercise
     for(i = exerciseNr; i < exercisesFinished[assignmentNr].length; i++)
     {
         if(!exercisesFinished[assignmentNr][i])
         {
+            exercisesGlow[assignmentNr][i] = true
             return i;
         }
     }
@@ -785,6 +791,8 @@ function getSpriteName(assignmentNumb){
 //the Instruction and WarmUp animations. Clicking on the Fingrafimi logo takes the user back to the home page.
 function addLogoAndAssignmentID(assignmentNr, exerciseNr)
 {
+    var info = game.add.text(70, 150, 'Beint í verkefnin', { font: "bold 16px Arial",backgroundColor: "rgba(211,211,211,1)"});
+    info.alpha = 0;
     //Add the Fingrafimi logo
     logoS = game.add.button(25, 25, 'logoS'); 
     addExitButton();
@@ -813,9 +821,16 @@ function addLogoAndAssignmentID(assignmentNr, exerciseNr)
     }
     assignmentBtn.frame = 0;
     //If mouse hovers over the arrow it will turn red
-    assignmentBtn.events.onInputOver.add(function(){ assignmentBtn.frame = 1; }, this);
+    assignmentBtn.events.onInputOver.add(function(){ 
+        assignmentBtn.frame = 1;
+        info.alpha = 1;
+     }, this);
     //If mouse hovers out of the arrow it will turn blue again
-    assignmentBtn.events.onInputOut.add(function(){ assignmentBtn.frame = 0; }, this);
+    assignmentBtn.events.onInputOut.add(function(){ 
+        assignmentBtn.frame = 0;
+        info.alpha = 0;
+    }, 
+        this);
     //Add the click event that loads the home page
     assignmentBtn.events.onInputDown.add(function()
     {
@@ -1054,6 +1069,14 @@ function addExerciseImages(image, imageGlow, posArr, count, assignmentNr, exerci
             exerciseBtnArray[assignmentNr][exerciseNr+i].frame = 1;
         }
 
+        if(exercisesGlow[assignmentNr][exerciseNr+i] === true){
+            exerciseBtnArray[assignmentNr][exerciseNr+i].alpha = 0.5;
+        }
+
+        if(exercisesGlow[assignmentNr][exerciseNr+i] == false){
+            exerciseBtnArray[assignmentNr][exerciseNr+i].alpha = 1;
+        }
+
         (function() 
         {
             var exerciseNum = exerciseNr + i;
@@ -1062,10 +1085,20 @@ function addExerciseImages(image, imageGlow, posArr, count, assignmentNr, exerci
             // Add number above every image
             game.add.text(textPosArr[i+exerciseNr][0], textPosArr[i+exerciseNr][1], textNum, { font: "bold 16px Arial"});
             // Add the event of calling the function Assignment to the exercise
-            exerciseBtnArray[assignmentNr][exerciseNr+i].events.onInputDown.add(function(){ quitExercise(); Assignment(assignmentNr, exerciseNum); });
+            exerciseBtnArray[assignmentNr][exerciseNr+i].events.onInputDown.add(function(){ 
+                quitExercise();
+                for(var i = 0; i < 30; i++){
+                    for(var a = 0; a < 13; a++){
+                    exercisesGlow[a][i] = false
+                    }
+                }
+                exercisesGlow[assignmentNr][exerciseNum] = true
+                Assignment(assignmentNr, exerciseNum);
+            });
         }()); // immediate invocation
     }
 }
+
 
 //Load and display the Instruction for the Assignments, after Instructions the WarmUp is called
 function Instructions(assignmentNr, exerciseNr)
@@ -1205,7 +1238,6 @@ function stopInstructorTalk()
 // but subtract the offset to the Y coordinates to move it slightly up on the canvas
 function addWarmUpTextArea(letter, offset, color)
 {
-    offset = 115
     textArea = game.add.text(game.world.centerX, game.world.centerY - offset, letter, instructionStyle);
     textArea.anchor.set(0.5);
     textArea.addColor(color, 0);
@@ -1237,16 +1269,21 @@ function addMoreExerButton(assignmentNr, exerciseNr){
     }
 
     btnMoreExer.events.onInputDown.add(function(){ 
+        for(var i = 0; i < 30; i++){
+            for(var a = 0; a < 13; a++){
+            exercisesGlow[a][i] = false
+            }
+        }
         if(nextPage[assignmentNr]){
             var nextFirstPage = 0;
             nextPage[assignmentNr] = false;
             for(var i = 0; i < 15; i++){
                 if(!exercisesFinished[assignmentNr][i]){
                     nextFirstPage = i;
+                    exercisesGlow[assignmentNr][i] = true
                     break;
                 }
             }
-            
             Assignment(assignmentNr,i);
         } else {
             var nextSecondPage = 15;
@@ -1255,6 +1292,7 @@ function addMoreExerButton(assignmentNr, exerciseNr){
             for(var i = 15; i < 30; i++){
                 if(!exercisesFinished[assignmentNr][i]){
                     nextSecondPage = i;
+                    exercisesGlow[assignmentNr][i] = true
                     break;
                 }
             }
@@ -2717,7 +2755,7 @@ function warmupStrikogSpurn(assignmentNr, exerciseNr)
              if(warmUps[7])
              {
                  warmupHead.play('talk');
-                 addBalloontext('Skrifaðu nú spurningamerki.',30,35,80,500);
+                 addBalloontext('Skrifaðu nú spurningamerki.',30,25,80,500);
                  sounds['skrifSpurn'].play();
                  addWarmUpTextArea('?', 100, '#000000');
              }
