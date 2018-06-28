@@ -334,8 +334,8 @@ function Assignment(assignmentNr, exerciseNr)
         balloon = game.add.sprite(440, 25, 'balloonSprite', 0);
         balloon.scale.setTo(0.6);
         if(assignmentNr === 8){
-            balloon.scale.setTo(0.7);
-            addBalloontext(addBalloon(assignmentNr),14,35,100,500);
+            balloon.scale.setTo(0.6);
+            addBalloontext(addBalloon(assignmentNr),14,30,100,500);
 
         }
         else if(assignmentNr === 2){
