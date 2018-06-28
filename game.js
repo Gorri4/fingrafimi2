@@ -2437,9 +2437,8 @@ function warmupKommustafir(assignmentNr, exerciseNr)
         game.input.keyboard.start();
         game.input.keyboard.addCallbacks(this, null, null, function(char)
         {    
-            console.log(char);
             
-            if(char === 'a')
+            if(char === 'á')
             {
                 game.input.keyboard.stop();
                 textArea.destroy();

@@ -111,34 +111,34 @@ function loadKeyboard(assignmentNr)
      keyboardKeysMap.get('m').scale.setTo(1.2);
 
      keyboardKeysMap.set('´', game.add.sprite(607, 334, '´', 0));
-     keyboardKeysMap.get('´').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 2, false);
+     keyboardKeysMap.get('´').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
      keyboardKeysMap.get('´').scale.setTo(1.2);
 
      keyboardKeysMap.set('-', game.add.sprite(619, 250, '-', 0));
-     keyboardKeysMap.get('-').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 2, false);
+     keyboardKeysMap.get('-').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
      keyboardKeysMap.get('-').scale.setTo(1.2);
 
      keyboardKeysMap.set('?', game.add.sprite(643, 293, '?', 0));
-     keyboardKeysMap.get('?').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 2, false);
+     keyboardKeysMap.get('?').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
      keyboardKeysMap.get('?').scale.setTo(1.2);
 
      keyboardKeysMap.set('.', game.add.sprite(546, 376, '.', 0));
-     keyboardKeysMap.get('.').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 2, false);
+     keyboardKeysMap.get('.').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
      keyboardKeysMap.get('.').scale.setTo(1.2);
 
      keyboardKeysMap.set('lshift', game.add.sprite(115, 377, 'lshift', 0));
-     keyboardKeysMap.get('lshift').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 2, false);
+     keyboardKeysMap.get('lshift').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
      keyboardKeysMap.get('lshift').scale.setTo(1.2);
 
      keyboardKeysMap.set('hshift', game.add.sprite(630, 375.5, 'hshift', 0));
-     keyboardKeysMap.get('hshift').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 2, false);
+     keyboardKeysMap.get('hshift').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
      keyboardKeysMap.get('hshift').scale.setTo(1.2);
 
      keyboardKeysMap.set(',', game.add.sprite(502, 376, ',', 0));
-     keyboardKeysMap.get(',').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 2, false);
+     keyboardKeysMap.get(',').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
      keyboardKeysMap.get(',').scale.setTo(1.2);
 
      keyboardKeysMap.set(' ', game.add.sprite(284, 419, ' ', 0));
-     keyboardKeysMap.get(' ').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 2, false);
+     keyboardKeysMap.get(' ').animations.add('blink', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0], 4, false);
      keyboardKeysMap.get(' ').scale.setTo(1.2);
 }
