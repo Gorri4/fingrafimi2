@@ -339,7 +339,7 @@ function Assignment(assignmentNr, exerciseNr)
 
         }
         else if(assignmentNr === 2){
-            addBalloontext(addBalloon(assignmentNr),16,5,100,500);
+            addBalloontext(addBalloon(assignmentNr),16,15,100,500);
         }else{
             addBalloontext(addBalloon(assignmentNr),18,25,100,500);
 
@@ -1522,7 +1522,7 @@ function warmupTM(assignmentNr, exerciseNr)
                 {
                     warmupHead.play('talk');
                     sounds['findM'].play();
-                    addBalloontext('Rabbit! Finndu nú stafinn m á lyklaborðinu.',25,22,90,17);
+                    addBalloontext('Rabbit! Finndu nú stafinn m á lyklaborðinu.',25,22,90,27);
                     game.time.events.add(Phaser.Timer.SECOND * 1, function(){
                             //balloon.frame = 10;
                             keyboardKeysMap.get('m').play('blink');
@@ -1682,7 +1682,7 @@ function warmupDogV(assignmentNr, exerciseNr)
             if(warmUps[2])
             {
                 warmupHead.play('talk');
-                addBalloontext('Skrifaðu ð',35,30,80,9);
+                addBalloontext('Skrifaðu ð',35,30,80,10);
                 sounds['skrifD'].play();
                 // Display the letter in the textArea
                 addWarmUpTextArea('ð', 100, '#000000');
@@ -2091,7 +2091,7 @@ function warmupÞogY(assignmentNr, exerciseNr)
             {
                 warmupHead.play('talk');
                 rightHand.play('y');
-                addBalloontext('Þú notar vísifingur hægri handar til að skrifa y.',25,22,90,47);
+                addBalloontext('Þú notar vísifingur hægri handar til að skrifa y.',25,22,90,48);
                 sounds['visY'].play();
             }
             
@@ -2205,7 +2205,7 @@ function warmupOogC(assignmentNr, exerciseNr)
             {
                 warmupHead.play('talk');
                 rightHand.play('ö');
-                addBalloontext('Þú notar litlaputta hægri handar til að skrifa ö.',25,22,90,47);
+                addBalloontext('Þú notar litlaputta hægri handar til að skrifa ö.',25,22,90,48);
                 sounds['lilÖ'].play();
             }              
         }, this).autoDestroy = true;  
@@ -2371,7 +2371,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
                 {
                     warmupHead.play('talk');
                     sounds['findUppKomma'].play();
-                    addBalloontext('Hvar er komman (´) til að setja yfir stafi á lyklaborðinu?',25,22,90,17);
+                    addBalloontext('Hvar er komman (´) til að setja yfir stafi á lyklaborðinu?',23,22,90,17);
             
                     keyboardKeysMap.get('´').play('blink');
                 }
@@ -2387,7 +2387,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
             {
                 warmupHead.play('talk');
                 rightHand.play('´');
-                addBalloontext('Þú notar litlaputta á hægri hendi til að setja kommu yfir staf.',25,22,100,500);
+                addBalloontext('Þú notar litlaputta á hægri hendi til að setja kommu yfir staf.',23,22,100,500);
                 sounds['lilUppKomma'].play();
             }              
         }, this).autoDestroy = true;  
@@ -2404,7 +2404,7 @@ function warmupKommustafir(assignmentNr, exerciseNr)
            {
                warmupHead.play('talk');
                leftHand.play('e');
-               addBalloontext('Síðan ýtir þú til dæmis á e til að skrifa é.',25,30,90,500);
+               addBalloontext('Síðan ýtir þú til dæmis á e til að skrifa é.',23,30,90,500);
                sounds['pressE'].play();
            }              
        }, this).autoDestroy = true;  
