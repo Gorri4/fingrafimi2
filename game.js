@@ -791,7 +791,7 @@ function getSpriteName(assignmentNumb){
 //the Instruction and WarmUp animations. Clicking on the Fingrafimi logo takes the user back to the home page.
 function addLogoAndAssignmentID(assignmentNr, exerciseNr)
 {
-    var info = game.add.text(70, 150, 'Beint í verkefnin', { font: "bold 16px Arial",backgroundColor: "rgba(211,211,211,1)"});
+    var info = game.add.text(70, 150, 'Beint í verkefnin', { font: "bold 16px Arial",backgroundColor: "rgba(240,240,240,1)"});
     info.alpha = 0;
     //Add the Fingrafimi logo
     logoS = game.add.button(25, 25, 'logoS'); 
