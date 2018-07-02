@@ -463,6 +463,19 @@ function keyPress(char, assignmentNr, exerciseNr)
                 keyboardKeysMap.get('e').play('blink');
                 keyboardKeysMap.get('´').play('blink');
             }
+            else if(text.charAt(incorrPos).toLowerCase() === 'ú')
+            {
+                //We check if the letter is in Uppercase to make the shift keys blink as well
+                if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
+                {                      
+                    keyboardKeysMap.get('lshift').play('blink');
+                    keyboardKeysMap.get('hshift').play('blink');
+                }
+                
+                //We make both e and ´ keys blink to indicate that we want the letter Á
+                keyboardKeysMap.get('u').play('blink');
+                keyboardKeysMap.get('´').play('blink');
+            }
             //Á, É, Í and Ó are special cases to blink so we want to detect if the key we want to blink is one of them
             else if(text.charAt(incorrPos).toLowerCase() === 'í')
             {
@@ -496,6 +509,16 @@ function keyPress(char, assignmentNr, exerciseNr)
             {                    
                 //We make the spacebar key blink
                 keyboardKeysMap.get(' ').play('blink');
+            }
+            else if(text.charAt(incorrPos) === ',')
+            {                    
+                //We make the spacebar key blink
+                keyboardKeysMap.get(',').play('blink');
+            }
+            else if(text.charAt(incorrPos) === '.')
+            {                    
+                //We make the spacebar key blink
+                keyboardKeysMap.get('.').play('blink');
             }
             //We check to see if the next expected character is in Uppercase, if so we want to make the shift keys blink along with the key of the expected character
             else if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
@@ -533,6 +556,17 @@ function keyPress(char, assignmentNr, exerciseNr)
                 keyboardKeysMap.get('a').play('blink');                
                 keyboardKeysMap.get('´').play('blink');
             }
+            else if(text.charAt(incorrPos).toLowerCase() === 'ú')
+            {
+                if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
+                {                      
+                    keyboardKeysMap.get('lshift').play('blink');
+                    keyboardKeysMap.get('hshift').play('blink');
+                }
+                
+                keyboardKeysMap.get('u').play('blink');
+                keyboardKeysMap.get('´').play('blink');
+            }
             else if(text.charAt(incorrPos).toLowerCase() === 'é')
             {
                 if(text.charAt(incorrPos) === text.charAt(incorrPos).toUpperCase())
@@ -565,6 +599,16 @@ function keyPress(char, assignmentNr, exerciseNr)
 
                 keyboardKeysMap.get('o').play('blink');
                 keyboardKeysMap.get('´').play('blink');
+            }
+            else if(text.charAt(incorrPos) === ',')
+            {                    
+                //We make the spacebar key blink
+                keyboardKeysMap.get(',').play('blink');
+            }
+            else if(text.charAt(incorrPos) === '.')
+            {                    
+                //We make the spacebar key blink
+                keyboardKeysMap.get('.').play('blink');
             }
             else if(text.charAt(incorrPos).toLowerCase() === ' ')
             {
@@ -797,6 +841,21 @@ function addLogoAndAssignmentID(assignmentNr, exerciseNr)
     logoS = game.add.button(25, 25, 'logoS'); 
     addExitButton();
     //Displays the logo from Menntamálastofnun in the botton left corner
+    
+    if(assignmentNr === 6 || assignmentNr === 5){
+        var graphics = game.add.graphics(0, 0);
+
+        // set a fill and line style
+        graphics.beginFill(0x8e9196);
+        graphics.lineStyle(10, 0x8e9196, 1);
+        // draw a shape
+        graphics.moveTo(0,600);
+        graphics.lineTo(250, 600);
+        graphics.lineTo(250, 575);
+        graphics.lineTo(0, 575);
+        graphics.lineTo(0, 600);
+        graphics.endFill();
+    }
     addLogo(20, 0.4);
     //Add the click event that loads the home page
     //logoS.events.onInputDown.add(function(){quitExercise(); loadHomePage();});
